@@ -24,6 +24,16 @@
       <scope>provided</scope>
     </dependency>
 
+    <!-- db stuff starts -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.2.6.Final</version>
+    </dependency>
+
+
+    <!-- db stuff ends-->
+
   </dependencies>
 
   <build>
