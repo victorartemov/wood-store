@@ -1,18 +1,16 @@
 package woodstore.model;
 
-import java.util.List;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
 
 /**
- * Created by Виктор on 18.01.2017.
+ * Created by Виктор on 05.02.2017.
  */
-public class Store {
-    List<Product> products;
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
+@Entity
+public class Store extends Item{
+    @ElementCollection
+    Collection<Product> storedProducts = new ArrayList<>();
 }

@@ -1,19 +1,25 @@
 package woodstore.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
 /**
  * Created by Виктор on 18.01.2017.
  */
-public class Category extends Entity {
+@Entity
+public class Category extends Item{
 
-    public Category() {}
-
-    private String title;
-
-    public String getTitle() {
-        return title;
+    public Category() {
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    @Column(name = "TITLE")
+    private String categoryTitle;
+
+    public String getCategoryTitle() {
+        return categoryTitle;
+    }
+
+    public void setCategoryTitle(String categoryTitle) {
+        this.categoryTitle = categoryTitle;
     }
 }

@@ -1,18 +1,30 @@
 package woodstore.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.util.Date;
 
 /**
  * Created by Виктор on 18.01.2017.
  */
-public class User extends Entity {
 
-    public User() {}
+@Entity
+public class Profile extends Item {
+
+    public Profile() {
+    }
 
     private String name;
+
+    @Column(name = "DATE_OF_BIRTH")
     private Date dateOfBirth;
+
+    @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
+
+    @Column(name = "ADDITIONAL_PHONE_NUMBER")
     private String additionalPhoneNumber;
+
     private String address;
     private String login;
     private String password;

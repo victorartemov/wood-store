@@ -1,20 +1,39 @@
 package woodstore.model;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 /**
  * Created by Виктор on 18.01.2017.
  */
-public class Product extends Entity{
+@Entity
+public class Product extends Item {
 
-    public Product() {}
+    public Product() {
+    }
 
     private String title;
     private double length;
     private double width;
     private double height;
-    private double weigth;
+    private double weight;
     private int amount;
     private double price;
+    private double quadrature;
+
+    @OneToOne
+    @JoinColumn(name = "CATEGORY_ID")
     private Category category;
+
+    public double getQuadrature() {
+        return quadrature;
+    }
+
+    public void setQuadrature(double quadrature) {
+        this.quadrature = quadrature;
+    }
 
     public String getTitle() {
         return title;
@@ -48,12 +67,12 @@ public class Product extends Entity{
         this.height = height;
     }
 
-    public double getWeigth() {
-        return weigth;
+    public double getWeight() {
+        return weight;
     }
 
-    public void setWeigth(double weigth) {
-        this.weigth = weigth;
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public Category getCategory() {

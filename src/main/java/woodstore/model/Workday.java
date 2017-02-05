@@ -1,18 +1,25 @@
 package woodstore.model;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Виктор on 18.01.2017.
  */
-public class Workday extends Entity {
+@Entity
+public class Workday extends Item {
 
-    public Workday() {}
+    public Workday() {
+    }
 
     private Date currentDate;
     private Long workerId;
-    private List<Product> products;
+
+    @ElementCollection
+    private Collection<Product> products = new ArrayList<>();
 
     public Date getCurrentDate() {
         return currentDate;
@@ -30,11 +37,11 @@ public class Workday extends Entity {
         this.workerId = workerId;
     }
 
-    public List<Product> getProducts() {
+    public Collection<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(Collection<Product> products) {
         this.products = products;
     }
 }

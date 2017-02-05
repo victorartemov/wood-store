@@ -30,6 +30,13 @@
         <property name="hbm2ddl.auto">create</property>
 
         <!-- Mapping files -->
-        <mapping class="woodstore.model.TestClass"/>
+        <mapping class="woodstore.model.Category"/>
+        <mapping class="woodstore.model.Item"/>
+        <mapping class="woodstore.model.Product"/>
+        <mapping class="woodstore.model.Profile"/>
+        <mapping class="woodstore.model.Workday"/>
+        <mapping class="woodstore.model.Store"/>
+        <mapping class="woodstore.model.Shipment"/>
+
     </session-factory>
 </hibernate-configuration>

@@ -1,18 +1,27 @@
 package woodstore.model;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 /**
- * Created by Виктор on 19.01.2017.
+ * Created by Виктор on 06.02.2017.
  */
-public class Shipment extends Entity {
+@Entity
+public class Shipment extends Item {
 
-    public Shipment() {}
+    public Shipment() {
+    }
 
     private Long workerId;
     private Date shipmentDate;
-    private List<Product> products;
+    private String shipFrom;
+    private String shipTo;
+
+    @ElementCollection
+    private Collection<Product> products = new ArrayList<>();
 
     public Long getWorkerId() {
         return workerId;
@@ -30,11 +39,35 @@ public class Shipment extends Entity {
         this.shipmentDate = shipmentDate;
     }
 
-    public List<Product> getProducts() {
+    public String getWhence() {
+        return shipFrom;
+    }
+
+    public void setWhence(String whence) {
+        this.shipFrom = whence;
+    }
+
+    public String getWhere() {
+        return shipTo;
+    }
+
+    public void setWhere(String where) {
+        this.shipTo = where;
+    }
+
+    public Collection<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(Collection<Product> products) {
         this.products = products;
+    }
+
+    @Override
+    public String toString() {
+        return "Shipment{" +
+                "shipmentDate=" + shipmentDate +
+                ", workerId=" + workerId +
+                '}';
     }
 }
