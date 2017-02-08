@@ -13,13 +13,14 @@ public class Category extends Item{
     }
 
     @Column(name = "TITLE")
-    private String categoryTitle;
+    private String title;
 
     public String getCategoryTitle() {
-        return categoryTitle;
+        return title;
     }
 
     public void setCategoryTitle(String categoryTitle) {
-        this.categoryTitle = categoryTitle;
+        this.title = categoryTitle;
     }
 }
+
