@@ -8,68 +8,68 @@
   <name>woodStore Maven Webapp</name>
   <url>http://maven.apache.org</url>
 
+  <properties>
+    <spring.mvc>4.0.3.RELEASE</spring.mvc>
+    <spring.data>1.3.4.RELEASE</spring.data>
+    <hb.manager>4.2.5.Final</hb.manager>
+    <hb.core>5.2.6.Final</hb.core>
+    <junit.version>4.11</junit.version>
+    <spring.test>3.2.4.RELEASE</spring.test>
+    <javax.servlet>2.5</javax.servlet>
+    <javax.version>6.0</javax.version>
+  </properties>
+
   <dependencies>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
-      <version>6.0</version>
+      <version>${javax.version}</version>
       <scope>provided</scope>
     </dependency>
 
-    <!-- db stuff starts -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>5.2.6.Final</version>
+      <version>${hb.core}</version>
     </dependency>
-    <!-- db stuff ends-->
 
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-jpa</artifactId>
-      <version>1.11.0.RELEASE</version>
+      <version>${spring.data}</version>
     </dependency>
 
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
-      <version>4.2.5.Final</version>
+      <version>${hb.manager}</version>
     </dependency>
 
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
+      <version>${javax.servlet}</version>
     </dependency>
 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>4.0.3.RELEASE</version>
+      <version>${spring.mvc}</version>
     </dependency>
 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <version>3.2.4.RELEASE</version>
+      <version>${spring.test}</version>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <build>
