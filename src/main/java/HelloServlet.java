@@ -2,12 +2,17 @@
  * Created by Виктор on 11.01.2017.
  */
 
+import javafx.application.Application;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import woodstore.config.DataConfig;
+
 import javax.servlet.http.*;
 import java.io.IOException;
 
-public class HelloServlet extends HttpServlet {
-    public void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
-            throws IOException {
-        httpServletResponse.getWriter().print("Hello from servlet");
+public class HelloServlet{
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(DataConfig.class);
+        System.out.println(context);
     }
 }
