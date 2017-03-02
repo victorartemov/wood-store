@@ -1,8 +1,8 @@
 package woodstore.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by Виктор on 18.01.2017.
@@ -28,6 +28,13 @@ public class Profile extends Item {
     private String address;
     private String login;
     private String password;
+
+    @Transient
+    private String confirmPassword;
+
+    @ManyToMany
+    @JoinTable()
+    private Set<Role> roles;
 
     public String getName() {
         return name;
@@ -83,5 +90,21 @@ public class Profile extends Item {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

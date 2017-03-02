@@ -33,7 +33,7 @@ public class ShipmentService implements ItemService<Shipment> {
     }
 
     @Override
-    public List<Shipment> getAll() {
+    public List<Shipment> findAll() {
         return shipmentRepository.findAll();
     }
 }

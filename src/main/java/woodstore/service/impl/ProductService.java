@@ -33,11 +33,11 @@ public class ProductService implements ItemService<Product> {
     }
 
     @Override
-    public List<Product> getAll() {
+    public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-    public Product getByTitle(String title){
+    public Product findByTitle(String title){
         return productRepository.findByTitle(title);
     }
 }

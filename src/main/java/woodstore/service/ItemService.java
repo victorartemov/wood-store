@@ -11,5 +11,5 @@ public interface ItemService<T extends Item> {
     void add(T item);
     void delete(Long id);
     void edit(T item);
-    List<T> getAll();
+    List<T> findAll();
 }

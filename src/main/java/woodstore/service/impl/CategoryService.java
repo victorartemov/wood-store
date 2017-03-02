@@ -18,7 +18,7 @@ public class CategoryService implements ItemService<Category> {
     private CategoryRepository categoryRepository;
 
     @Override
-    public List<Category> getAll() {
+    public List<Category> findAll() {
         return categoryRepository.findAll();
     }
 

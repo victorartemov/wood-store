@@ -18,7 +18,7 @@ public class StoreService implements ItemService<Store> {
     private StoreRepository storeRepository;
 
     @Override
-    public List<Store> getAll() {
+    public List<Store> findAll() {
         return storeRepository.findAll();
     }
 
