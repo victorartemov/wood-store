@@ -7,6 +7,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import woodstore.config.DataConfig;
 import woodstore.config.TestDatabaseConfig;
 import woodstore.model.Category;
 import woodstore.service.impl.CategoryService;
@@ -20,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
  */
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestDatabaseConfig.class)
+@ContextConfiguration(classes = DataConfig.class)
 @WebAppConfiguration
 public class CategoryServiceTest {
 
