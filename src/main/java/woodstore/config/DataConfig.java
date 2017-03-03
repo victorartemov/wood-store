@@ -19,9 +19,9 @@ import java.util.Properties;
 /**
  * Created by Виктор on 08.02.2017.
  */
+
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("woodstore")
 @PropertySource("classpath:app.properties")
 @EnableJpaRepositories(basePackages = "woodstore.repository")
 public class DataConfig {

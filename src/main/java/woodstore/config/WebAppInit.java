@@ -3,23 +3,23 @@ package woodstore.config;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
- * Created by Виктор on 08.02.2017.
+ * Created by Viktor_Artemov on 3/3/2017.
  */
-public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class WebAppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{
-                DataConfig.class
-        };
+        return new Class[]{WebConfig.class}; // We dont need any special servlet config yet.
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[0];
+        return null;
     }
 
     @Override
     protected String[] getServletMappings() {
-        return new String[0];
+        return new String[]{"/"};
     }
+
 }

@@ -3,12 +3,14 @@ package woodstore.service;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import woodstore.config.DataConfig;
 import woodstore.config.TestDatabaseConfig;
+import woodstore.config.WebConfig;
 import woodstore.model.Category;
 import woodstore.service.impl.CategoryService;
 
@@ -21,16 +23,16 @@ import javax.persistence.EntityManagerFactory;
  */
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = DataConfig.class)
+@ContextConfiguration(classes = WebConfig.class)
 @WebAppConfiguration
 public class CategoryServiceTest {
 
-    @Resource
+    @Autowired
     private EntityManagerFactory entityManagerFactory;
 
     protected EntityManager entityManager;
 
-    @Resource
+    @Autowired
     private CategoryService categoryService;
 
     @Before
