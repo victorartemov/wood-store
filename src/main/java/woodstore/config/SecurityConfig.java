@@ -6,7 +6,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
@@ -27,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //provide access for all to use "/", "/login**", "/webjars/**"
         http.antMatcher("/**")
                 .authorizeRequests()
-                .antMatchers( "/login**", "/resources/**").permitAll()
+                .antMatchers("/login**", "/resources/**").permitAll()
                 .anyRequest().authenticated();
 
         //trying to clear SESSION cookies, but it doesn't work
@@ -39,8 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //init custom login page
         http.formLogin().loginPage("/login").permitAll();
-
-
     }
 
 
@@ -62,12 +59,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         return bCryptPasswordEncoder;
     }
-//
-//    @Bean
-//    public UserDetailsService () {
-//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(11);
-//
-//        return bCryptPasswordEncoder;
-//    }
-
 }

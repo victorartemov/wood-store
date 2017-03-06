@@ -14,23 +14,8 @@ import java.util.List;
 @Configuration
 public class MVCConfig extends WebMvcConfigurerAdapter {
 
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
-
-
-    /**
-     * Add JSON Support to project
-     */
-//    @Override
-//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-//        final MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-//        final ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-//        converter.setObjectMapper(objectMapper);
-//        converters.add(converter);
-//        super.configureMessageConverters(converters);
-//    }
 }

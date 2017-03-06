@@ -56,4 +56,6 @@ public class ProfileService implements ItemService<Profile> {
     public Profile findByName(String name){
         return profileRepository.findByName(name);
     }
+
+    public Profile findByLogin(String login) {return profileRepository.findByLogin(login);}
 }

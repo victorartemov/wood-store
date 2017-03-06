@@ -10,4 +10,5 @@ import woodstore.model.Profile;
 
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
     Profile findByName(String name);
+    Profile findByLogin(String login);
 }
