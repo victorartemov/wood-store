@@ -21,6 +21,7 @@
 
 <div class="container">
 
+    <!-- Header navigation bar -->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
 
@@ -40,22 +41,83 @@
             </div>
 
             <!-- Worker info/logout -->
+            <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
-                        <a href="#"><span class="glyphicon glyphicon-user"></span> ${pageContext.request.userPrincipal.name}</a>
+                        <a href="#"><span class="glyphicon glyphicon-user"></span>
+                            ${pageContext.request.userPrincipal.name}</a>
                     </c:if>
                 </li>
                 <li>
-                    <span class="glyphicon glyphicon-log-in"><form id="logoutForm" method="POST" action="${contextPath}/logout">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <a onclick="document.forms['logoutForm'].submit()"> Logout</a>
-                    </form></span>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <a onclick="document.forms['logoutForm'].submit()">Выход</a>
                 </li>
             </ul>
+            </form>
 
         </div>
     </nav>
+    <!-- Header navigation bar ends -->
+
+    <!-- Date logo -->
+    <h1 align="center">На складе 24.05.17</h1>
+
+    <!-- Table of products 1 -->
+    <h2>Название категории 1</h2>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Firstname</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Anna</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Debbie</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>John</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Table of products 1 ends -->
+
+    <!-- Table of products 2 -->
+    <h2>Название категории 2</h2>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Firstname</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Anna</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Debbie</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>John</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Table of products 2 ends -->
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
