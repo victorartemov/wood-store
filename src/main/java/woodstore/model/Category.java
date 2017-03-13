@@ -19,8 +19,27 @@ public class Category extends Item{
         return title;
     }
 
+    @Column(name = "KIND")
+    private boolean simple;
+
     public void setCategoryTitle(String categoryTitle) {
         this.title = categoryTitle;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isSimple() {
+        return simple;
+    }
+
+    public void setSimple(boolean simple) {
+        this.simple = simple;
     }
 }
 

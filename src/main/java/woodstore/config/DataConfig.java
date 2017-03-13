@@ -60,8 +60,8 @@ public class DataConfig {
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
         entityManagerFactoryBean.setPackagesToScan("woodstore.model");
-        entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
         entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
+        entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
 
 
         return entityManagerFactoryBean;

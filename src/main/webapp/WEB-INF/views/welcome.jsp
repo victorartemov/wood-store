@@ -3,6 +3,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
+
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -61,63 +62,29 @@
     <!-- Header navigation bar ends -->
 
     <!-- Date logo -->
-    <h1 align="center">На складе 24.05.17</h1>
+    <h1 align="center">На складе <c:out value="${currentTime}"/> </h1>
 
-    <!-- Table of products 1 -->
-    <h2>Название категории 1</h2>
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Firstname</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>Anna</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Debbie</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>John</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- Table of products 1 ends -->
 
-    <!-- Table of products 2 -->
-    <h2>Название категории 2</h2>
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Firstname</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>Anna</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Debbie</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>John</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- Table of products 2 ends -->
+    <c:forEach items="${categories}" var="category">
+        <h2><c:out value="${category.title}"/></h2>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Длина, м</th>
+                    <th>Количество, шт</th>
+                    <th>м. кв</th>
+                    <th>Цена</th>
+                    <th>Стоимость</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </c:forEach>
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

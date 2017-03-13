@@ -2,6 +2,7 @@ package woodstore.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import woodstore.model.Category;
 import woodstore.model.Product;
 import woodstore.repository.ProductRepository;
 import woodstore.service.ItemService;
@@ -40,4 +41,6 @@ public class ProductService implements ItemService<Product> {
     public Product findByTitle(String title){
         return productRepository.findByTitle(title);
     }
+
+    public List<Product> findByCategory(Category category){return  productRepository.findByCategory(category);}
 }

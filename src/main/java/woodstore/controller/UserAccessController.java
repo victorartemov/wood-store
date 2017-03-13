@@ -7,16 +7,29 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import woodstore.model.Category;
+import woodstore.model.Product;
 import woodstore.model.Profile;
 import woodstore.service.SecurityService;
+import woodstore.service.impl.CategoryService;
+import woodstore.service.impl.ProductService;
 import woodstore.service.impl.ProfileService;
 import woodstore.validator.ProfileValidator;
+
+import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * Created by Viktor_Artemov on 3/2/2017.
  */
 @Controller
 public class UserAccessController {
+
     @Autowired
     private ProfileService profileService;
 
@@ -25,6 +38,12 @@ public class UserAccessController {
 
     @Autowired
     private ProfileValidator profileValidator;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private ProductService productService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -46,6 +65,7 @@ public class UserAccessController {
         securityService.autoLogin(userForm.getName(), userForm.getConfirmPassword());
 
         return "redirect:/welcome";
+
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -63,6 +83,21 @@ public class UserAccessController {
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
+
+        String currentTime = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
+        model.addAttribute("currentTime", currentTime);
+
+        List<Category> categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
+
+        Map<String, List<Product>> productsByCategories = new HashMap<>();
+
+        for (Category category : categories){
+            productsByCategories.put(category.getTitle(), productService.findByCategory(category));
+        }
+
+        model.addAttribute("productsByCategories", productsByCategories);
+
         return "welcome";
     }
 

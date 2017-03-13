@@ -1,3 +1,5 @@
+<!-- Use HibernateTest main instead to get init data to your db -->
+
 INSERT ALL
    INTO PROFILE(ID, ADDITIONAL_PHONE_NUMBER, ADDRESS, DATE_OF_BIRTH, LOGIN, NAME, PASSWORD, PHONE_NUMBER) VALUES (1,'','','','admin','Victor','admin','')
    INTO PROFILE(ID, ADDITIONAL_PHONE_NUMBER, ADDRESS, DATE_OF_BIRTH, LOGIN, NAME, PASSWORD, PHONE_NUMBER) VALUES (2,'','','','Masha','Masha','tester','')
