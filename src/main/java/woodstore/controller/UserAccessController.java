@@ -105,4 +105,9 @@ public class UserAccessController {
     public String admin(Model model) {
         return "admin";
     }
+
+    @RequestMapping(value = "/workday", method = RequestMethod.GET)
+    public String workday(Model model){
+        return "workday";
+    }
 }
