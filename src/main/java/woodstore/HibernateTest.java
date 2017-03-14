@@ -40,6 +40,10 @@ public class HibernateTest {
         category3.setCategoryTitle("Печи дровяные");
         category3.setSimple(true);
 
+        Category category4 = new Category();
+        category4.setCategoryTitle("Штучные товары");
+        category4.setSimple(true);
+
         Product product1 = new Product();
         product1.setAmount(10);
         product1.setCategory(category1);
@@ -92,6 +96,24 @@ public class HibernateTest {
         product8.setAmount(3);
         product8.setCategory(category3);
 
+        Product product9 = new Product();
+        product9.setTitle("Шапка для бани");
+        product9.setPrice(150);
+        product9.setAmount(9);
+        product9.setCategory(category4);
+
+        Product product10 = new Product();
+        product10.setTitle("Черпак аллюминий");
+        product10.setPrice(1350);
+        product10.setAmount(3);
+        product10.setCategory(category4);
+
+        Product product11 = new Product();
+        product11.setTitle("Заглушка вентиляционная");
+        product11.setPrice(540);
+        product11.setAmount(3);
+        product11.setCategory(category4);
+
 
         try {
             //oracle db driver doesn't work properly in russian environment
@@ -109,6 +131,7 @@ public class HibernateTest {
             session.save(category1);
             session.save(category2);
             session.save(category3);
+            session.save(category4);
 
             //saving products
             session.save(product1);
@@ -119,6 +142,9 @@ public class HibernateTest {
             session.save(product6);
             session.save(product7);
             session.save(product8);
+            session.save(product9);
+            session.save(product10);
+            session.save(product11);
 
             session.getTransaction().commit();
         } catch (Exception e) {
