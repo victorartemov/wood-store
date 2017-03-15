@@ -22,44 +22,8 @@
 
 <div class="container">
 
-    <!-- Header navigation bar -->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-
-            <!-- Logo -->
-            <div class="navbar-header">
-                <a href="" class="navbar-brand">WOODSTORE</a>
-            </div>
-
-            <!-- Menu items -->
-            <div>
-                <ul class="nav navbar-nav">
-                    <li><a href="">Склад</a></li>
-                    <li><a href="">Рабочий день</a></li>
-                    <li><a href="">Приход</a></li>
-                    <li><a href="">Расход</a></li>
-                </ul>
-            </div>
-
-            <!-- Worker info/logout -->
-            <form id="logoutForm" method="POST" action="${contextPath}/logout">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <c:if test="${pageContext.request.userPrincipal.name != null}">
-                            <a href="#"><span class="glyphicon glyphicon-user"></span>
-                                ${pageContext.request.userPrincipal.name}</a>
-                        </c:if>
-                    </li>
-                    <li>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <a onclick="document.forms['logoutForm'].submit()">Выход</a>
-                    </li>
-                </ul>
-            </form>
-
-        </div>
-    </nav>
-    <!-- Header navigation bar ends -->
+    <!-- Header -->
+    <jsp:include page="header.jsp"/>
 
     <!-- Date logo -->
     <h1 align="center">На складе
@@ -78,7 +42,7 @@
 
             <c:when test="${category.simple == true}">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
                             <th>Название</th>
@@ -88,18 +52,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${productsByCategories}" var="entry">
-                                <c:if test="${entry.key == category.title}">
-                                    <c:forEach items="${entry.value}" var="product">
-                                        <tr>
-                                            <td>${product.title}</td>
-                                            <td>${product.amount}</td>
-                                            <td>${product.price}</td>
-                                            <td>${product.price*product.amount}</td>
-                                        </tr>
-                                    </c:forEach>
-                                </c:if>
-                            </c:forEach>
+                        <c:forEach items="${productsByCategories}" var="entry">
+                            <c:if test="${entry.key == category.title}">
+                                <c:forEach items="${entry.value}" var="product">
+                                    <tr>
+                                        <td>${product.title}</td>
+                                        <td>${product.amount}</td>
+                                        <td>${product.price}</td>
+                                        <td>${product.price*product.amount}</td>
+                                    </tr>
+                                </c:forEach>
+                            </c:if>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -108,7 +72,7 @@
 
             <c:when test="${category.simple == false}">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
                             <th>Название</th>
