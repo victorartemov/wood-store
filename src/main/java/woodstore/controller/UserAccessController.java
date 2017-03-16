@@ -10,18 +10,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import woodstore.model.Category;
 import woodstore.model.Product;
 import woodstore.model.Profile;
+import woodstore.model.Store;
 import woodstore.service.SecurityService;
 import woodstore.service.impl.CategoryService;
 import woodstore.service.impl.ProductService;
 import woodstore.service.impl.ProfileService;
+import woodstore.service.impl.StoreService;
 import woodstore.validator.ProfileValidator;
 
 import java.security.Principal;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -44,6 +43,9 @@ public class UserAccessController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private StoreService storeService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -107,17 +109,20 @@ public class UserAccessController {
     }
 
     @RequestMapping(value = "/workday", method = RequestMethod.GET)
-    public String workday(Model model){
+    public String workday(Model model) {
+
+
+
         return "workday";
     }
 
     @RequestMapping(value = "/shipmentout", method = RequestMethod.GET)
-    public String shipmentout(Model model){
+    public String shipmentout(Model model) {
         return "shipmentout";
     }
 
     @RequestMapping(value = "/shipmentin", method = RequestMethod.GET)
-    public String shipmentin(Model model){
+    public String shipmentin(Model model) {
         return "shipmentin";
     }
 

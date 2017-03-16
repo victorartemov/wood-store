@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import woodstore.model.Category;
 import woodstore.model.Product;
 import woodstore.model.Profile;
+import woodstore.model.Store;
 import woodstore.validator.ProfileValidator;
 
 import java.util.Locale;
@@ -114,6 +115,20 @@ public class HibernateTest {
         product11.setAmount(3);
         product11.setCategory(category4);
 
+        Store woodstore = new Store();
+        woodstore.setTitle("woodstore");
+        woodstore.addProduct(product1);
+        woodstore.addProduct(product2);
+        woodstore.addProduct(product3);
+        woodstore.addProduct(product4);
+        woodstore.addProduct(product5);
+        woodstore.addProduct(product6);
+        woodstore.addProduct(product7);
+        woodstore.addProduct(product8);
+        woodstore.addProduct(product9);
+        woodstore.addProduct(product10);
+        woodstore.addProduct(product11);
+
 
         try {
             //oracle db driver doesn't work properly in russian environment
@@ -145,6 +160,8 @@ public class HibernateTest {
             session.save(product9);
             session.save(product10);
             session.save(product11);
+
+            session.save(woodstore);
 
             session.getTransaction().commit();
         } catch (Exception e) {

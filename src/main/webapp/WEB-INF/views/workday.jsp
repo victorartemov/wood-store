@@ -28,6 +28,7 @@
     <h1 align="center">Рабочий день</h1>
     <br>
 
+
     <div class="panel panel-warning">
         <div class="panel-heading">Новый день не создан</div>
         <div class="panel-body">

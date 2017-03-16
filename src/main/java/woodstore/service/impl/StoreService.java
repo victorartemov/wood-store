@@ -36,4 +36,8 @@ public class StoreService implements ItemService<Store> {
     public void edit(Store item) {
         storeRepository.saveAndFlush(item);
     }
+
+    public Store findByTitle(String title){
+        return storeRepository.findByTitle(title);
+    }
 }

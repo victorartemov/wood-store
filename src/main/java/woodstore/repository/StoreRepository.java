@@ -9,4 +9,5 @@ import woodstore.model.Store;
  */
 
 public interface StoreRepository extends JpaRepository<Store, Long> {
+    Store findByTitle(String title);
 }

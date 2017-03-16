@@ -11,6 +11,29 @@ import java.util.Set;
  */
 @Entity
 public class Store extends Item{
+
+    private String title;
+
     @ElementCollection
     Collection<Product> storedProducts = new ArrayList<>();
+
+    public Collection<Product> getStoredProducts() {
+        return storedProducts;
+    }
+
+    public void setStoredProducts(Collection<Product> storedProducts) {
+        this.storedProducts = storedProducts;
+    }
+
+    public void addProduct(Product product){
+        storedProducts.add(product);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
