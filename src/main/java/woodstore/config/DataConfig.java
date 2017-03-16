@@ -22,7 +22,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource("classpath:app.properties")
+@PropertySource("classpath:postgresDB.properties")
 @EnableJpaRepositories(basePackages = "woodstore.repository")
 public class DataConfig {
 
