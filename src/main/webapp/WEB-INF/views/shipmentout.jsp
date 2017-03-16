@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Рабочий день</title>
+    <title>Расход</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
@@ -25,16 +25,11 @@
     <!-- Header -->
     <jsp:include page="header.jsp"/>
 
-    <h1 align="center">Рабочий день</h1>
-    <br>
 
     <div class="panel panel-warning">
-        <div class="panel-heading">Новый день не создан</div>
-        <div class="panel-body">
-            <button type="button" class="btn btn-default">Создать новый день</button>
-        </div>
+        <div class="panel-heading">Внимание!</div>
+        <div class="panel-body">Данная страница в процессе разработки.</div>
     </div>
-
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

@@ -110,4 +110,15 @@ public class UserAccessController {
     public String workday(Model model){
         return "workday";
     }
+
+    @RequestMapping(value = "/shipmentout", method = RequestMethod.GET)
+    public String shipmentout(Model model){
+        return "shipmentout";
+    }
+
+    @RequestMapping(value = "/shipmentin", method = RequestMethod.GET)
+    public String shipmentin(Model model){
+        return "shipmentin";
+    }
+
 }

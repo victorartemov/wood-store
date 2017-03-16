@@ -8,10 +8,10 @@
         <!-- Menu items -->
         <div>
             <ul class="nav navbar-nav">
-                <li><a href="">Склад</a></li>
-                <li><a href="">Рабочий день</a></li>
-                <li><a href="">Приход</a></li>
-                <li><a href="">Расход</a></li>
+                <li><a href="welcome">Склад</a></li>
+                <li><a href="workday">Рабочий день</a></li>
+                <li><a href="shipmentin">Приход</a></li>
+                <li><a href="shipmentout">Расход</a></li>
             </ul>
         </div>
 
