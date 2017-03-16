@@ -19,10 +19,7 @@
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <c:if test="${pageContext.request.userPrincipal.name != null}">
-                        <a href="#"><span class="glyphicon glyphicon-user"></span>
-                            ${pageContext.request.userPrincipal.name}</a>
-                    </c:if>
+                    <a href="#"><span class="glyphicon glyphicon-user"></span> ${pageContext.request.userPrincipal.name}</a>
                 </li>
                 <li>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
