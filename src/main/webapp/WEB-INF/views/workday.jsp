@@ -28,13 +28,14 @@
     <h1 align="center">Рабочий день</h1>
     <br>
 
-
-    <div class="panel panel-warning">
-        <div class="panel-heading">Новый день не создан</div>
-        <div class="panel-body">
-            <button type="button" class="btn btn-default">Создать новый день</button>
+    <c:if test = "${currentWorkDay == null}">
+        <div class="panel panel-warning">
+            <div class="panel-heading">Новый день не создан</div>
+            <div class="panel-body">
+                <button type="button" class="btn btn-default">Создать новый день</button>
+            </div>
         </div>
-    </div>
+    </c:if>
 
 
 </div>

@@ -7,15 +7,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import woodstore.model.Category;
-import woodstore.model.Product;
-import woodstore.model.Profile;
-import woodstore.model.Store;
+import org.springframework.web.bind.annotation.RequestParam;
+import woodstore.model.*;
 import woodstore.service.SecurityService;
-import woodstore.service.impl.CategoryService;
-import woodstore.service.impl.ProductService;
-import woodstore.service.impl.ProfileService;
-import woodstore.service.impl.StoreService;
+import woodstore.service.impl.*;
 import woodstore.validator.ProfileValidator;
 
 import java.security.Principal;
@@ -46,6 +41,9 @@ public class UserAccessController {
 
     @Autowired
     private StoreService storeService;
+
+    @Autowired
+    private WorkdayService workdayService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -111,7 +109,11 @@ public class UserAccessController {
     @RequestMapping(value = "/workday", method = RequestMethod.GET)
     public String workday(Model model) {
 
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yy");
 
+        Workday currentWorkDay = workdayService.findByDate(dateFormatter.format(currentDate));
+        model.addAttribute("currentWorkDay", currentWorkDay);
 
         return "workday";
     }

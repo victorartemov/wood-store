@@ -15,18 +15,18 @@ public class Workday extends Item {
     public Workday() {
     }
 
-    private Date currentDate;
+    private String date;
     private Long workerId;
 
     @ElementCollection
     private Collection<Product> products = new ArrayList<>();
 
-    public Date getCurrentDate() {
-        return currentDate;
+    public String getDate() {
+        return date;
     }
 
-    public void setCurrentDate(Date currentDate) {
-        this.currentDate = currentDate;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Long getWorkerId() {
