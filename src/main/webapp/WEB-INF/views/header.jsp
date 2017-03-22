@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <!-- Logo -->
         <div class="navbar-header">
-            <a href="" class="navbar-brand">WOODSTORE</a>
+            <span class="navbar-brand">WOODSTORE</span>
         </div>
 
         <!-- Menu items -->
