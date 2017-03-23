@@ -24,6 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //provide access for all to use "/", "/login**", "/webjars/**"
+        http.csrf().disable();
+
         http.antMatcher("/**")
                 .authorizeRequests()
                 .antMatchers("/login**", "/resources/**").permitAll()

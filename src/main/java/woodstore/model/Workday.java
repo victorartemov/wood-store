@@ -1,10 +1,14 @@
 package woodstore.model;
 
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Виктор on 18.01.2017.
@@ -18,8 +22,8 @@ public class Workday extends Item {
     private String date;
     private Long workerId;
 
-    @ElementCollection
-    private Collection<Product> products = new ArrayList<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<Product> products = new ArrayList<>();
 
     public String getDate() {
         return date;
@@ -37,11 +41,11 @@ public class Workday extends Item {
         this.workerId = workerId;
     }
 
-    public Collection<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(Collection<Product> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 }

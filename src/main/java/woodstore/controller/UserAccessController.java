@@ -13,6 +13,8 @@ import woodstore.service.SecurityService;
 import woodstore.service.impl.*;
 import woodstore.validator.ProfileValidator;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -110,10 +112,17 @@ public class UserAccessController {
     public String workday(Model model) {
 
         Date currentDate = new Date();
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yy");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        //model.addAttribute("currentTime", dateFormatter.format(currentDate));
 
         Workday currentWorkDay = workdayService.findByDate(dateFormatter.format(currentDate));
         model.addAttribute("currentWorkDay", currentWorkDay);
+
+        List<Category> categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
+
+        List<Product> products = productService.findAll();
+        model.addAttribute("products", products);
 
         return "workday";
     }
@@ -128,4 +137,44 @@ public class UserAccessController {
         return "shipmentin";
     }
 
+    @RequestMapping(value = "/createnewday", method = RequestMethod.GET)
+    public String createnewday(Model model) {
+
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+
+        Workday newWorkday = new Workday();
+        newWorkday.setDate(dateFormatter.format(currentDate));
+
+        workdayService.add(newWorkday);
+
+        return "redirect:/workday";
+    }
+
+    @RequestMapping(value = "/createnewproduct", method = RequestMethod.POST)
+    public String createnewdayA(HttpServletRequest request) {
+
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Enumeration en = request.getParameterNames();
+        while(en.hasMoreElements()) {
+            // Get the name of the request parameter
+            String name = (String)en.nextElement();
+            System.out.println(name);
+
+            // Get the value of the request parameter
+            String value = request.getParameter(name);
+
+            // If the request parameter can appear more than once in the query string, get all values
+            String[] values = request.getParameterValues(name);
+
+            for (int i=0; i<values.length; i++) {
+                System.out.println(" " + values[i]);
+            }
+        }
+        return "redirect:/workday";
+    }
 }
