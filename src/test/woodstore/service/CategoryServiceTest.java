@@ -12,11 +12,14 @@ import woodstore.config.DataConfig;
 import woodstore.config.TestDatabaseConfig;
 import woodstore.config.WebConfig;
 import woodstore.model.Category;
+import woodstore.model.Product;
 import woodstore.service.impl.CategoryService;
+import woodstore.service.impl.ProductService;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.List;
 
 /**
  * Created by Виктор on 12.02.2017.
@@ -35,6 +38,9 @@ public class CategoryServiceTest {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private ProductService productService;
+
     @Before
     public void setUp(){
         entityManager = entityManagerFactory.createEntityManager();
@@ -42,10 +48,13 @@ public class CategoryServiceTest {
 
     @Test
     public void testSaveCategory(){
-        Category category = new Category();
-        category.setCategoryTitle("Вагонка липа 2м");
 
-        categoryService.add(category);
+        Category category = categoryService.findByTitle("Штучные товары");
+
+        List<Product> products = productService.findByCategory(category);
+        for(Product product : products){
+            System.out.println(product.getTitle());
+        }
     }
 
 }

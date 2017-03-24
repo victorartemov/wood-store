@@ -50,28 +50,28 @@ public class HibernateTest {
         product1.setCategory(category1);
         product1.setLength(2);
         product1.setPrice(200);
-        product1.setTitle("Вагонка сосна");
+        product1.setTitle("Вагонка сосна 2 м");
 
         Product product2 = new Product();
         product2.setAmount(10);
         product2.setCategory(category1);
         product2.setLength(2.1);
         product2.setPrice(200);
-        product2.setTitle("Вагонка сосна");
+        product2.setTitle("Вагонка сосна 2.1 м");
 
         Product product3 = new Product();
         product3.setAmount(10);
         product3.setCategory(category1);
         product3.setLength(2.2);
         product3.setPrice(200);
-        product3.setTitle("Вагонка сосна");
+        product3.setTitle("Вагонка сосна 2.2 м");
 
         Product product4 = new Product();
         product4.setAmount(10);
         product4.setCategory(category1);
         product4.setLength(2.3);
         product4.setPrice(200);
-        product4.setTitle("Вагонка сосна");
+        product4.setTitle("Вагонка сосна 2.3 м");
 
         Product product5 = new Product();
         product5.setTitle("Кирасир 16");

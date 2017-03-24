@@ -1,8 +1,6 @@
 package woodstore.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +10,10 @@ import woodstore.model.Product;
 import woodstore.service.impl.CategoryService;
 import woodstore.service.impl.ProductService;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.util.List;
 
 /**
@@ -29,9 +30,21 @@ public class RRestController {
     private CategoryService categoryService;
 
     @RequestMapping(value = "/getProducts", method = RequestMethod.GET)
-    public List<Product> admin(@RequestParam(value = "title") String title) {
+    public List<Product> admin(HttpServletRequest request) {
+
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        String title = request.getParameter("title");
+
+
+        System.out.println("Что у нас прилетает к ресту? - " + title);
+
         Category category = categoryService.findByTitle(title);
 
-        return productService.findAll();
+        return productService.findByCategory(category);
     }
 }

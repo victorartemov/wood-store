@@ -153,28 +153,16 @@ public class UserAccessController {
 
     @RequestMapping(value = "/createnewproduct", method = RequestMethod.POST)
     public String createnewdayA(HttpServletRequest request) {
-
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        Enumeration en = request.getParameterNames();
-        while(en.hasMoreElements()) {
-            // Get the name of the request parameter
-            String name = (String)en.nextElement();
-            System.out.println(name);
 
-            // Get the value of the request parameter
-            String value = request.getParameter(name);
+        System.out.println(request.getParameter("selectCategory"));
+        System.out.println(request.getParameter("selectProduct"));
+        System.out.println(request.getParameter("quantity"));
 
-            // If the request parameter can appear more than once in the query string, get all values
-            String[] values = request.getParameterValues(name);
-
-            for (int i=0; i<values.length; i++) {
-                System.out.println(" " + values[i]);
-            }
-        }
         return "redirect:/workday";
     }
 }
