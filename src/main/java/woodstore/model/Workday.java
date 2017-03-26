@@ -23,7 +23,7 @@ public class Workday extends Item {
     private Long workerId;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<Product> products = new ArrayList<>();
+    private List<SoldProduct> products = new ArrayList<>();
 
     public String getDate() {
         return date;
@@ -41,11 +41,11 @@ public class Workday extends Item {
         this.workerId = workerId;
     }
 
-    public List<Product> getProducts() {
+    public List<SoldProduct> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<SoldProduct> products) {
         this.products = products;
     }
 }

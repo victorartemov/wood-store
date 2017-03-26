@@ -6,6 +6,7 @@ import woodstore.model.Workday;
 import woodstore.repository.WorkdayRepository;
 import woodstore.service.ItemService;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -40,5 +41,11 @@ public class WorkdayService implements ItemService<Workday> {
 
     public Workday findByDate(String date){
         return workdayRepository.findByDate(date);
+    }
+
+    public Workday today(){
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        return workdayRepository.findByDate(dateFormatter.format(currentDate));
     }
 }

@@ -1,6 +1,7 @@
 package woodstore.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,6 +47,9 @@ public class UserAccessController {
 
     @Autowired
     private WorkdayService workdayService;
+
+    @Autowired
+    private SoldProductService soldProductService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -94,7 +98,7 @@ public class UserAccessController {
 
         Map<String, List<Product>> productsByCategories = new HashMap<>();
 
-        for (Category category : categories){
+        for (Category category : categories) {
             productsByCategories.put(category.getTitle(), productService.findByCategory(category));
         }
 
@@ -113,7 +117,6 @@ public class UserAccessController {
 
         Date currentDate = new Date();
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
-        //model.addAttribute("currentTime", dateFormatter.format(currentDate));
 
         Workday currentWorkDay = workdayService.findByDate(dateFormatter.format(currentDate));
         model.addAttribute("currentWorkDay", currentWorkDay);
@@ -121,8 +124,26 @@ public class UserAccessController {
         List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
 
-        List<Product> products = productService.findAll();
-        model.addAttribute("products", products);
+        if (workdayService.today() != null) {
+            Set<Category> soldCategories = new HashSet<>();
+            for (SoldProduct product : currentWorkDay.getProducts()) {
+                soldCategories.add(product.getCategory());
+            }
+            model.addAttribute("soldCategories", soldCategories);
+
+
+            Map<String, List<SoldProduct>> productsByCategories = new HashMap<>();
+            for (Category category : soldCategories) {
+                ArrayList<SoldProduct> products = new ArrayList<>();
+                for (SoldProduct product : currentWorkDay.getProducts()) {
+                    if (product.getCategory().getTitle() == category.getTitle()) {
+                        products.add(product);
+                    }
+                }
+                productsByCategories.put(category.getTitle(), products);
+            }
+            model.addAttribute("productsByCategories", productsByCategories);
+        }
 
         return "workday";
     }
@@ -152,16 +173,25 @@ public class UserAccessController {
     }
 
     @RequestMapping(value = "/createnewproduct", method = RequestMethod.POST)
-    public String createnewdayA(HttpServletRequest request) {
+    public String createnewproduct(HttpServletRequest request, Model model) {
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
-        System.out.println(request.getParameter("selectCategory"));
-        System.out.println(request.getParameter("selectProduct"));
-        System.out.println(request.getParameter("quantity"));
+        String title = request.getParameter("selectProduct");
+        String quantity = request.getParameter("quantity");
+
+        SoldProduct soldProduct = new SoldProduct(productService.findByTitle(title));
+        soldProduct.setAmount(Integer.parseInt(quantity));
+        soldProduct.setCategory(categoryService.findByTitle(request.getParameter("selectCategory")));
+
+        soldProductService.add(soldProduct);
+
+        Workday today = workdayService.today();
+        today.getProducts().add(soldProduct);
+        workdayService.edit(today);
 
         return "redirect:/workday";
     }

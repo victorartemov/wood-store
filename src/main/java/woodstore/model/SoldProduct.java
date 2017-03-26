@@ -9,12 +9,12 @@ import javax.persistence.OneToOne;
  * Created by Виктор on 18.01.2017.
  */
 @Entity
-public class Product extends Item {
+public class SoldProduct extends Item {
 
-    public Product() {
+    public SoldProduct() {
     }
 
-    public Product(Product another){
+    public SoldProduct(Product another){
         this.title = another.getTitle();
         this.length = another.getLength();
         this.width = another.getWidth();

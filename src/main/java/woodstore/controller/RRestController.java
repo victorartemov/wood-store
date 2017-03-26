@@ -41,10 +41,10 @@ public class RRestController {
         String title = request.getParameter("title");
 
 
-        System.out.println("Что у нас прилетает к ресту? - " + title);
+        //System.out.println("Что у нас прилетает к ресту? - " + title);
 
         Category category = categoryService.findByTitle(title);
 
-        return productService.findByCategory(category);
+        return productService.findAll();
     }
 }
