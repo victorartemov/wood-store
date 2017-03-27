@@ -9,6 +9,10 @@ import woodstore.model.Profile;
 import woodstore.model.Store;
 import woodstore.validator.ProfileValidator;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Locale;
 
 /**
@@ -168,6 +172,33 @@ public class HibernateTest {
             e.printStackTrace();
         } finally {
             session.close();
+        }
+
+        String JDBC_DRIVER = "org.postgresql.Driver";
+        String DB_URL = "jdbc:postgresql://localhost:5432/woodstore";
+        String USER = "postgres";
+        String PASSWORD = "Unexpirience1";
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try{
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER,PASSWORD);
+
+            String sql = "DELETE FROM WORKDAY_SOLDPRODUCT; " +
+                    "DELETE FROM WORKDAY;" +
+                    "DELETE FROM SOLDPRODUCT;";
+            stmt = conn.prepareStatement(sql);
+
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            conn.close();
+
+        } catch (ClassNotFoundException | SQLException e ){
+            e.printStackTrace();
         }
     }
 }
