@@ -1,7 +1,9 @@
 package woodstore.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
@@ -10,11 +12,11 @@ import java.util.Set;
  * Created by Виктор on 05.02.2017.
  */
 @Entity
-public class Store extends Item{
+public class Store extends Item {
 
     private String title;
 
-    @ElementCollection
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     Collection<Product> storedProducts = new ArrayList<>();
 
     public Collection<Product> getStoredProducts() {
@@ -25,7 +27,7 @@ public class Store extends Item{
         this.storedProducts = storedProducts;
     }
 
-    public void addProduct(Product product){
+    public void addProduct(Product product) {
         storedProducts.add(product);
     }
 

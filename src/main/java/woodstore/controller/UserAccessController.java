@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import woodstore.model.*;
 import woodstore.service.SecurityService;
 import woodstore.service.impl.*;
@@ -131,7 +132,6 @@ public class UserAccessController {
             }
             model.addAttribute("soldCategories", soldCategories);
 
-
             Map<String, List<SoldProduct>> productsByCategories = new HashMap<>();
             for (Category category : soldCategories) {
                 ArrayList<SoldProduct> products = new ArrayList<>();
@@ -143,6 +143,16 @@ public class UserAccessController {
                 productsByCategories.put(category.getTitle(), products);
             }
             model.addAttribute("productsByCategories", productsByCategories);
+
+            double totalSum = 0;
+            for (SoldProduct product : currentWorkDay.getProducts()) {
+                if (product.getCategory().isSimple()) {
+                    totalSum += product.getPrice();
+                } else {
+                    totalSum += product.getPrice() * 0.096 * product.getLength() * product.getAmount();
+                }
+            }
+            model.addAttribute("totalSum", totalSum);
         }
 
         return "workday";
@@ -173,7 +183,7 @@ public class UserAccessController {
     }
 
     @RequestMapping(value = "/createnewproduct", method = RequestMethod.POST)
-    public String createnewproduct(HttpServletRequest request, Model model) {
+    public String createnewproduct(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -183,15 +193,35 @@ public class UserAccessController {
         String title = request.getParameter("selectProduct");
         String quantity = request.getParameter("quantity");
 
-        SoldProduct soldProduct = new SoldProduct(productService.findByTitle(title));
-        soldProduct.setAmount(Integer.parseInt(quantity));
-        soldProduct.setCategory(categoryService.findByTitle(request.getParameter("selectCategory")));
+        if (title != null && title != "") {
+            Product storedProduct = productService.findByTitle(title);
+            SoldProduct soldProduct = new SoldProduct(storedProduct);
 
-        soldProductService.add(soldProduct);
+            if (Integer.parseInt(quantity) > 0 && Integer.parseInt(quantity) <= storedProduct.getAmount()) {
+                soldProduct.setAmount(Integer.parseInt(quantity));
+                soldProduct.setCategory(categoryService.findByTitle(request.getParameter("selectCategory")));
 
-        Workday today = workdayService.today();
-        today.getProducts().add(soldProduct);
-        workdayService.edit(today);
+                soldProductService.add(soldProduct);
+
+                Workday today = workdayService.today();
+                today.getProducts().add(soldProduct);
+                workdayService.edit(today);
+
+                if (storedProduct.getAmount() - soldProduct.getAmount() > 0) {
+                    storedProduct.setAmount(storedProduct.getAmount() - soldProduct.getAmount());
+                    productService.edit(storedProduct);
+                } else {
+                    productService.deleteFromStore(storedProduct);
+                }
+
+
+                redirectAttributes.addFlashAttribute("formInputError", null);
+            } else {
+                redirectAttributes.addFlashAttribute("formInputError", "Недопустимое количество товара для продажи");
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("formInputError", "Не выбран товар для продажи");
+        }
 
         return "redirect:/workday";
     }

@@ -58,14 +58,15 @@
                     <form action="/createnewproduct" method="post" accept-charset="utf-8" align="center">
                         <label style="font-size:20px">Категория: </label>
 
-                        <select class="btn btn-default" name ="selectCategory" onchange="selectProductsForCategory(this)">
+                        <select class="btn btn-default" name="selectCategory"
+                                onchange="selectProductsForCategory(this)">
                             <c:forEach items="${categories}" var="category">
                                 <option value="${category.title}">${category.title}</option>
                             </c:forEach>
                         </select>
 
                         <label style="font-size:20px; margin-left:25px">Название: </label>
-                        <select class="btn btn-default" id="productSelect" name ="selectProduct">
+                        <select class="btn btn-default" id="productSelect" name="selectProduct">
                             <!-- Automatically generates with javascript function -->
                         </select>
 
@@ -79,107 +80,149 @@
         </c:if>
 
         <c:if test="${fn:length(currentWorkDay.products) != 0}">
-             <c:forEach items="${soldCategories}" var="category">
-                 <h2>
-                     <c:out value="${category.title}"/>
-                 </h2>
-                 <!-- Check the type of a category -->
-                         <c:choose>
+            <c:forEach items="${soldCategories}" var="category">
+                <h2>
+                    <c:out value="${category.title}"/>
+                </h2>
+                <!-- Check the type of a category -->
+                <c:choose>
 
-                             <c:when test="${category.simple == true}">
-                                 <div class="table-responsive">
-                                     <table class="table table-bordered table-hover">
-                                         <thead>
-                                         <tr>
-                                             <th>Название</th>
-                                             <th>Количество, шт</th>
-                                             <th>Цена, р</th>
-                                             <th>Стоимость, р</th>
-                                         </tr>
-                                         </thead>
-                                         <tbody>
-                                         <c:forEach items="${productsByCategories}" var="entry">
-                                             <c:if test="${entry.key == category.title}">
-                                                 <c:forEach items="${entry.value}" var="product">
-                                                     <tr>
-                                                         <td>${product.title}</td>
-                                                         <td>${product.amount}</td>
-                                                         <td>${product.price}</td>
-                                                         <td>${product.price*product.amount}</td>
-                                                     </tr>
-                                                 </c:forEach>
-                                             </c:if>
-                                         </c:forEach>
-                                         </tbody>
-                                     </table>
-                                 </div>
-                             </c:when>
-                             <c:when test="${category.simple == false}">
-                                             <div class="table-responsive">
-                                                 <table class="table table-bordered table-hover">
-                                                     <thead>
-                                                     <tr>
-                                                         <th>Название</th>
-                                                         <th>Длина, м</th>
-                                                         <th>Количество, шт</th>
-                                                         <th>м. кв</th>
-                                                         <th>Цена, р</th>
-                                                         <th>Стоимость, р</th>
-                                                     </tr>
-                                                     </thead>
-                                                     <tbody>
-                                                     <c:forEach items="${productsByCategories}" var="entry">
-                                                         <c:if test="${entry.key == category.title}">
-                                                             <c:forEach items="${entry.value}" var="product">
-                                                                 <tr>
-                                                                     <td>${product.title}</td>
-                                                                     <td>${product.length}</td>
-                                                                     <td>${product.amount}</td>
-                                                                     <td>${product.length*product.amount*0.096}</td>
-                                                                     <td>${product.price}</td>
-                                                                     <td>${product.length*product.amount*0.096*product.price}</td>
-                                                                 </tr>
-                                                             </c:forEach>
-                                                         </c:if>
-                                                     </c:forEach>
-                                                     </tbody>
-                                                 </table>
-                                             </div>
-                                         </c:when>
+                    <c:when test="${category.simple == true}">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Название</th>
+                                    <th>Количество, шт</th>
+                                    <th>Цена, р</th>
+                                    <th>Стоимость, р</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${productsByCategories}" var="entry">
+                                    <c:if test="${entry.key == category.title}">
+                                        <c:forEach items="${entry.value}" var="product">
+                                            <tr>
+                                                <td>${product.title}</td>
+                                                <td>${product.amount}</td>
+                                                <td>${product.price}</td>
+                                                <td>${product.price*product.amount}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:if>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </c:when>
+                    <c:when test="${category.simple == false}">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Название</th>
+                                    <th>Длина, м</th>
+                                    <th>Количество, шт</th>
+                                    <th>м. кв</th>
+                                    <th>Цена, р</th>
+                                    <th>Стоимость, р</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${productsByCategories}" var="entry">
+                                    <c:if test="${entry.key == category.title}">
+                                        <c:forEach items="${entry.value}" var="product">
+                                            <tr>
+                                                <td>${product.title}</td>
+                                                <td>${product.length}</td>
+                                                <td>${product.amount}</td>
+                                                <td>${product.length*product.amount*0.096}</td>
+                                                <td>${product.price}</td>
+                                                <td>${product.length*product.amount*0.096*product.price}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:if>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </c:when>
 
 
-                                         <c:otherwise>
-                                             Upss.. No data in the database!
-                                         </c:otherwise>
-                                     </c:choose>
-             </c:forEach>
+                    <c:otherwise>
+                        Upss.. No data in the database!
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
 
-             <div class="panel panel-info">
-                             <div class="panel-heading">Оформление продажи товара</div>
-                             <div class="panel-body">
+            <c:if test="${formInputError == null}">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Оформление продажи товара</div>
+                    <div class="panel-body">
 
-                                 <!-- Choose a product to sell-->
-                                 <form action="/createnewproduct" method="post" accept-charset="utf-8" align="center">
-                                     <label style="font-size:20px">Категория: </label>
+                        <!-- Choose a product to sell-->
+                        <form action="/createnewproduct" method="post" accept-charset="utf-8" align="center">
+                            <label style="font-size:20px">Категория: </label>
 
-                                     <select class="btn btn-default" name ="selectCategory" onchange="selectProductsForCategory(this)">
-                                         <c:forEach items="${categories}" var="category">
-                                             <option value="${category.title}">${category.title}</option>
-                                         </c:forEach>
-                                     </select>
+                            <select class="btn btn-default" name="selectCategory"
+                                    onchange="selectProductsForCategory(this)">
+                                <c:forEach items="${categories}" var="category">
+                                    <option value="${category.title}">${category.title}</option>
+                                </c:forEach>
+                            </select>
 
-                                     <label style="font-size:20px; margin-left:25px">Название: </label>
-                                     <select class="btn btn-default" id="productSelect" name ="selectProduct">
-                                         <!-- Automatically generates with javascript function -->
-                                     </select>
+                            <label style="font-size:20px; margin-left:25px">Название: </label>
+                            <select class="btn btn-default" id="productSelect" name="selectProduct">
+                                <!-- Automatically generates with javascript function -->
+                            </select>
 
-                                     <label style="font-size:20px; margin-left:25px">Количество: </label>
-                                     <input type="text" style="margin-right:25px; width: 50px" name="quantity">
-                                     <input type="submit" class="btn btn-info" value="Добавить">
-                                 </form>
+                            <label style="font-size:20px; margin-left:25px">Количество: </label>
+                            <input type="text" style="margin-right:25px; width: 50px" name="quantity">
+                            <input type="submit" class="btn btn-info" value="Добавить">
+                        </form>
 
-                             </div>
-                         </div>
+                    </div>
+                </div>
+            </c:if>
+            <c:if test="${formInputError != null}">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <c:out value="${formInputError}"/>
+                    </div>
+                    <div class="panel-body">
+
+                        <!-- Choose a product to sell-->
+                        <form action="/createnewproduct" method="post" accept-charset="utf-8" align="center">
+                            <label style="font-size:20px">Категория: </label>
+
+                            <select class="btn btn-default" name="selectCategory"
+                                    onchange="selectProductsForCategory(this)">
+                                <c:forEach items="${categories}" var="category">
+                                    <option value="${category.title}">${category.title}</option>
+                                </c:forEach>
+                            </select>
+
+                            <label style="font-size:20px; margin-left:25px">Название: </label>
+                            <select class="btn btn-default" id="productSelect" name="selectProduct">
+                                <!-- Automatically generates with javascript function -->
+                            </select>
+
+                            <label style="font-size:20px; margin-left:25px">Количество: </label>
+                            <input type="text" style="margin-right:25px; width: 50px" name="quantity">
+                            <input type="submit" class="btn btn-info" value="Добавить">
+                        </form>
+
+                    </div>
+                </div>
+            </c:if>
+
+            <div class="well">
+                <div align="center">
+                    <h3>Касса: <c:out value="${totalSum}"/> рублей. </h3>
+                    <button type="button" class="btn btn-success">Сохранить рабочий день</button>
+                </div>
+            </div>
+
         </c:if>
 
     </c:if>
@@ -210,6 +253,12 @@
         }
     });
     }
+
+
+
+
+
+
 </script>
 </body>
 </html>
