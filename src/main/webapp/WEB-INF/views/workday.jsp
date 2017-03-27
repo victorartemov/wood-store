@@ -252,13 +252,6 @@
             $('#productSelect').html(result);
         }
     });
-    }
-
-
-
-
-
-
 </script>
 </body>
 </html>

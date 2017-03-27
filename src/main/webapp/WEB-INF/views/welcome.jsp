@@ -110,6 +110,12 @@
         </c:choose>
     </c:forEach>
 
+    <div class="well">
+        <div align="center">
+            <h3>Товаров на складе на сумму: <c:out value="${totalSum}"/> рублей. </h3>
+        </div>
+    </div>
+
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

@@ -105,6 +105,16 @@ public class UserAccessController {
 
         model.addAttribute("productsByCategories", productsByCategories);
 
+        double totalSum = 0;
+        for (Product product : productService.findAll()) {
+            if (product.getCategory().isSimple()) {
+                totalSum += product.getPrice() * product.getAmount();
+            } else {
+                totalSum += product.getPrice() * product.getAmount() * product.getLength() * 0.096;
+            }
+        }
+        model.addAttribute("totalSum", totalSum);
+
         return "welcome";
     }
 
@@ -147,7 +157,7 @@ public class UserAccessController {
             double totalSum = 0;
             for (SoldProduct product : currentWorkDay.getProducts()) {
                 if (product.getCategory().isSimple()) {
-                    totalSum += product.getPrice();
+                    totalSum += product.getPrice() * product.getAmount();
                 } else {
                     totalSum += product.getPrice() * 0.096 * product.getLength() * product.getAmount();
                 }
