@@ -2,6 +2,7 @@ package woodstore.model;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -20,7 +21,7 @@ public class Shipment extends Item {
     private String shipFrom;
     private String shipTo;
 
-    @ElementCollection
+    @OneToMany
     private Collection<Product> products = new ArrayList<>();
 
     public Long getWorkerId() {

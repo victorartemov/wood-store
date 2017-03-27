@@ -1,9 +1,6 @@
 package woodstore.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
@@ -16,7 +13,7 @@ public class Store extends Item {
 
     private String title;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER)
     Collection<Product> storedProducts = new ArrayList<>();
 
     public Collection<Product> getStoredProducts() {

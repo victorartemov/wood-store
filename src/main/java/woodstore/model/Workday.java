@@ -5,6 +5,7 @@ import org.hibernate.annotations.Fetch;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -22,7 +23,7 @@ public class Workday extends Item {
     private String date;
     private Long workerId;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     private List<SoldProduct> products = new ArrayList<>();
 
     public String getDate() {
