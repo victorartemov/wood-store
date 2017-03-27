@@ -45,5 +45,8 @@
         <mapping class="woodstore.model.Shipment"/>
         <mapping class="woodstore.model.Role"/>
         <mapping class="woodstore.model.SoldProduct"/>
+        <mapping class="woodstore.model.RecievedProduct"/>
+        <mapping class="woodstore.model.SentProduct"/>
+        <mapping class="woodstore.model.BasicProduct"/>
     </session-factory>
 </hibernate-configuration>
