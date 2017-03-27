@@ -12,6 +12,7 @@
                 <li><a href="workday">Рабочий день</a></li>
                 <li><a href="shipmentin">Приход</a></li>
                 <li><a href="shipmentout">Расход</a></li>
+                <li><a href="journal">Журнал</a></li>
             </ul>
         </div>
 

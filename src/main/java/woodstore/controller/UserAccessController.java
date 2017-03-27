@@ -235,4 +235,10 @@ public class UserAccessController {
 
         return "redirect:/workday";
     }
+
+    @RequestMapping(value = "/journal", method = RequestMethod.GET)
+    public String journal(Model model){
+
+        return "journal";
+    }
 }
