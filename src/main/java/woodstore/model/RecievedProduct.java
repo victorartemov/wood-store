@@ -9,4 +9,18 @@ import javax.persistence.InheritanceType;
  */
 @Entity
 public class RecievedProduct extends BasicProduct {
+
+    public RecievedProduct() {
+    }
+
+    public RecievedProduct(Product another) {
+        this.setTitle(another.getTitle());
+        this.setLength(another.getLength());
+        this.setWeight(another.getWidth());
+        this.setHeight(another.getHeight());
+        this.setWeight(another.getWeight());
+        this.setAmount(another.getAmount());
+        this.setPrice(another.getPrice());
+        this.setQuadrature(another.getQuadrature());
+    }
 }

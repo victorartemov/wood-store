@@ -10,4 +10,19 @@ import javax.persistence.InheritanceType;
 
 @Entity
 public class SentProduct extends BasicProduct {
+
+    public SentProduct() {
+
+    }
+
+    public SentProduct(Product another) {
+        this.setTitle(another.getTitle());
+        this.setLength(another.getLength());
+        this.setWeight(another.getWidth());
+        this.setHeight(another.getHeight());
+        this.setWeight(another.getWeight());
+        this.setAmount(another.getAmount());
+        this.setPrice(another.getPrice());
+        this.setQuadrature(another.getQuadrature());
+    }
 }

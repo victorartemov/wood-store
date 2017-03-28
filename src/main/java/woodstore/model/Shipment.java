@@ -1,8 +1,6 @@
 package woodstore.model;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -11,7 +9,8 @@ import java.util.Date;
  * Created by Виктор on 06.02.2017.
  */
 @Entity
-public class Shipment extends Item {
+@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
+public abstract class Shipment extends Item {
 
     public Shipment() {
     }
@@ -21,8 +20,7 @@ public class Shipment extends Item {
     private String shipFrom;
     private String shipTo;
 
-    @OneToMany
-    private Collection<Product> products = new ArrayList<>();
+    private boolean closed;
 
     public Long getWorkerId() {
         return workerId;
@@ -56,12 +54,28 @@ public class Shipment extends Item {
         this.shipTo = where;
     }
 
-    public Collection<Product> getProducts() {
-        return products;
+    public String getShipFrom() {
+        return shipFrom;
     }
 
-    public void setProducts(Collection<Product> products) {
-        this.products = products;
+    public void setShipFrom(String shipFrom) {
+        this.shipFrom = shipFrom;
+    }
+
+    public String getShipTo() {
+        return shipTo;
+    }
+
+    public void setShipTo(String shipTo) {
+        this.shipTo = shipTo;
+    }
+
+    public boolean isClosed() {
+        return closed;
+    }
+
+    public void setClosed(boolean closed) {
+        this.closed = closed;
     }
 
     @Override
