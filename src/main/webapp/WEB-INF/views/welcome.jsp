@@ -1,5 +1,7 @@
 ﻿<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -59,7 +61,10 @@
                                         <td>${product.title}</td>
                                         <td>${product.amount}</td>
                                         <td>${product.price}</td>
-                                        <td>${product.price*product.amount}</td>
+                                        <td>
+                                            <fmt:formatNumber pattern="0.#"
+                                                              value="${product.price*product.amount}"/>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </c:if>
@@ -91,9 +96,15 @@
                                         <td>${product.title}</td>
                                         <td>${product.length}</td>
                                         <td>${product.amount}</td>
-                                        <td>${product.length*product.amount*0.096}</td>
+                                        <td>
+                                            <fmt:formatNumber pattern="0.#"
+                                                              value="${product.length*product.amount*0.096}"/>
+                                        </td>
                                         <td>${product.price}</td>
-                                        <td>${product.length*product.amount*0.096*product.price}</td>
+                                        <td>
+                                            <fmt:formatNumber pattern="0.#"
+                                                              value="${product.length*product.amount*0.096*product.price}"/>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </c:if>
@@ -112,7 +123,10 @@
 
     <div class="well">
         <div align="center">
-            <h3>Товаров на складе на сумму: <c:out value="${totalSum}"/> рублей. </h3>
+            <h3>Товаров на складе на сумму:
+                <c:out value="${totalSum}"/>
+                рублей.
+            </h3>
         </div>
     </div>
 

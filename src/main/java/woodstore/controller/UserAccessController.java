@@ -18,6 +18,7 @@ import woodstore.validator.ProfileValidator;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -112,8 +113,8 @@ public class UserAccessController {
             } else {
                 totalSum += product.getPrice() * product.getAmount() * product.getLength() * 0.096;
             }
-        }
-        model.addAttribute("totalSum", totalSum);
+        }DecimalFormat df = new DecimalFormat("#.0");
+        model.addAttribute("totalSum", df.format(totalSum));
 
         return "welcome";
     }
@@ -136,9 +137,11 @@ public class UserAccessController {
         model.addAttribute("categories", categories);
 
         if (workdayService.today() != null) {
-            Set<Category> soldCategories = new HashSet<>();
+            List<Category> soldCategories = new ArrayList<>();
             for (SoldProduct product : currentWorkDay.getProducts()) {
-                soldCategories.add(product.getCategory());
+                if (!soldCategories.contains(product.getCategory())) {
+                    soldCategories.add(product.getCategory());
+                }
             }
             model.addAttribute("soldCategories", soldCategories);
 
@@ -162,7 +165,8 @@ public class UserAccessController {
                     totalSum += product.getPrice() * 0.096 * product.getLength() * product.getAmount();
                 }
             }
-            model.addAttribute("totalSum", totalSum);
+            DecimalFormat df = new DecimalFormat("#.0");
+            model.addAttribute("totalSum", df.format(totalSum));
         }
 
         return "workday";
@@ -209,7 +213,7 @@ public class UserAccessController {
 
             if (Integer.parseInt(quantity) > 0 && Integer.parseInt(quantity) <= storedProduct.getAmount()) {
                 soldProduct.setAmount(Integer.parseInt(quantity));
-                soldProduct.setCategory(categoryService.findByTitle(request.getParameter("selectCategory")));
+                soldProduct.setCategory(storedProduct.getCategory());
 
                 soldProductService.add(soldProduct);
 
@@ -237,7 +241,7 @@ public class UserAccessController {
     }
 
     @RequestMapping(value = "/journal", method = RequestMethod.GET)
-    public String journal(Model model){
+    public String journal(Model model) {
 
         return "journal";
     }
