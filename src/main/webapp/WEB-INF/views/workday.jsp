@@ -218,7 +218,10 @@
 
             <div class="well">
                 <div align="center">
-                    <h3>Касса: <c:out value="${totalSum}"/> рублей. </h3>
+                    <h3>Касса:
+                        <c:out value="${totalSum}"/>
+                        рублей.
+                    </h3>
                     <button type="button" class="btn btn-success">Сохранить рабочий день</button>
                 </div>
             </div>
@@ -235,23 +238,24 @@
     function selectProductsForCategory(selectObject) {
         var value = selectObject.value;
 
-    var request = '/getProducts?title=' + value;
+        var request = '/getProducts?title=' + value;
 
-    $.ajax(request, {
-        method : 'get',
-        success: function(data) {
+        $.ajax(request, {
+            method : 'get',
+            success: function(data) {
 
-            var size = data.length;
-            var result = "";
+                var size = data.length;
+                var result = "";
 
-            for (var i=0; i!=size; ++i) {
-                 result += "<option>";
-                 result += data[i].title;
-                 result += "</option>";
+                for (var i=0; i!=size; ++i) {
+                     result += "<option>";
+                     result += data[i].title;
+                     result += "</option>";
+                }
+                $('#productSelect').html(result);
             }
-            $('#productSelect').html(result);
-        }
-    });
+        });
+    }
 </script>
 </body>
 </html>
