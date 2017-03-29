@@ -120,8 +120,6 @@
                         </table>
                     </div>
                 </c:when>
-
-
                 <c:otherwise>
                     Upss.. No data in the database!
                 </c:otherwise>
@@ -171,7 +169,7 @@
 
                         <select class="btn btn-default" name="selectCategory"
                                 onchange="selectProductsForCategory(this)">
-                            <c:forEach items="${categories}" var="category">
+                            <c:forEach items="${allCategories}" var="category">
                                 <option value="${category.title}">${category.title}</option>
                             </c:forEach>
                         </select>

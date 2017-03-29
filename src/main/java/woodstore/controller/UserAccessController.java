@@ -30,6 +30,11 @@ import java.util.*;
 @Controller
 public class UserAccessController {
 
+    /*
+    todo при продаже исчезают товары из выпадающих списков в приходе и расходе
+    todo все падает если не ввести количество товара
+     */
+
     @Autowired
     private ProfileService profileService;
 
@@ -59,6 +64,12 @@ public class UserAccessController {
 
     @Autowired
     private RecievedProductService recievedProductService;
+
+    @Autowired
+    private ShipmentOutService shipmentOutService;
+
+    @Autowired
+    private SentProductService sentProductService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -182,23 +193,11 @@ public class UserAccessController {
         return "workday";
     }
 
-    @RequestMapping(value = "/shipmentout", method = RequestMethod.GET)
-    public String shipmentout(Model model) {
-        return "shipmentout";
-    }
-
     @RequestMapping(value = "/shipmentin", method = RequestMethod.GET)
     public String shipmentin(Model model) {
 
-        ShipmentIn currentShipment = null;
-
-        List<ShipmentIn> shipmentIns = shipmentInService.findAll();
-        for (ShipmentIn shipmentIn : shipmentIns) {
-            if (!shipmentIn.isClosed()) {
-                currentShipment = shipmentIn;
-                model.addAttribute("currentShipment", shipmentIn);
-            }
-        }
+        ShipmentIn currentShipment = shipmentInService.getCurrentShipment();
+        model.addAttribute("currentShipment", currentShipment);
 
         if (currentShipment != null) {
 
@@ -253,26 +252,21 @@ public class UserAccessController {
     }
 
     @RequestMapping(value = "/closeCurrentShipmentIn", method = RequestMethod.GET)
-    public String closeCurrentShipmentIn(Model model){
+    public String closeCurrentShipmentIn(Model model) {
 
         //пополняем склад всеми товарами из прихода
         ShipmentIn currentShipment = shipmentInService.getCurrentShipment();
 
         Collection<RecievedProduct> recievedProducts = currentShipment.getProducts();
-        for(RecievedProduct product : recievedProducts){
+        for (RecievedProduct product : recievedProducts) {
             Product storedProduct = productService.findByTitle(product.getTitle());
             storedProduct.setAmount(storedProduct.getAmount() + product.getAmount());
             productService.edit(storedProduct);
         }
 
         //закрываем приход
-        List<ShipmentIn> shipmentIns = shipmentInService.findAll();
-        for(ShipmentIn shipment: shipmentIns){
-            if(!shipment.isClosed()){
-                shipment.close();
-                shipmentInService.edit(shipment);
-            }
-        }
+        currentShipment.close();
+        shipmentInService.edit(currentShipment);
 
         return "redirect:/shipmentin";
     }
@@ -292,20 +286,13 @@ public class UserAccessController {
             Product storedProduct = productService.findByTitle(title);
             RecievedProduct recievedProduct = new RecievedProduct(storedProduct);
 
-            if (Integer.parseInt(quantity) > 0) {
+            if (Integer.parseInt(quantity) > 0 && quantity != "") {
                 recievedProduct.setAmount(Integer.parseInt(quantity));
                 recievedProduct.setCategory(storedProduct.getCategory());
 
                 recievedProductService.add(recievedProduct);
 
-                ShipmentIn currentShipment = null;
-
-                List<ShipmentIn> shipmentIns = shipmentInService.findAll();
-                for (ShipmentIn shipmentIn : shipmentIns) {
-                    if (!shipmentIn.isClosed()) {
-                        currentShipment = shipmentIn;
-                    }
-                }
+                ShipmentIn currentShipment = shipmentInService.getCurrentShipment();
 
                 currentShipment.getProducts().add(recievedProduct);
                 shipmentInService.edit(currentShipment);
@@ -384,4 +371,138 @@ public class UserAccessController {
 
         return "journal";
     }
+
+    @RequestMapping(value = "/shipmentout", method = RequestMethod.GET)
+    public String shipmentout(Model model) {
+
+        ShipmentOut currentShipment = shipmentOutService.getCurrentShipment();
+        model.addAttribute("currentShipment", currentShipment);
+
+        if (currentShipment != null) {
+
+            List<Category> categories = new ArrayList<>();
+            for (SentProduct product : currentShipment.getProducts()) {
+                if (!categories.contains(product.getCategory())) {
+                    categories.add(product.getCategory());
+                }
+            }
+            model.addAttribute("categories", categories);
+
+
+            List<Category> allCategories = categoryService.findAll();
+            model.addAttribute("allCategories", allCategories);
+
+            Map<String, List<SentProduct>> productsByCategories = new HashMap<>();
+            for (Category category : categories) {
+                ArrayList<SentProduct> products = new ArrayList<>();
+                for (SentProduct product : currentShipment.getProducts()) {
+                    if (product.getCategory().getTitle() == category.getTitle()) {
+                        products.add(product);
+                    }
+                }
+                productsByCategories.put(category.getTitle(), products);
+            }
+            model.addAttribute("productsByCategories", productsByCategories);
+
+            double totalSum = 0;
+            for (SentProduct product : currentShipment.getProducts()) {
+                if (product.getCategory().isSimple()) {
+                    totalSum += product.getPrice() * product.getAmount();
+                } else {
+                    totalSum += product.getPrice() * product.getAmount() * product.getLength() * 0.096;
+                }
+            }
+            DecimalFormat df = new DecimalFormat("#.0");
+            if (totalSum != 0) {
+                model.addAttribute("totalSum", df.format(totalSum));
+            } else model.addAttribute("totalSum", 0);
+        }
+
+        return "shipmentout";
+    }
+
+    @RequestMapping(value = "/createNewShipmentOut", method = RequestMethod.GET)
+    public String createNewShipmentOut(Model model) {
+
+        ShipmentOut currentShipment = new ShipmentOut();
+        shipmentOutService.add(currentShipment);
+
+        return "redirect:/shipmentout";
+    }
+
+    @RequestMapping(value = "/closeCurrentShipmentOut", method = RequestMethod.GET)
+    public String closeCurrentShipmentOut(Model model) {
+
+        //пополняем склад всеми товарами из прихода
+        ShipmentOut currentShipment = shipmentOutService.getCurrentShipment();
+
+        Collection<SentProduct> sentProducts = currentShipment.getProducts();
+        for (SentProduct product : sentProducts) {
+            Product storedProduct = productService.findByTitle(product.getTitle());
+
+            if (storedProduct.getAmount() - product.getAmount() > 0) {
+                storedProduct.setAmount(storedProduct.getAmount() - product.getAmount());
+                productService.edit(storedProduct);
+            } else {
+                productService.deleteFromStore(storedProduct);
+            }
+        }
+
+        //закрываем приход
+        currentShipment.close();
+        shipmentOutService.edit(currentShipment);
+
+        return "redirect:/shipmentout";
+    }
+
+    @RequestMapping(value = "/createNewShipmentOutProduct", method = RequestMethod.POST)
+    public String createNewShipmentOutProduct(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        ShipmentOut currentShipment = shipmentOutService.getCurrentShipment();
+
+        String title = request.getParameter("selectProduct");
+        String quantity = request.getParameter("quantity");
+
+        if (title != null && title != "") {
+            Product storedProduct = productService.findByTitle(title);
+            SentProduct sentProduct = new SentProduct(storedProduct);
+
+            //check if we already have this product to ship out and its quantity(multiple rows may exist)
+            int summaryCountOfAlreadySentProducts = 0;
+            for (SentProduct product : currentShipment.getProducts()) {
+                if (product.getTitle().equals(sentProduct.getTitle())) {
+                    summaryCountOfAlreadySentProducts += product.getAmount();
+                }
+            }
+
+            if ((Integer.parseInt(quantity) > 0) && (storedProduct.getAmount() >= (Integer.parseInt(quantity) + summaryCountOfAlreadySentProducts))) {
+                sentProduct.setAmount(Integer.parseInt(quantity));
+                sentProduct.setCategory(storedProduct.getCategory());
+
+                sentProductService.add(sentProduct);
+
+                currentShipment.getProducts().add(sentProduct);
+                shipmentOutService.edit(currentShipment);
+
+                redirectAttributes.addFlashAttribute("formInputError", null);
+            } else {
+                if (storedProduct.getAmount() < (Integer.parseInt(quantity) + summaryCountOfAlreadySentProducts)) {
+                    redirectAttributes.addFlashAttribute("formInputError", "Превышено возможное количество товара для отправки. На складе осталось "
+                            + (sentProduct.getAmount() - summaryCountOfAlreadySentProducts) + " единиц товара");
+                } else {
+                    redirectAttributes.addFlashAttribute("formInputError", "Недопустимое количество товара");
+                }
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("formInputError", "Не выбран товар для отправки");
+        }
+
+        return "redirect:/shipmentout";
+    }
+
 }

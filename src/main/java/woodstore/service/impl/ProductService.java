@@ -48,13 +48,15 @@ public class ProductService implements ItemService<Product> {
         return productRepository.findAll();
     }
 
-    public Product findByTitle(String title){
+    public Product findByTitle(String title) {
         return productRepository.findByTitle(title);
     }
 
-    public List<Product> findByCategory(Category category){return  productRepository.findByCategory(category);}
+    public List<Product> findByCategory(Category category) {
+        return productRepository.findByCategory(category);
+    }
 
-    public void deleteFromStore(Product product){
+    public void deleteFromStore(Product product) {
         String JDBC_DRIVER = "org.postgresql.Driver";
         String DB_URL = "jdbc:postgresql://localhost:5432/woodstore";
         String USER = "postgres";
@@ -63,9 +65,9 @@ public class ProductService implements ItemService<Product> {
         Connection conn = null;
         PreparedStatement stmt = null;
 
-        try{
+        try {
             Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL,USER,PASSWORD);
+            conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 
             String sql = "DELETE FROM STORE_PRODUCT WHERE STOREDPRODUCTS_ID = ?; " +
                     "DELETE FROM PRODUCT WHERE PRODUCT.ID = ?;";
@@ -79,7 +81,7 @@ public class ProductService implements ItemService<Product> {
             stmt.close();
             conn.close();
 
-        } catch (ClassNotFoundException | SQLException e ){
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
 
