@@ -259,7 +259,7 @@
 
                 for (var i=0; i!=size; ++i) {
                      result += "<option>";
-                     result += data[i].title;
+                     result += data[i];
                      result += "</option>";
                 }
                 $('#productSelect').html(result);

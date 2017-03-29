@@ -133,6 +133,9 @@ public class HibernateTest {
         woodstore.addProduct(product10);
         woodstore.addProduct(product11);
 
+        for(Product product : woodstore.getStoredProducts()){
+            woodstore.getPossibleProducts().add(product.getTitle());
+        }
 
         try {
             //oracle db driver doesn't work properly in russian environment

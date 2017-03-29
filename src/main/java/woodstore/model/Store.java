@@ -1,8 +1,12 @@
 package woodstore.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,6 +19,10 @@ public class Store extends Item {
 
     @OneToMany(fetch = FetchType.EAGER)
     Collection<Product> storedProducts = new ArrayList<>();
+
+    @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
+    List<String> possibleProducts = new ArrayList<>();
 
     public Collection<Product> getStoredProducts() {
         return storedProducts;
@@ -34,5 +42,13 @@ public class Store extends Item {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<String> getPossibleProducts() {
+        return possibleProducts;
+    }
+
+    public void setPossibleProducts(List<String> possibleProducts) {
+        this.possibleProducts = possibleProducts;
     }
 }

@@ -33,6 +33,8 @@ public class UserAccessController {
     /*
     todo при продаже исчезают товары из выпадающих списков в приходе и расходе
     todo все падает если не ввести количество товара
+    todo проблема с кодировкой
+    todo проблема с отображением ошибок при продаже товара
      */
 
     @Autowired
@@ -337,6 +339,7 @@ public class UserAccessController {
             Product storedProduct = productService.findByTitle(title);
             SoldProduct soldProduct = new SoldProduct(storedProduct);
 
+
             if (Integer.parseInt(quantity) > 0 && Integer.parseInt(quantity) <= storedProduct.getAmount()) {
                 soldProduct.setAmount(Integer.parseInt(quantity));
                 soldProduct.setCategory(storedProduct.getCategory());
@@ -353,7 +356,6 @@ public class UserAccessController {
                 } else {
                     productService.deleteFromStore(storedProduct);
                 }
-
 
                 redirectAttributes.addFlashAttribute("formInputError", null);
             } else {
@@ -504,5 +506,4 @@ public class UserAccessController {
 
         return "redirect:/shipmentout";
     }
-
 }

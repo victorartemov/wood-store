@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import woodstore.model.Category;
 import woodstore.model.Product;
+import woodstore.model.Store;
 import woodstore.service.impl.CategoryService;
 import woodstore.service.impl.ProductService;
+import woodstore.service.impl.StoreService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
@@ -27,24 +29,20 @@ public class RRestController {
     private ProductService productService;
 
     @Autowired
+    private StoreService storeService;
+
+    @Autowired
     private CategoryService categoryService;
 
     @RequestMapping(value = "/getProducts", method = RequestMethod.GET)
-    public List<Product> admin(HttpServletRequest request) {
-
-        try {
-            request.setCharacterEncoding("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+    public List<String> getProducts(HttpServletRequest request) {
 
         String title = request.getParameter("title");
 
-
         System.out.println("Что у нас прилетает к ресту? - " + title);
 
-        Category category = categoryService.findByTitle(title);
+        Store store = storeService.findByTitle("woodstore");
 
-        return productService.findAll();
+        return store.getPossibleProducts();
     }
 }
