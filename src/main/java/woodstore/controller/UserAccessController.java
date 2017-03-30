@@ -337,6 +337,11 @@ public class UserAccessController {
 
         if (title != null && title != "") {
             Product storedProduct = productService.findByTitle(title);
+
+            if (storedProduct == null) {
+                redirectAttributes.addFlashAttribute("formInputError", "На складе больше нет данного товара");
+                return "redirect:/workday";
+            }
             SoldProduct soldProduct = new SoldProduct(storedProduct);
 
 
@@ -472,6 +477,10 @@ public class UserAccessController {
 
         if (title != null && title != "") {
             Product storedProduct = productService.findByTitle(title);
+            if (storedProduct == null) {
+                redirectAttributes.addFlashAttribute("formInputError", "На складе нет данного товара");
+                return "redirect:/shipmentout";
+            }
             SentProduct sentProduct = new SentProduct(storedProduct);
 
             //check if we already have this product to ship out and its quantity(multiple rows may exist)
