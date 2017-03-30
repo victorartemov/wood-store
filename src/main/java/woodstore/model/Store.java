@@ -20,9 +20,9 @@ public class Store extends Item {
     @OneToMany(fetch = FetchType.EAGER)
     Collection<Product> storedProducts = new ArrayList<>();
 
-    @ElementCollection
+    @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
-    List<String> possibleProducts = new ArrayList<>();
+    List<PossibleProduct> possibleProducts = new ArrayList<>();
 
     public Collection<Product> getStoredProducts() {
         return storedProducts;
@@ -44,11 +44,11 @@ public class Store extends Item {
         this.title = title;
     }
 
-    public List<String> getPossibleProducts() {
+    public List<PossibleProduct> getPossibleProducts() {
         return possibleProducts;
     }
 
-    public void setPossibleProducts(List<String> possibleProducts) {
+    public void setPossibleProducts(List<PossibleProduct> possibleProducts) {
         this.possibleProducts = possibleProducts;
     }
 }

@@ -3,10 +3,7 @@ package woodstore;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import woodstore.model.Category;
-import woodstore.model.Product;
-import woodstore.model.Profile;
-import woodstore.model.Store;
+import woodstore.model.*;
 import woodstore.validator.ProfileValidator;
 
 import java.sql.Connection;
@@ -133,8 +130,10 @@ public class HibernateTest {
         woodstore.addProduct(product10);
         woodstore.addProduct(product11);
 
-        for(Product product : woodstore.getStoredProducts()){
-            woodstore.getPossibleProducts().add(product.getTitle());
+        for (Product product : woodstore.getStoredProducts()) {
+            PossibleProduct possibleProduct = new PossibleProduct(product);
+            possibleProduct.setCategory(product.getCategory());
+            woodstore.getPossibleProducts().add(possibleProduct);
         }
 
         try {
@@ -167,6 +166,10 @@ public class HibernateTest {
             session.save(product9);
             session.save(product10);
             session.save(product11);
+
+            for (PossibleProduct possibleProduct : woodstore.getPossibleProducts()) {
+                session.save(possibleProduct);
+            }
 
             session.save(woodstore);
 

@@ -50,5 +50,6 @@
         <mapping class="woodstore.model.BasicProduct"/>
         <mapping class="woodstore.model.ShipmentIn"/>
         <mapping class="woodstore.model.ShipmentOut"/>
+        <mapping class="woodstore.model.PossibleProduct"/>
     </session-factory>
 </hibernate-configuration>

@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import woodstore.model.Category;
+import woodstore.model.PossibleProduct;
 import woodstore.model.Product;
 import woodstore.model.Store;
 import woodstore.service.impl.CategoryService;
+import woodstore.service.impl.PossibleProductService;
 import woodstore.service.impl.ProductService;
 import woodstore.service.impl.StoreService;
 
@@ -34,8 +36,11 @@ public class RRestController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private PossibleProductService possibleProductService;
+
     @RequestMapping(value = "/getProducts", method = RequestMethod.GET)
-    public List<String> getProducts(HttpServletRequest request) {
+    public List<PossibleProduct> getProducts(HttpServletRequest request) {
 
         String title = request.getParameter("title");
 
@@ -43,6 +48,6 @@ public class RRestController {
 
         Store store = storeService.findByTitle("woodstore");
 
-        return store.getPossibleProducts();
+        return possibleProductService.findAll();
     }
 }

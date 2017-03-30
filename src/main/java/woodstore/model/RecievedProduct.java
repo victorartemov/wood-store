@@ -13,7 +13,7 @@ public class RecievedProduct extends BasicProduct {
     public RecievedProduct() {
     }
 
-    public RecievedProduct(Product another) {
+    public RecievedProduct(BasicProduct another) {
         this.setTitle(another.getTitle());
         this.setLength(another.getLength());
         this.setWeight(another.getWidth());

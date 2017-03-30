@@ -31,7 +31,7 @@ public abstract class BasicProduct extends Item{
     private double price;
     private double quadrature;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 

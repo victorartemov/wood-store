@@ -73,6 +73,9 @@ public class UserAccessController {
     @Autowired
     private SentProductService sentProductService;
 
+    @Autowired
+    private PossibleProductService possibleProductService;
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new Profile());
@@ -261,9 +264,18 @@ public class UserAccessController {
 
         Collection<RecievedProduct> recievedProducts = currentShipment.getProducts();
         for (RecievedProduct product : recievedProducts) {
-            Product storedProduct = productService.findByTitle(product.getTitle());
-            storedProduct.setAmount(storedProduct.getAmount() + product.getAmount());
-            productService.edit(storedProduct);
+
+            Product storedProduct = null;
+
+            if (productService.findByTitle(product.getTitle()) == null) {
+                storedProduct = new Product(possibleProductService.findByTitle(product.getTitle()));
+                storedProduct.setAmount(product.getAmount());
+                productService.add(storedProduct);
+            } else {
+                storedProduct = productService.findByTitle(product.getTitle());
+                storedProduct.setAmount(storedProduct.getAmount() + product.getAmount());
+                productService.edit(storedProduct);
+            }
         }
 
         //закрываем приход
@@ -285,7 +297,15 @@ public class UserAccessController {
         String quantity = request.getParameter("quantity");
 
         if (title != null && title != "") {
-            Product storedProduct = productService.findByTitle(title);
+
+            BasicProduct storedProduct = null;
+
+            if (productService.findByTitle(title) == null) {
+                storedProduct = possibleProductService.findByTitle(title);
+            } else {
+                storedProduct = productService.findByTitle(title);
+            }
+
             RecievedProduct recievedProduct = new RecievedProduct(storedProduct);
 
             if (Integer.parseInt(quantity) > 0 && quantity != "") {

@@ -221,7 +221,7 @@
 
                 for (var i=0; i!=size; ++i) {
                      result += "<option>";
-                     result += data[i];
+                     result += data[i].title;
                      result += "</option>";
                 }
                 $('#productSelect').html(result);
