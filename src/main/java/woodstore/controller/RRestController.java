@@ -40,12 +40,7 @@ public class RRestController {
     private PossibleProductService possibleProductService;
 
     @RequestMapping(value = "/getProducts", method = RequestMethod.GET)
-    public List<PossibleProduct> getProducts(HttpServletRequest request) {
-
-        String id = request.getParameter("id");
-
-        //System.out.println("Что у нас прилетает к ресту? - " + title);
-
+    public List<PossibleProduct> getProducts(@RequestParam(value = "id", required = true) Long id) {
         return possibleProductService.findMatchesById(Long.valueOf(id));
     }
 }
