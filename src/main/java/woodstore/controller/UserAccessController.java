@@ -388,7 +388,7 @@ public class UserAccessController {
             } else {
                 if (storedProduct.getAmount() < Integer.parseInt(quantity)) {
                     redirectAttributes.addFlashAttribute("formInputError", "Превышено возможное количество товара для отправки. На складе осталось "
-                            + storedProduct.getAmount() + " единиц товара");
+                            +  storedProduct.getAmount() + " единиц товара");
                 } else {
                     redirectAttributes.addFlashAttribute("formInputError", "Недопустимое количество товара");
                 }
