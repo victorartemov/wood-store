@@ -138,7 +138,7 @@
                         <select class="btn btn-default" name="selectCategory"
                                 onchange="selectProductsForCategory(this)">
                             <c:forEach items="${allCategories}" var="category">
-                                <option value="${category.title}">${category.title}</option>
+                                <option value="${category.id}">${category.title}</option>
                             </c:forEach>
                         </select>
 
@@ -170,7 +170,7 @@
                         <select class="btn btn-default" name="selectCategory"
                                 onchange="selectProductsForCategory(this)">
                             <c:forEach items="${allCategories}" var="category">
-                                <option value="${category.title}">${category.title}</option>
+                                <option value="${category.id}">${category.title}</option>
                             </c:forEach>
                         </select>
 
@@ -207,10 +207,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-    function selectProductsForCategory(selectObject) {
+     function selectProductsForCategory(selectObject) {
         var value = selectObject.value;
 
-        var request = '/getProducts?title=' + value;
+        var request = '/getProducts?id=' + value;
 
         $.ajax(request, {
             method : 'get',

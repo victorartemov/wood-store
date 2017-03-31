@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -62,7 +63,7 @@
                         <select class="btn btn-default" name="selectCategory"
                                 onchange="selectProductsForCategory(this)">
                             <c:forEach items="${categories}" var="category">
-                                <option value="${category.title}">${category.title}</option>
+                                <option value="${category.id}">${category.title}</option>
                             </c:forEach>
                         </select>
 
@@ -177,7 +178,7 @@
                             <select class="btn btn-default" name="selectCategory"
                                     onchange="selectProductsForCategory(this)">
                                 <c:forEach items="${categories}" var="category">
-                                    <option value="${category.title}">${category.title}</option>
+                                    <option value="${category.id}">${category.title}</option>
                                 </c:forEach>
                             </select>
 
@@ -208,7 +209,7 @@
                             <select class="btn btn-default" name="selectCategory"
                                     onchange="selectProductsForCategory(this)">
                                 <c:forEach items="${categories}" var="category">
-                                    <option value="${category.title}">${category.title}</option>
+                                    <option value="${category.id}">${category.title}</option>
                                 </c:forEach>
                             </select>
 
@@ -248,7 +249,7 @@
     function selectProductsForCategory(selectObject) {
         var value = selectObject.value;
 
-        var request = '/getProducts?title=' + value;
+        var request = '/getProducts?id=' + value;
 
         $.ajax(request, {
             method : 'get',
@@ -266,7 +267,6 @@
             }
         });
     }
-
 </script>
 </body>
 </html>

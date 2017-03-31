@@ -42,12 +42,10 @@ public class RRestController {
     @RequestMapping(value = "/getProducts", method = RequestMethod.GET)
     public List<PossibleProduct> getProducts(HttpServletRequest request) {
 
-        String title = request.getParameter("title");
+        String id = request.getParameter("id");
 
-        System.out.println("Что у нас прилетает к ресту? - " + title);
+        //System.out.println("Что у нас прилетает к ресту? - " + title);
 
-        Store store = storeService.findByTitle("woodstore");
-
-        return possibleProductService.findAll();
+        return possibleProductService.findMatchesById(Long.valueOf(id));
     }
 }
