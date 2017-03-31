@@ -137,6 +137,7 @@
 
                         <select class="btn btn-default" name="selectCategory"
                                 onchange="selectProductsForCategory(this)">
+                            <option selected disabled hidden>Выберите категорию</option>
                             <c:forEach items="${allCategories}" var="category">
                                 <option value="${category.id}">${category.title}</option>
                             </c:forEach>
@@ -144,11 +145,12 @@
 
                         <label style="font-size:20px; margin-left:25px">Название: </label>
                         <select class="btn btn-default" id="productSelect" name="selectProduct">
+                            <option selected disabled hidden>Название товара</option>
                             <!-- Automatically generates with javascript function -->
                         </select>
 
                         <label style="font-size:20px; margin-left:25px">Количество: </label>
-                        <input type="text" style="margin-right:25px; width: 50px" name="quantity">
+                        <input type="text" style="margin-right:25px; width: 50px" name="quantity" placeholder="0">
                         <input type="submit" class="btn btn-info" value="Добавить">
                     </form>
 
@@ -169,6 +171,7 @@
 
                         <select class="btn btn-default" name="selectCategory"
                                 onchange="selectProductsForCategory(this)">
+                            <option selected disabled hidden>Выберите категорию</option>
                             <c:forEach items="${allCategories}" var="category">
                                 <option value="${category.id}">${category.title}</option>
                             </c:forEach>
@@ -176,11 +179,12 @@
 
                         <label style="font-size:20px; margin-left:25px">Название: </label>
                         <select class="btn btn-default" id="productSelect" name="selectProduct">
+                            <option selected disabled hidden>Название товара</option>
                             <!-- Automatically generates with javascript function -->
                         </select>
 
                         <label style="font-size:20px; margin-left:25px">Количество: </label>
-                        <input type="text" style="margin-right:25px; width: 50px" name="quantity">
+                        <input type="text" style="margin-right:25px; width: 50px" name="quantity" placeholder="0">
                         <input type="submit" class="btn btn-info" value="Добавить">
                     </form>
 
