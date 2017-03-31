@@ -150,7 +150,7 @@
                         </select>
 
                         <label style="font-size:20px; margin-left:25px">Количество: </label>
-                        <input type="text" style="margin-right:25px; width: 50px" name="quantity" placeholder="0">
+                        <input type="text" id="inputQuantity" style="margin-right:25px; width: 50px" name="quantity" placeholder="0">
                         <input type="submit" class="btn btn-info" value="Добавить">
                     </form>
 
@@ -184,7 +184,7 @@
                         </select>
 
                         <label style="font-size:20px; margin-left:25px">Количество: </label>
-                        <input type="text" style="margin-right:25px; width: 50px" name="quantity" placeholder="0">
+                        <input type="text" id="inputQuantity" style="margin-right:25px; width: 50px" name="quantity" placeholder="0">
                         <input type="submit" class="btn btn-info" value="Добавить">
                     </form>
 
@@ -212,6 +212,9 @@
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript">
      function selectProductsForCategory(selectObject) {
+
+       document.getElementById("inputQuantity").defaultValue = "0";
+
         var value = selectObject.value;
 
         var request = '/getProducts?id=' + value;

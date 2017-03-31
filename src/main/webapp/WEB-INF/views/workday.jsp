@@ -51,36 +51,73 @@
 
         <br>
         <c:if test="${fn:length(currentWorkDay.products) == 0}">
-            <!-- Creating first product in this day-->
-            <div class="panel panel-info">
-                <div class="panel-heading">Сегодня еще нет продаж</div>
-                <div class="panel-body">
+            <c:if test="${formInputError == null}">
+                <!-- Creating first product in this day-->
+                <div class="panel panel-info">
+                    <div class="panel-heading">Сегодня еще нет продаж</div>
+                    <div class="panel-body">
 
-                    <!-- Choose a product to sell-->
-                    <form action="/createnewproduct" method="post" accept-charset="utf-8" align="center">
-                        <label style="font-size:20px">Категория: </label>
+                        <!-- Choose a product to sell-->
+                        <form action="/createnewproduct" method="post" accept-charset="utf-8" align="center">
+                            <label style="font-size:20px">Категория: </label>
 
-                        <select class="btn btn-default" name="selectCategory"
-                                onchange="selectProductsForCategory(this)">
-                            <option selected disabled hidden>Выберите категорию</option>
-                            <c:forEach items="${categories}" var="category">
-                                <option value="${category.id}">${category.title}</option>
-                            </c:forEach>
-                        </select>
+                            <select class="btn btn-default" name="selectCategory"
+                                    onchange="selectProductsForCategory(this)">
+                                <option selected disabled hidden>Выберите категорию</option>
+                                <c:forEach items="${categories}" var="category">
+                                    <option value="${category.id}">${category.title}</option>
+                                </c:forEach>
+                            </select>
 
-                        <label style="font-size:20px; margin-left:25px">Название: </label>
-                        <select class="btn btn-default" id="productSelect" name="selectProduct">
-                            <option selected disabled hidden>Название товара</option>
-                            <!-- Automatically generates with javascript function -->
-                        </select>
+                            <label style="font-size:20px; margin-left:25px">Название: </label>
+                            <select class="btn btn-default" id="productSelect" name="selectProduct">
+                                <option selected disabled hidden>Название товара</option>
+                                <!-- Automatically generates with javascript function -->
+                            </select>
 
-                        <label style="font-size:20px; margin-left:25px">Количество: </label>
-                        <input type="text" style="margin-right:25px; width: 50px" name="quantity" placeholder="0">
-                        <input type="submit" class="btn btn-info" value="Добавить">
-                    </form>
+                            <label style="font-size:20px; margin-left:25px">Количество: </label>
+                            <input type="text" id="inputQuantity" style="margin-right:25px; width: 50px" name="quantity"
+                                   placeholder="0">
+                            <input type="submit" class="btn btn-info" value="Добавить">
+                        </form>
 
+                    </div>
                 </div>
-            </div>
+            </c:if>
+            <c:if test="${formInputError != null}">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <c:out value="${formInputError}"/>
+                    </div>
+                    <div class="panel-body">
+
+                        <!-- Choose a product to sell-->
+                        <form action="/createnewproduct" method="post" accept-charset="utf-8" align="center">
+                            <label style="font-size:20px">Категория: </label>
+
+                            <select class="btn btn-default" name="selectCategory"
+                                    onchange="selectProductsForCategory(this)">
+                                <option selected disabled hidden>Выберите категорию</option>
+                                <c:forEach items="${categories}" var="category">
+                                    <option value="${category.id}">${category.title}</option>
+                                </c:forEach>
+                            </select>
+
+                            <label style="font-size:20px; margin-left:25px">Название: </label>
+                            <select class="btn btn-default" id="productSelect" name="selectProduct">
+                                <option selected disabled hidden>Название товара</option>
+                                <!-- Automatically generates with javascript function -->
+                            </select>
+
+                            <label style="font-size:20px; margin-left:25px">Количество: </label>
+                            <input type="text" id="inputQuantity" style="margin-right:25px; width: 50px" name="quantity"
+                                   placeholder="0">
+                            <input type="submit" class="btn btn-info" value="Добавить">
+                        </form>
+
+                    </div>
+                </div>
+            </c:if>
         </c:if>
 
         <c:if test="${fn:length(currentWorkDay.products) != 0}">
@@ -192,7 +229,8 @@
                             </select>
 
                             <label style="font-size:20px; margin-left:25px">Количество: </label>
-                            <input type="text" style="margin-right:25px; width: 50px" name="quantity" placeholder="0">
+                            <input type="text" id="inputQuantity" style="margin-right:25px; width: 50px" name="quantity"
+                                   placeholder="0">
                             <input type="submit" class="btn btn-info" value="Добавить">
                         </form>
 
@@ -225,7 +263,8 @@
                             </select>
 
                             <label style="font-size:20px; margin-left:25px">Количество: </label>
-                            <input type="text" style="margin-right:25px; width: 50px" name="quantity" placeholder="0">
+                            <input type="text" id="inputQuantity" style="margin-right:25px; width: 50px" name="quantity"
+                                   placeholder="0">
                             <input type="submit" class="btn btn-info" value="Добавить">
                         </form>
 
@@ -253,6 +292,9 @@
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     function selectProductsForCategory(selectObject) {
+
+        document.getElementById("inputQuantity").defaultValue = "0";
+
         var value = selectObject.value;
 
         var request = '/getProducts?id=' + value;
@@ -273,6 +315,9 @@
             }
         });
     }
+
+
+
 
 
 </script>

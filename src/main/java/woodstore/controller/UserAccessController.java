@@ -30,11 +30,6 @@ import java.util.*;
 @Controller
 public class UserAccessController {
 
-    /*
-    todo все падает если не ввести количество товара
-    todo проблема с кодировкой
-     */
-
     @Autowired
     private ProfileService profileService;
 
@@ -306,6 +301,11 @@ public class UserAccessController {
 
             RecievedProduct recievedProduct = new RecievedProduct(storedProduct);
 
+            if (Integer.parseInt(quantity) == 0) {
+                redirectAttributes.addFlashAttribute("formInputError", "Введите количество товара");
+                return "redirect:/shipmentin";
+            }
+
             if (Integer.parseInt(quantity) > 0 && quantity != "") {
                 recievedProduct.setAmount(Integer.parseInt(quantity));
                 recievedProduct.setCategory(storedProduct.getCategory());
@@ -362,6 +362,10 @@ public class UserAccessController {
             }
             SoldProduct soldProduct = new SoldProduct(storedProduct);
 
+            if (Integer.parseInt(quantity) == 0) {
+                redirectAttributes.addFlashAttribute("formInputError", "Введите количество товара");
+                return "redirect:/workday";
+            }
 
             if (Integer.parseInt(quantity) > 0 && Integer.parseInt(quantity) <= storedProduct.getAmount()) {
                 soldProduct.setAmount(Integer.parseInt(quantity));
@@ -507,6 +511,11 @@ public class UserAccessController {
                 if (product.getTitle().equals(sentProduct.getTitle())) {
                     summaryCountOfAlreadySentProducts += product.getAmount();
                 }
+            }
+
+            if (Integer.parseInt(quantity) == 0) {
+                redirectAttributes.addFlashAttribute("formInputError", "Введите количество товара");
+                return "redirect:/shipmentout";
             }
 
             if ((Integer.parseInt(quantity) > 0) && (storedProduct.getAmount() >= (Integer.parseInt(quantity) + summaryCountOfAlreadySentProducts))) {
