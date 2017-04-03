@@ -8,8 +8,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <title>Журнал</title>
 
@@ -25,9 +23,14 @@
     <!-- Header -->
     <jsp:include page="header.jsp"/>
 
-    <div class="panel panel-warning">
-        <div class="panel-heading">Внимание!</div>
-        <div class="panel-body">Данная страница в процессе разработки.</div>
+    <div class="page-header">
+        <h1>Журнал</h1>
+    </div>
+
+    <div class="list-group">
+        <a href="#" class="list-group-item"><h2>Рабочие дни</h2></a>
+        <a href="#" class="list-group-item"><h2>Приходы</h2></a>
+        <a href="#" class="list-group-item"><h2>Расходы</h2></a>
     </div>
 
 </div>
