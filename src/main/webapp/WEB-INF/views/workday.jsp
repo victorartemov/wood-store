@@ -12,14 +12,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <title>Рабочий день</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -37,7 +34,7 @@
         <div class="panel panel-warning">
             <div class="panel-heading">Новый день не создан</div>
             <div class="panel-body">
-                <form action="/createnewday">
+                <form action="/createNewDay">
                     <button type="submit" class="btn btn-default">Создать новый день</button>
                 </form>
             </div>
@@ -47,81 +44,97 @@
     <!-- Current workday already exists -->
     <c:if test="${currentWorkDay != null}">
 
-        <h1 align="center">Рабочий день
-            <c:out value="${currentWorkDay.date}"/>
-        </h1>
+        <c:choose>
+            <c:when test="${dayIsOpen == true}">
+                <h1 align="center">Рабочий день
+                    <c:out value="${currentWorkDay.date}"/>
+                </h1>
 
-        <br>
-        <c:if test="${fn:length(currentWorkDay.products) == 0}">
-            <c:if test="${formInputError == null}">
-                <!-- Creating first product in this day-->
-                <div class="panel panel-info">
-                    <div class="panel-heading">Сегодня еще нет продаж</div>
+                <br>
+                <c:if test="${fn:length(currentWorkDay.products) == 0}">
+                    <c:if test="${formInputError == null}">
+                        <!-- Creating first product in this day-->
+                        <div class="panel panel-info">
+                            <div class="panel-heading">Сегодня еще нет продаж</div>
+                            <div class="panel-body">
+
+                                <!-- Choose a product to sell-->
+                                <jsp:include page="add_new_product.jsp"/>
+
+                            </div>
+                        </div>
+                    </c:if>
+                    <c:if test="${formInputError != null}">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <c:out value="${formInputError}"/>
+                            </div>
+                            <div class="panel-body">
+
+                                <!-- Choose a product to sell-->
+                                <jsp:include page="add_new_product.jsp"/>
+
+                            </div>
+                        </div>
+                    </c:if>
+                </c:if>
+
+                <c:if test="${fn:length(currentWorkDay.products) != 0}">
+
+                    <!-- Tables of products per each category -->
+                    <jsp:include page="display_products_per_category.jsp"/>
+
+                    <c:if test="${formInputError == null}">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">Оформление продажи товара</div>
+                            <div class="panel-body">
+
+                                <!-- Choose a product to sell-->
+                                <jsp:include page="add_new_product.jsp"/>
+
+                            </div>
+                        </div>
+                    </c:if>
+
+                    <c:if test="${formInputError != null}">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <c:out value="${formInputError}"/>
+                            </div>
+                            <div class="panel-body">
+
+                                <!-- Choose a product to sell-->
+                                <jsp:include page="add_new_product.jsp"/>
+
+                            </div>
+                        </div>
+                    </c:if>
+
+                    <div class="well">
+                        <div align="center">
+                            <h3>Касса:
+                                <c:out value="${totalSum}"/>
+                                рублей.
+                            </h3>
+                            <form action="/closeTheDay">
+                                <button type="submit" class="btn btn-success">Сохранить рабочий день</button>
+                            </form>
+                        </div>
+                    </div>
+                </c:if>
+            </c:when>
+
+            <c:when test="${dayIsOpen == false}">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">День закрыт</div>
                     <div class="panel-body">
-
-                        <!-- Choose a product to sell-->
-                        <jsp:include page="add_new_product.jsp"/>
-
+                        <form action="/openTheDay">
+                            <button type="submit" class="btn btn-default">Открыть день</button>
+                        </form>
                     </div>
                 </div>
-            </c:if>
-            <c:if test="${formInputError != null}">
-                <div class="panel panel-danger">
-                    <div class="panel-heading">
-                        <c:out value="${formInputError}"/>
-                    </div>
-                    <div class="panel-body">
-
-                        <!-- Choose a product to sell-->
-                        <jsp:include page="add_new_product.jsp"/>
-
-                    </div>
-                </div>
-            </c:if>
-        </c:if>
-
-        <c:if test="${fn:length(currentWorkDay.products) != 0}">
-
-            <!-- Tables of products per each category -->
-            <jsp:include page="display_products_per_category.jsp"/>
-
-            <c:if test="${formInputError == null}">
-                <div class="panel panel-info">
-                    <div class="panel-heading">Оформление продажи товара</div>
-                    <div class="panel-body">
-
-                        <!-- Choose a product to sell-->
-                        <jsp:include page="add_new_product.jsp"/>
-
-                    </div>
-                </div>
-            </c:if>
-            <c:if test="${formInputError != null}">
-                <div class="panel panel-danger">
-                    <div class="panel-heading">
-                        <c:out value="${formInputError}"/>
-                    </div>
-                    <div class="panel-body">
-
-                        <!-- Choose a product to sell-->
-                        <jsp:include page="add_new_product.jsp"/>
-
-                    </div>
-                </div>
-            </c:if>
-
-            <div class="well">
-                <div align="center">
-                    <h3>Касса:
-                        <c:out value="${totalSum}"/>
-                        рублей.
-                    </h3>
-                    <button type="button" class="btn btn-success">Сохранить рабочий день</button>
-                </div>
-            </div>
-
-        </c:if>
-
+            </c:when>
+        </c:choose>
     </c:if>
 
 

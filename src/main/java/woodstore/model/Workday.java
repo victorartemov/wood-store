@@ -2,10 +2,7 @@ package woodstore.model;
 
 import org.hibernate.annotations.Fetch;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -22,6 +19,9 @@ public class Workday extends Item {
 
     private String date;
     private Long workerId;
+
+    @Column(nullable = true)
+    private boolean open;
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<SoldProduct> products = new ArrayList<>();
@@ -48,5 +48,13 @@ public class Workday extends Item {
 
     public void setProducts(List<SoldProduct> products) {
         this.products = products;
+    }
+
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
     }
 }

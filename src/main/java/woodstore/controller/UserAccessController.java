@@ -150,7 +150,10 @@ public class UserAccessController {
         List<Category> categories = categoryService.findAll();
         model.addAttribute("allCategories", categories);
 
-        if (workdayService.today() != null) {
+        if (currentWorkDay != null && currentWorkDay.isOpen()) {
+
+            model.addAttribute("dayIsOpen", true);
+
             List<Category> soldCategories = new ArrayList<>();
             for (SoldProduct product : currentWorkDay.getProducts()) {
                 if (!soldCategories.contains(product.getCategory())) {
@@ -181,9 +184,48 @@ public class UserAccessController {
             }
             DecimalFormat df = new DecimalFormat("#.0");
             model.addAttribute("totalSum", df.format(totalSum));
+        } else {
+            model.addAttribute("dayIsOpen", false);
         }
 
         return "workday";
+    }
+
+    @RequestMapping(value = "/createNewDay", method = RequestMethod.GET)
+    public String createNewDay(Model model) {
+
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+
+        Workday newWorkday = new Workday();
+        newWorkday.setDate(dateFormatter.format(currentDate));
+        newWorkday.setOpen(true);
+
+        workdayService.add(newWorkday);
+
+        return "redirect:/workday";
+    }
+
+    @RequestMapping(value = "/openTheDay", method = RequestMethod.GET)
+    public String openTheDay(Model model) {
+        Workday currentWorkday = workdayService.today();
+        if (currentWorkday != null) {
+            currentWorkday.setOpen(true);
+            workdayService.edit(currentWorkday);
+        }
+
+        return "redirect:/workday";
+    }
+
+    @RequestMapping(value = "/closeTheDay", method = RequestMethod.GET)
+    public String closeTheDay(Model model) {
+        Workday currentWorkday = workdayService.today();
+        if (currentWorkday != null) {
+            currentWorkday.setOpen(false);
+            workdayService.edit(currentWorkday);
+        }
+
+        return "redirect:/workday";
     }
 
     @RequestMapping(value = "/shipmentin", method = RequestMethod.GET)
@@ -323,20 +365,6 @@ public class UserAccessController {
         return "redirect:/shipmentin";
     }
 
-    @RequestMapping(value = "/createnewday", method = RequestMethod.GET)
-    public String createnewday(Model model) {
-
-        Date currentDate = new Date();
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
-
-        Workday newWorkday = new Workday();
-        newWorkday.setDate(dateFormatter.format(currentDate));
-
-        workdayService.add(newWorkday);
-
-        return "redirect:/workday";
-    }
-
     @RequestMapping(value = "/createnewproduct", method = RequestMethod.POST)
     public String createnewproduct(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         try {
@@ -383,7 +411,7 @@ public class UserAccessController {
             } else {
                 if (storedProduct.getAmount() < Integer.parseInt(quantity)) {
                     redirectAttributes.addFlashAttribute("formInputError", "Превышено возможное количество товара для отправки. На складе осталось "
-                            +  storedProduct.getAmount() + " единиц товара");
+                            + storedProduct.getAmount() + " единиц товара");
                 } else {
                     redirectAttributes.addFlashAttribute("formInputError", "Недопустимое количество товара");
                 }
