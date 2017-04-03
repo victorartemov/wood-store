@@ -570,4 +570,16 @@ public class UserAccessController {
 
         return "redirect:/shipmentout";
     }
+
+    @RequestMapping(value = "/shipmentInList", method = RequestMethod.GET)
+    public String shipmentInList(Model model){
+
+        return "shipmentInList";
+    }
+
+    @RequestMapping(value = "/shipmentOutList", method = RequestMethod.GET)
+    public String shipmentOutList(Model model){
+
+        return "shipmentOutList";
+    }
 }

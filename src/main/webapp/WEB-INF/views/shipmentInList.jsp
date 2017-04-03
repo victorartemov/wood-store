@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Журнал</title>
+    <title>Выбор прихода</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
@@ -24,14 +24,10 @@
     <jsp:include page="header.jsp"/>
 
     <div class="page-header">
-        <h1>Журнал</h1>
+        <h1>Выбор прихода</h1>
     </div>
 
-    <div class="list-group">
-        <a href="#" class="list-group-item"><h2>Рабочие дни</h2></a>
-        <a href="shipmentInList" class="list-group-item"><h2>Приходы</h2></a>
-        <a href="shipmentOutList" class="list-group-item"><h2>Расходы</h2></a>
-    </div>
+
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
