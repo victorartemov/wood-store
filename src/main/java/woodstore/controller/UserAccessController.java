@@ -144,16 +144,11 @@ public class UserAccessController {
     @RequestMapping(value = "/workday", method = RequestMethod.GET)
     public String workday(Model model) {
 
-        Date currentDate = new Date();
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
-
-        Workday currentWorkDay = workdayService.findByDate(dateFormatter.format(currentDate));
+        Workday currentWorkDay = workdayService.today();
         model.addAttribute("currentWorkDay", currentWorkDay);
 
         List<Category> categories = categoryService.findAll();
-        ModelAndView modelAndView = new ModelAndView("workwithproduct.jsp");
-        modelAndView.addObject("categories", categories);
-        model.addAttribute("categories", categories);
+        model.addAttribute("allCategories", categories);
 
         if (workdayService.today() != null) {
             List<Category> soldCategories = new ArrayList<>();
