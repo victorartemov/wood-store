@@ -37,12 +37,12 @@ public class ShipmentInService implements ItemService<ShipmentIn> {
         return shipmentInRepository.findAll();
     }
 
-    public ShipmentIn getCurrentShipment(){
+    public ShipmentIn getCurrentShipment() {
         ShipmentIn shipment = null;
 
         List<ShipmentIn> shipments = shipmentInRepository.findAll();
-        for(ShipmentIn s: shipments){
-            if(!s.isClosed()){
+        for (ShipmentIn s : shipments) {
+            if (!s.isClosed()) {
                 shipment = s;
             }
         }

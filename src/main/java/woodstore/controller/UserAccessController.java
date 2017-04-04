@@ -21,6 +21,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 
@@ -280,7 +281,12 @@ public class UserAccessController {
     @RequestMapping(value = "/createnewshipmentin", method = RequestMethod.GET)
     public String createnewshipmentin(Model model) {
 
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+
         ShipmentIn currentShipment = new ShipmentIn();
+        currentShipment.setDate(dateFormatter.format(currentDate));
+
         shipmentInService.add(currentShipment);
 
         return "redirect:/shipmentin";
@@ -310,8 +316,8 @@ public class UserAccessController {
 
         //закрываем приход
         currentShipment.close();
-        shipmentInService.edit(currentShipment);
 
+        shipmentInService.edit(currentShipment);
         return "redirect:/shipmentin";
     }
 

@@ -16,7 +16,7 @@ public abstract class Shipment extends Item {
     }
 
     private Long workerId;
-    private Date shipmentDate;
+    private String date;
     private String shipFrom;
     private String shipTo;
 
@@ -30,12 +30,12 @@ public abstract class Shipment extends Item {
         this.workerId = workerId;
     }
 
-    public Date getShipmentDate() {
-        return shipmentDate;
+    public String getDate() {
+        return date;
     }
 
-    public void setShipmentDate(Date shipmentDate) {
-        this.shipmentDate = shipmentDate;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getWhence() {
@@ -76,13 +76,5 @@ public abstract class Shipment extends Item {
 
     public void setClosed(boolean closed) {
         this.closed = closed;
-    }
-
-    @Override
-    public String toString() {
-        return "Shipment{" +
-                "shipmentDate=" + shipmentDate +
-                ", workerId=" + workerId +
-                '}';
     }
 }

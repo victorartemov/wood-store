@@ -5,19 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import woodstore.model.Category;
-import woodstore.model.PossibleProduct;
-import woodstore.model.Product;
-import woodstore.model.Store;
-import woodstore.service.impl.CategoryService;
-import woodstore.service.impl.PossibleProductService;
-import woodstore.service.impl.ProductService;
-import woodstore.service.impl.StoreService;
+import woodstore.model.*;
+import woodstore.service.impl.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,8 +34,31 @@ public class RRestController {
     @Autowired
     private PossibleProductService possibleProductService;
 
+    @Autowired
+    private ShipmentInService shipmentInService;
+
     @RequestMapping(value = "/getProducts", method = RequestMethod.GET)
     public List<PossibleProduct> getProducts(@RequestParam(value = "id", required = true) Long id) {
         return possibleProductService.findMatchesById(Long.valueOf(id));
+    }
+
+    @RequestMapping(value = "/getShipments", method = RequestMethod.GET)
+    public List<ShipmentIn> getShipments(@RequestParam(value = "date", required = true) String date) {
+
+        System.out.println("wow!");
+
+        List<ShipmentIn> shipmentIns = shipmentInService.findAll();
+        List<ShipmentIn> resultList = new ArrayList<>();
+        for (ShipmentIn shipment : shipmentIns) {
+            if (shipment.getDate().equals(date)) {
+                resultList.add(shipment);
+            }
+        }
+
+        for (ShipmentIn shipmentIn : resultList) {
+            System.out.println(shipmentIn.getDate());
+        }
+
+        return resultList;
     }
 }
