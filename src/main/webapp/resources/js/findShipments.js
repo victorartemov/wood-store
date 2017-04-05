@@ -1,14 +1,17 @@
-function findShipments() {
+$(document).ready(function() {
+            $("button").click(function() {
+                var $result = $('#shipments');
+                var $request = '/getShipments?date=' +$('#datePicker').val();
+                $result.empty();
 
-    var select = $('#shipmentsSelect');
-    var request = '/getShipments?date=' + $('#datePicker').val();
-
-    var b = document.getElementById("findClickButton");
-
-    $.ajax(request, {
-        method : 'get',
-        success: function(data) {
-
-        }
-    });
- }
+                $.ajax({
+                    type: 'GET',
+                    url: $request,
+                    success: function(shipments) {
+                        $.each(shipments, function(i, shipment) {
+                            $result.append('<li>' + shipment.date + '</li>');
+                        });
+                    }
+                });
+            });
+        });

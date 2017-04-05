@@ -30,29 +30,22 @@
         <h1>Выбор прихода</h1>
     </div>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
     <div class="panel panel-default">
         <div class="panel-heading">Выберите дату</div>
         <div class="panel-body">
-            <form>
-                <input class="form-control" id="datePicker" name="date" placeholder="дд/мм/гггг" type="text"
-                       style="width:200px"/>
-                <input type="submit" class="btn btn-primary" id="findClickButton" value="Найти"
-                       onclick="findShipments()">
-            </form>
+            <input id="datePicker" name="date" placeholder="дд/мм/гггг" type="text"
+                   style="width:150px"/>
+            <button>Найти</button>
         </div>
     </div>
 
 
+    <ul id="shipments"></ul>
+
+
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="http://jquery-ui.googlecode.com/svn-history/r3004/trunk/ui/i18n/ui.datepicker-ru.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
