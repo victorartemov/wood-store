@@ -15,6 +15,9 @@ $(document).ready(function() {
                         if (products.length === 0) {
                             $result.append($("<option></option>")
                             .attr("value",-1).text('Нет товаров выбранной категории'));
+
+
+
                             $result.prop('disabled', true);
                             $inputQuantity.prop('disabled', true);
                         } else {
