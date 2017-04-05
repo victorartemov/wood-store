@@ -45,18 +45,12 @@ public class RRestController {
     @RequestMapping(value = "/getShipments", method = RequestMethod.GET)
     public List<ShipmentIn> getShipments(@RequestParam(value = "date", required = true) String date) {
 
-        System.out.println("wow!");
-
         List<ShipmentIn> shipmentIns = shipmentInService.findAll();
         List<ShipmentIn> resultList = new ArrayList<>();
         for (ShipmentIn shipment : shipmentIns) {
             if (shipment.getDate().equals(date)) {
                 resultList.add(shipment);
             }
-        }
-
-        for (ShipmentIn shipmentIn : resultList) {
-            System.out.println(shipmentIn.getDate());
         }
 
         return resultList;

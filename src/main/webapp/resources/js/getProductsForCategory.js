@@ -1,40 +1,29 @@
-function selectProductsForCategory(selectObject) {
+$(document).ready(function() {
+            $('#selectCategory').on('change', function() {
+                var $result = $('#productSelect');
+                var $inputQuantity = $("#inputQuantity");
+                var $request = '/getProducts?id=' + $( "#selectCategory" ).val();
+                $result.empty();
 
-        select = document.getElementById("productSelect");
-        inputQuantity = document.getElementById("inputQuantity");
+                $result.prop('disabled', false);
+                $inputQuantity.prop('disabled', false);
 
-        inputQuantity.defaultValue = "0";
-        select.disabled = false;
-        inputQuantity.disabled = false;
-
-        var value = selectObject.value;
-
-        var request = '/getProducts?id=' + value;
-
-        $.ajax(request, {
-            method : 'get',
-            success: function(data) {
-
-                var size = data.length;
-                var result = "";
-
-                if(size != 0){
-                    for (var i=0; i!=size; ++i) {
-                         result += "<option>";
-                         result += data[i].title;
-                         result += "</option>";
+                $.ajax({
+                    type: 'GET',
+                    url: $request,
+                    success: function(products) {
+                        if (products.length === 0) {
+                            $result.append($("<option></option>")
+                            .attr("value",-1).text('Нет товаров выбранной категории'));
+                            $result.prop('disabled', true);
+                            $inputQuantity.prop('disabled', true);
+                        } else {
+                            $.each(products, function(i, product) {
+                                $result.append($("<option></option>")
+                                .attr("value",product.title).text(product.title));
+                            });
+                        }
                     }
-                    $('#productSelect').html(result);
-                } else{
-                    var option = document.createElement('option');
-                    option.innerHTML = "Нет товаров выбранной категории";
-                    option.value = "1";
-                    select.appendChild(option);
-                    select.value = 1;
-
-                    select.disabled = true;
-                    inputQuantity.disabled = true;
-                }
-            }
+                });
+            });
         });
-    }

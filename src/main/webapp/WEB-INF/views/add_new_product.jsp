@@ -4,8 +4,7 @@
 <form action="/${path}" method="post" accept-charset="utf-8" align="center">
     <label style="font-size:20px">Категория: </label>
 
-    <select class="btn btn-default" name="selectCategory"
-            onchange="selectProductsForCategory(this)">
+    <select class="btn btn-default" name="selectCategory" id="selectCategory">
         <option selected disabled hidden>Выберите категорию</option>
         <c:forEach items="${allCategories}" var="category">
             <option value="${category.id}">${category.title}</option>
