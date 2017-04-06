@@ -487,7 +487,12 @@ public class UserAccessController {
     @RequestMapping(value = "/createNewShipmentOut", method = RequestMethod.GET)
     public String createNewShipmentOut(Model model) {
 
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+
         ShipmentOut currentShipment = new ShipmentOut();
+        currentShipment.setDate(dateFormatter.format(currentDate));
+
         shipmentOutService.add(currentShipment);
 
         return "redirect:/shipmentout";
@@ -587,5 +592,11 @@ public class UserAccessController {
     public String shipmentOutList(Model model){
 
         return "shipmentOutList";
+    }
+
+    @RequestMapping(value = "/workdayList", method = RequestMethod.GET)
+    public String workdayList(Model model){
+
+        return "workdayList";
     }
 }

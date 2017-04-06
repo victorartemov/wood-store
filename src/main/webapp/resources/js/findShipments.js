@@ -2,8 +2,10 @@ $(document).ready(function() {
             $("button").click(function() {
                 var $result = $('#shipments');
                 var $noResultsText = $('#noResultsText');
-                var $request = '/getShipments?date=' +$('#datePicker').val();
+                var $countOfFoundRecords = $('#countOfFoundRecords');
+                var $request = path +$('#datePicker').val();
                 $result.empty();
+                $countOfFoundRecords.empty();
                 $noResultsText.empty();
                 $('#dynamicTables').empty();
 
@@ -12,8 +14,11 @@ $(document).ready(function() {
                     url: $request,
                     success: function(shipments) {
                         if (shipments.length === 0) {
-                            $noResultsText.text("В этот день не было приходов");
+                            $noResultsText.text("Нет записей для этого дня");
                         } else {
+
+                            $noResultsText.text("Для этой даты найдено записей: " + shipments.length + " шт");
+
                             $.each(shipments, function(i, shipment) {
                                 var tableTitle = $('<h1> Дата: ' + shipment.date + '</h1>');
                                 $('#dynamicTables').append(tableTitle);
@@ -25,13 +30,13 @@ $(document).ready(function() {
                                 //iterate through nested list of products in json
                                 $.each(shipment.products, function(i, product){
 
-                                    var sum = product.category.simple == true ? product.price * product.amount : product.price * product.amount * 0.096 * product.length;
+                                var sum = product.category.simple == true ? product.price * product.amount : product.price * product.amount * 0.096 * product.length;
 
-                                    var row = $('<tbody><tr><td>' + product.title + '</td>' +
-                                    '<td>' + product.amount + '</td>' +
-                                    '<td>' + product.price + '</td>' +
-                                    '<td>' + sum + '</td></tr></tbody>');
-                                    table.append(row);
+                                var row = $('<tbody><tr><td>' + product.title + '</td>' +
+                                '<td>' + product.amount + '</td>' +
+                                '<td>' + product.price + '</td>' +
+                                '<td>' + sum + '</td></tr></tbody>');
+                                table.append(row);
                                 });
 
                                 $('#dynamicTables').append(table);

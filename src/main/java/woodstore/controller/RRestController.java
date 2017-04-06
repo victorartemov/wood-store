@@ -37,6 +37,12 @@ public class RRestController {
     @Autowired
     private ShipmentInService shipmentInService;
 
+    @Autowired
+    private ShipmentOutService shipmentOutService;
+
+    @Autowired
+    private WorkdayService workdayService;
+
     @RequestMapping(value = "/getProducts", method = RequestMethod.GET)
     public List<PossibleProduct> getProducts(@RequestParam(value = "id", required = true) Long id) {
         return possibleProductService.findMatchesById(Long.valueOf(id));
@@ -55,4 +61,28 @@ public class RRestController {
 
         return resultList;
     }
+
+    @RequestMapping(value = "/getShipmentOuts", method = RequestMethod.GET)
+    public List<ShipmentOut> getShipmentOuts(@RequestParam(value = "date", required = true) String date) {
+
+        List<ShipmentOut> shipmentOuts = shipmentOutService.findAll();
+        List<ShipmentOut> resultList = new ArrayList<>();
+        for (ShipmentOut shipment : shipmentOuts) {
+            if (shipment.getDate().equals(date)) {
+                resultList.add(shipment);
+            }
+        }
+
+        return resultList;
+    }
+
+    @RequestMapping(value = "/getWorkday", method = RequestMethod.GET)
+    public Workday getWorkday(@RequestParam(value = "date", required = true) String date) {
+
+        String dateAppropriateForDb = date.replaceAll("/", ".");
+        Workday workday = workdayService.findByDate(dateAppropriateForDb);
+
+        return workday;
+    }
+
 }

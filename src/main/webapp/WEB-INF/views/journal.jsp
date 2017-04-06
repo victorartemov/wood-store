@@ -28,7 +28,7 @@
     </div>
 
     <div class="list-group">
-        <a href="#" class="list-group-item"><h2>Рабочие дни</h2></a>
+        <a href="workdayList" class="list-group-item"><h2>Рабочие дни</h2></a>
         <a href="shipmentInList" class="list-group-item"><h2>Приходы</h2></a>
         <a href="shipmentOutList" class="list-group-item"><h2>Расходы</h2></a>
     </div>
