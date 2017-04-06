@@ -5,6 +5,7 @@ $(document).ready(function() {
                 var $request = '/getShipments?date=' +$('#datePicker').val();
                 $result.empty();
                 $noResultsText.empty();
+                $('#dynamicTables').empty();
 
                 $.ajax({
                     type: 'GET',
@@ -14,7 +15,26 @@ $(document).ready(function() {
                             $noResultsText.text("В этот день не было приходов");
                         } else {
                             $.each(shipments, function(i, shipment) {
-                                $result.append('<li>' + shipment.date + '</li>');
+                                var tableTitle = $('<h1> Дата: ' + shipment.date + '</h1>');
+                                $('#dynamicTables').append(tableTitle);
+
+                                var table = $('<table></table>').addClass('table table-bordered table-hover');
+                                var tableHeading = $(' <thead><tr><th>Название</th><th>Количество, шт</th><th>Цена, р</th><th>Стоимость, р</th></tr></thead>');
+                                table.append(tableHeading);
+
+                                //iterate through nested list of products in json
+                                $.each(shipment.products, function(i, product){
+
+                                    var sum = product.category.simple == true ? product.price * product.amount : product.price * product.amount * 0.096 * product.length;
+
+                                    var row = $('<tbody><tr><td>' + product.title + '</td>' +
+                                    '<td>' + product.amount + '</td>' +
+                                    '<td>' + product.price + '</td>' +
+                                    '<td>' + sum + '</td></tr></tbody>');
+                                    table.append(row);
+                                });
+
+                                $('#dynamicTables').append(table);
                             });
                         }
                     }

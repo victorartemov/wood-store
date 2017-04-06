@@ -332,9 +332,6 @@ public class UserAccessController {
         String title = request.getParameter("selectProduct");
         String quantity = request.getParameter("quantity");
 
-        System.out.println(title);
-        System.out.println(quantity);
-
         if (title != null && title != "") {
 
             BasicProduct storedProduct = null;

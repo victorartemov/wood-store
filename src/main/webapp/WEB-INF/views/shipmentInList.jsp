@@ -40,7 +40,7 @@
     </div>
 
 
-    <ul id="shipments"></ul>
+    <div id="dynamicTables"></div>
 
     <h2 id="noResultsText"></h2>
 </div>
