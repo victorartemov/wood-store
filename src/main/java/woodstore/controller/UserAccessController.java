@@ -629,4 +629,10 @@ public class UserAccessController {
 
         return "redirect:/shipmentin";
     }
+
+    @RequestMapping(value = "/createNewProductFromModal", method = RequestMethod.POST)
+    public String createNewProductFromModal(HttpServletRequest request, RedirectAttributes redirectAttributes){
+
+        return "redirect:/shipmentin";
+    }
 }

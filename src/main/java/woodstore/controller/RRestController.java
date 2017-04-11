@@ -85,4 +85,9 @@ public class RRestController {
         return workday;
     }
 
+    @RequestMapping(value = "/getCategories", method = RequestMethod.GET)
+    public List<Category> getCategories() {
+        return categoryService.findAll();
+    }
+
 }

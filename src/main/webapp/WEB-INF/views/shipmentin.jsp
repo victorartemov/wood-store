@@ -5,6 +5,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="path" value="createNewShipmentInProduct" scope="request"/>
 <c:set var="createNewCategoryPath" value="createNewCategory" scope="request"/>
+<c:set var="createNewProductPath" value="createNewProductFromModal" scope="request"/>
 <c:set var="categoriesToIterate" value="${categories}" scope="request"/>
 
 
@@ -92,12 +93,15 @@
     </c:if>
 
     <jsp:include page="categoryCreationModalWindow.jsp"/>
+    <jsp:include page="productCreationModalWindow.jsp"/>
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/getProductsForCategory.js"></script>
 <script src="${contextPath}/resources/js/categoryCreationModalWindow.js"></script>
+<script src="${contextPath}/resources/js/productCreationModalWindow.js"></script>
+<script src="${contextPath}/resources/js/getCategories.js"></script>
 
 </body>
 </html>
