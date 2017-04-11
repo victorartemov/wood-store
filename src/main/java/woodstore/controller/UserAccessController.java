@@ -583,20 +583,50 @@ public class UserAccessController {
     }
 
     @RequestMapping(value = "/shipmentInList", method = RequestMethod.GET)
-    public String shipmentInList(Model model){
+    public String shipmentInList(Model model) {
 
         return "shipmentInList";
     }
 
     @RequestMapping(value = "/shipmentOutList", method = RequestMethod.GET)
-    public String shipmentOutList(Model model){
+    public String shipmentOutList(Model model) {
 
         return "shipmentOutList";
     }
 
     @RequestMapping(value = "/workdayList", method = RequestMethod.GET)
-    public String workdayList(Model model){
+    public String workdayList(Model model) {
 
         return "workdayList";
+    }
+
+    @RequestMapping(value = "/createNewCategory", method = RequestMethod.POST)
+    public String createNewCategory(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        String title = request.getParameter("title");
+        String type = request.getParameter("categoryType");
+
+        if (title != null && title != "") {
+            Category category = null;
+            if (categoryService.findByTitle(title) == null) {
+                category = new Category();
+                category.setCategoryTitle(title);
+                if (Integer.valueOf(type) == 0) {
+                    category.setSimple(true);
+                } else {
+                    category.setSimple(false);
+                }
+                categoryService.add(category);
+            }
+        } else {
+            // TODO: 4/11/2017 send a response about creation failure
+        }
+
+        return "redirect:/shipmentin";
     }
 }

@@ -4,6 +4,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="path" value="createNewShipmentInProduct" scope="request"/>
+<c:set var="createNewCategoryPath" value="createNewCategory" scope="request"/>
 <c:set var="categoriesToIterate" value="${categories}" scope="request"/>
 
 
@@ -90,54 +91,13 @@
 
     </c:if>
 
-    <div id="createCategoryModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-sm">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <form>
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Создание категории</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="form-group">
-                            <label for="categoryTitle">Название категории</label>
-                            <input type="text" placeholder="название" style="width:115px;" id="categoryTitle">
-                        </div>
-                        <div class="form-group">
-                            <label for="categoryType">Тип категории</label>
-                            <select class="btn btn-default" name="categoryType" id="categoryType">
-                                <option value="0">Штучные товары</option>
-                                <option value="1">Квадратура</option>
-                            </select>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Создать</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <jsp:include page="categoryCreationModalWindow.jsp"/>
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/getProductsForCategory.js"></script>
-
-<script>
-    $(function(){
-    $('#createCategoryModal').on('submit', function(e){
-        e.preventDefault();
-        alert('works!');
-        $('#createCategoryModal').modal('hide');
-    });
-});
-</script>
+<script src="${contextPath}/resources/js/categoryCreationModalWindow.js"></script>
 
 </body>
 </html>
