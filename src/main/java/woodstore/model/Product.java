@@ -21,6 +21,7 @@ public class Product extends BasicProduct {
         this.setWeight(another.getWeight());
         this.setWidth(another.getWidth());
         this.setQuadrature(another.getQuadrature());
+        this.setLength(another.getLength());
     }
 
 }

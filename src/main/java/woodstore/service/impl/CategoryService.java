@@ -40,4 +40,8 @@ public class CategoryService implements ItemService<Category> {
     public Category findByTitle(String title){
         return categoryRepository.findByTitle(title);
     }
+
+    public Category findById(Long id){
+        return categoryRepository.findById(id);
+    }
 }

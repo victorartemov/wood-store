@@ -23,6 +23,7 @@ public class SentProduct extends BasicProduct {
         this.setWeight(another.getWeight());
         this.setAmount(another.getAmount());
         this.setPrice(another.getPrice());
+        this.setLength(another.getLength());
         this.setQuadrature(another.getQuadrature());
     }
 }

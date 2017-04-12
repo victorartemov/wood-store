@@ -1,5 +1,6 @@
 package woodstore.controller;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
@@ -631,7 +632,7 @@ public class UserAccessController {
     }
 
     @RequestMapping(value = "/createNewProductFromModal", method = RequestMethod.POST)
-    public String createNewProductFromModal(HttpServletRequest request, RedirectAttributes redirectAttributes){
+    public String createNewProductFromModal(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -643,10 +644,21 @@ public class UserAccessController {
         String length = request.getParameter("length");
         String price = request.getParameter("price");
 
-        System.out.println(title);
-        System.out.println(category);
-        System.out.println(length);
-        System.out.println(price);
+        price = price.replaceAll(",", ".");
+        length = length.replaceAll(",", ".");
+
+        if (title != null && category != null && Double.parseDouble(length) > 0 && Double.parseDouble(price) > 0) {
+            Category productCategory = categoryService.findById(Long.parseLong(category));
+            if(productCategory!=null){
+                PossibleProduct product = new PossibleProduct();
+                product.setTitle(title);
+                product.setLength(Double.parseDouble(length));
+                product.setPrice(Double.parseDouble(price));
+                product.setCategory(productCategory);
+
+                possibleProductService.add(product);
+            }
+        }
 
         return "redirect:/shipmentin";
     }

@@ -9,5 +9,8 @@ import woodstore.model.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     Category findByTitle(String title);
+
+    Category findById(Long id);
 }
+
 
