@@ -19,9 +19,6 @@
                         <label for="selectCategoryForModal">Категория</label>
                         <select class="btn btn-default" name="selectCategory" id="selectCategoryForModal">
                             <option selected disabled hidden>Категория</option>
-                            <c:forEach items="${allCategories}" var="category">
-                                <option value="${category.id}">${category.title}</option>
-                            </c:forEach>
                         </select>
                     </div>
 
@@ -34,8 +31,6 @@
                         <label for="productTitle">Цена товара</label>
                         <input type="text" placeholder="цена, р" style="width:115px; margin-left:10px;" id="productPrice" name="price">
                     </div>
-
-
 
                 </div>
                 <div class="modal-footer">

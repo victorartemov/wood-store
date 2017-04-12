@@ -632,6 +632,21 @@ public class UserAccessController {
 
     @RequestMapping(value = "/createNewProductFromModal", method = RequestMethod.POST)
     public String createNewProductFromModal(HttpServletRequest request, RedirectAttributes redirectAttributes){
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        String title = request.getParameter("title");
+        String category = request.getParameter("selectCategory");
+        String length = request.getParameter("length");
+        String price = request.getParameter("price");
+
+        System.out.println(title);
+        System.out.println(category);
+        System.out.println(length);
+        System.out.println(price);
 
         return "redirect:/shipmentin";
     }
