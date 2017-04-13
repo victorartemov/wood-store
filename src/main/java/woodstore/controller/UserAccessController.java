@@ -345,8 +345,13 @@ public class UserAccessController {
 
             RecievedProduct recievedProduct = new RecievedProduct(storedProduct);
 
-            if (Integer.parseInt(quantity) == 0) {
+            if (quantity == "") {
                 redirectAttributes.addFlashAttribute("formInputError", "Введите количество товара");
+                return "redirect:/shipmentin";
+            }
+
+            if (Integer.parseInt(quantity) == 0) {
+                redirectAttributes.addFlashAttribute("formInputError", "Недопустимое количество товара");
                 return "redirect:/shipmentin";
             }
 
@@ -383,7 +388,7 @@ public class UserAccessController {
         String title = request.getParameter("selectProduct");
         String quantity = request.getParameter("quantity");
 
-        if (title != null && title != "") {
+        if (title != "" && title != null) {
             Product storedProduct = productService.findByTitle(title);
 
             if (storedProduct == null) {
@@ -392,10 +397,16 @@ public class UserAccessController {
             }
             SoldProduct soldProduct = new SoldProduct(storedProduct);
 
-            if (Integer.parseInt(quantity) == 0) {
+            if (quantity == "") {
                 redirectAttributes.addFlashAttribute("formInputError", "Введите количество товара");
                 return "redirect:/workday";
             }
+
+            if (Integer.parseInt(quantity) == 0) {
+                redirectAttributes.addFlashAttribute("formInputError", "Недопустимое количество товара");
+                return "redirect:/workday";
+            }
+
 
             if (Integer.parseInt(quantity) > 0 && Integer.parseInt(quantity) <= storedProduct.getAmount()) {
                 soldProduct.setAmount(Integer.parseInt(quantity));
@@ -545,6 +556,11 @@ public class UserAccessController {
             }
             SentProduct sentProduct = new SentProduct(storedProduct);
 
+            if (quantity == "") {
+                redirectAttributes.addFlashAttribute("formInputError", "Введите количество товара");
+                return "redirect:/shipmentout";
+            }
+
             //check if we already have this product to ship out and its quantity(multiple rows may exist)
             int summaryCountOfAlreadySentProducts = 0;
             for (SentProduct product : currentShipment.getProducts()) {
@@ -649,7 +665,7 @@ public class UserAccessController {
 
         if (title != null && category != null && Double.parseDouble(length) > 0 && Double.parseDouble(price) > 0) {
             Category productCategory = categoryService.findById(Long.parseLong(category));
-            if(productCategory!=null){
+            if (productCategory != null) {
                 PossibleProduct product = new PossibleProduct();
                 product.setTitle(title);
                 product.setLength(Double.parseDouble(length));
