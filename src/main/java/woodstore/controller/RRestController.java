@@ -87,7 +87,6 @@ public class RRestController {
 
     @RequestMapping(value = "/getCategories", method = RequestMethod.GET)
     public List<Category> getCategories() {
-        System.out.println("Прилетело!");
         return categoryService.findAll();
     }
 

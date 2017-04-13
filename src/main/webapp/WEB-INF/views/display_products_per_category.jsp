@@ -28,8 +28,14 @@
                                     <td>${product.amount}</td>
                                     <td>${product.price}</td>
                                     <td>
-                                        <fmt:formatNumber pattern="0.#"
-                                                          value="${product.price*product.amount}"/>
+                                        <c:if test="${product.length == 0}">
+                                            <fmt:formatNumber pattern="0.#"
+                                                              value="${product.price*product.amount}"/>
+                                        </c:if>
+                                        <c:if test="${product.length != 0}">
+                                            <fmt:formatNumber pattern="0.#"
+                                                              value="${product.price*product.amount*product.length}"/>
+                                        </c:if>
                                     </td>
                                 </tr>
                             </c:forEach>
