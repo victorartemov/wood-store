@@ -102,5 +102,8 @@
 <script src="${contextPath}/resources/js/categoryCreationModalWindow.js"></script>
 <script src="${contextPath}/resources/js/productCreationModalWindow.js"></script>
 <script src="${contextPath}/resources/js/getCategories.js"></script>
+<script>
+
+</script>
 </body>
 </html>
