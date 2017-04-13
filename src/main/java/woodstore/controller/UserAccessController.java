@@ -32,6 +32,9 @@ import java.util.*;
 @Controller
 public class UserAccessController {
 
+    // TODO: 4/13/2017 jquery validation
+    // TODO: 4/13/2017 editing rows om product table
+
     @Autowired
     private ProfileService profileService;
 
@@ -659,11 +662,17 @@ public class UserAccessController {
         String category = request.getParameter("selectCategory");
         String length = request.getParameter("length");
         String price = request.getParameter("price");
+        String width = request.getParameter("width");
+        String weight = request.getParameter("weight");
 
         price = price.replaceAll(",", ".");
         length = length.replaceAll(",", ".");
+        width = width.replaceAll(",", ".");
+        weight = weight.replaceAll(",", ".");
 
-        if (title != null && category != null && Double.parseDouble(length) > 0 && Double.parseDouble(price) > 0) {
+        // TODO: 4/13/2017 корректно проверять на допустимость введенных данных
+
+        if (title != null && category != null && Double.parseDouble(length) >= 0 && Double.parseDouble(price) > 0) {
             Category productCategory = categoryService.findById(Long.parseLong(category));
             if (productCategory != null) {
                 PossibleProduct product = new PossibleProduct();
@@ -671,6 +680,14 @@ public class UserAccessController {
                 product.setLength(Double.parseDouble(length));
                 product.setPrice(Double.parseDouble(price));
                 product.setCategory(productCategory);
+
+                if(width != ""){
+                    product.setWidth(Double.parseDouble(width));
+                }
+
+                if(weight != ""){
+                    product.setWeight(Double.parseDouble(weight));
+                }
 
                 possibleProductService.add(product);
             }
