@@ -302,25 +302,26 @@ public class UserAccessController {
         ShipmentIn currentShipment = shipmentInService.getCurrentShipment();
 
         Collection<RecievedProduct> recievedProducts = currentShipment.getProducts();
-        for (RecievedProduct product : recievedProducts) {
 
-            Product storedProduct = null;
-
-            if (productService.findByTitle(product.getTitle()) == null) {
-                storedProduct = new Product(possibleProductService.findByTitle(product.getTitle()));
-                storedProduct.setAmount(product.getAmount());
-                productService.add(storedProduct);
-            } else {
-                storedProduct = productService.findByTitle(product.getTitle());
-                storedProduct.setAmount(storedProduct.getAmount() + product.getAmount());
-                productService.edit(storedProduct);
+        if (recievedProducts.size() != 0) {
+            for (RecievedProduct product : recievedProducts) {
+                Product storedProduct = null;
+                if (productService.findByTitle(product.getTitle()) == null) {
+                    storedProduct = new Product(possibleProductService.findByTitle(product.getTitle()));
+                    storedProduct.setAmount(product.getAmount());
+                    productService.add(storedProduct);
+                } else {
+                    storedProduct = productService.findByTitle(product.getTitle());
+                    storedProduct.setAmount(storedProduct.getAmount() + product.getAmount());
+                    productService.edit(storedProduct);
+                }
             }
+            //закрываем приход
+            currentShipment.close();
+            shipmentInService.edit(currentShipment);
+        } else {
+            shipmentInService.delete(currentShipment.getId());
         }
-
-        //закрываем приход
-        currentShipment.close();
-
-        shipmentInService.edit(currentShipment);
         return "redirect:/shipmentin";
     }
 
@@ -519,20 +520,25 @@ public class UserAccessController {
         ShipmentOut currentShipment = shipmentOutService.getCurrentShipment();
 
         Collection<SentProduct> sentProducts = currentShipment.getProducts();
-        for (SentProduct product : sentProducts) {
-            Product storedProduct = productService.findByTitle(product.getTitle());
 
-            if (storedProduct.getAmount() - product.getAmount() > 0) {
-                storedProduct.setAmount(storedProduct.getAmount() - product.getAmount());
-                productService.edit(storedProduct);
-            } else {
-                productService.deleteFromStore(storedProduct);
+        //если что-то отправили - закрываем и сохраняем, если ничего нет - удаляем
+        if (sentProducts.size() != 0) {
+            for (SentProduct product : sentProducts) {
+                Product storedProduct = productService.findByTitle(product.getTitle());
+
+                if (storedProduct.getAmount() - product.getAmount() > 0) {
+                    storedProduct.setAmount(storedProduct.getAmount() - product.getAmount());
+                    productService.edit(storedProduct);
+                } else {
+                    productService.deleteFromStore(storedProduct);
+                }
             }
+            //закрываем приход
+            currentShipment.close();
+            shipmentOutService.edit(currentShipment);
+        } else {
+            shipmentOutService.delete(currentShipment.getId());
         }
-
-        //закрываем приход
-        currentShipment.close();
-        shipmentOutService.edit(currentShipment);
 
         return "redirect:/shipmentout";
     }
@@ -680,11 +686,11 @@ public class UserAccessController {
                 product.setPrice(Double.parseDouble(price));
                 product.setCategory(productCategory);
 
-                if(width != ""){
+                if (width != "") {
                     product.setWidth(Double.parseDouble(width));
                 }
 
-                if(weight != ""){
+                if (weight != "") {
                     product.setWeight(Double.parseDouble(weight));
                 }
 
