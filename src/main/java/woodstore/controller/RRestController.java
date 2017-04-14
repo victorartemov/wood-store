@@ -89,5 +89,4 @@ public class RRestController {
     public List<Category> getCategories() {
         return categoryService.findAll();
     }
-
 }

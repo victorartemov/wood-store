@@ -700,4 +700,9 @@ public class UserAccessController {
 
         return "redirect:/shipmentin";
     }
+
+    @RequestMapping(value = "/deleteProuductWromWorkday", method = RequestMethod.POST)
+    public void deleteProuductWromWorkday(){
+
+    }
 }

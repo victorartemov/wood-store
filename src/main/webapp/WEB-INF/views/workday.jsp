@@ -83,7 +83,7 @@
                 <c:if test="${fn:length(currentWorkDay.products) != 0}">
 
                     <!-- Tables of products per each category -->
-                    <jsp:include page="display_products_per_category.jsp"/>
+                    <jsp:include page="display_products_per_category_with_deleting.jsp"/>
 
                     <c:if test="${formInputError == null}">
                         <div class="panel panel-info">
