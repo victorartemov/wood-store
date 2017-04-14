@@ -12,7 +12,7 @@
 
                     <div class="form-group">
                         <label for="categoryTitle">Название категории</label>
-                        <input type="text" placeholder="название" style="width:115px;" id="categoryTitle" name="title">
+                        <input type="text" placeholder="название" style="width:115px;" id="categoryTitle" name="title" required>
                     </div>
                     <div class="form-group">
                         <label for="categoryType">Тип категории</label>

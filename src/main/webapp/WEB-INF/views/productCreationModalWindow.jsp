@@ -11,20 +11,20 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="productTitle">Название товара*</label>
-                        <input type="text" placeholder="название" style="width:115px; margin-left:10px;" id="productTitle" name="title">
+                        <label for="productTitle">Название товара</label>
+                        <input type="text" placeholder="название" style="width:115px; margin-left:10px;" id="productTitle" name="title" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="selectCategoryForModal">Категория*</label>
-                        <select class="btn btn-default" name="selectCategory" id="selectCategoryForModal">
+                        <label for="selectCategoryForModal">Категория </label>
+                        <select class="btn btn-default" name="selectCategory" id="selectCategoryForModal" required>
                             <option selected disabled hidden>Категория</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="productTitle">Длина товара*</label>
-                        <input type="text" placeholder="длина, м" style="width:115px; margin-left:10px;" id="productLength" name="length">
+                        <label for="productTitle">Длина товара</label>
+                        <input type="text" placeholder="длина, м" style="width:115px; margin-left:10px;" id="productLength" name="length" required>
                     </div>
 
                     <div class="form-group">
@@ -39,10 +39,8 @@
 
                     <div class="form-group">
                         <label for="productTitle">Цена товара*</label>
-                        <input type="text" placeholder="цена, р" style="width:115px; margin-left:10px;" id="productPrice" name="price">
+                        <input type="text" placeholder="цена, р" style="width:115px; margin-left:10px;" id="productPrice" name="price" required>
                     </div>
-
-                    <label>* - обязательные поля</label>
 
                 </div>
                 <div class="modal-footer">

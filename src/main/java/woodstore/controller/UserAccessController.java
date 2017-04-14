@@ -32,7 +32,6 @@ import java.util.*;
 @Controller
 public class UserAccessController {
 
-    // TODO: 4/13/2017 jquery validation
     // TODO: 4/13/2017 editing rows om product table
 
     @Autowired
