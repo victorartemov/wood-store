@@ -6,10 +6,7 @@ import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import woodstore.model.*;
@@ -701,8 +698,23 @@ public class UserAccessController {
         return "redirect:/shipmentin";
     }
 
-    @RequestMapping(value = "/deleteProuductWromWorkday", method = RequestMethod.POST)
-    public void deleteProuductWromWorkday(){
+    @RequestMapping(value = "/deleteProductFromWorkday/{id}", method = RequestMethod.POST)
+    public String deleteProductFromWorkday(@PathVariable("id") Long id) {
 
+        SoldProduct soldProduct = soldProductService.findById(id);
+
+        Product storedProduct = productService.findByTitle(soldProduct.getTitle());
+
+        if (storedProduct != null) {
+            storedProduct.setAmount(storedProduct.getAmount() + soldProduct.getAmount());
+            productService.edit(storedProduct);
+        } else {
+            storedProduct = new Product(soldProduct);
+            productService.add(storedProduct);
+        }
+
+        soldProductService.deleteFromWorkday(id);
+
+        return "redirect:/workday";
     }
 }

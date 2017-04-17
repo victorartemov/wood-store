@@ -39,7 +39,9 @@
                                         </c:if>
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger glyphicon glyphicon-trash"></button>
+                                        <form action="/deleteProductFromWorkday/${product.id}" method="post" accept-charset="utf-8">
+                                            <button type="submit" class="btn btn-danger glyphicon glyphicon-trash"></button>
+                                        </form>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -82,7 +84,10 @@
                                                           value="${product.length*product.amount*0.096*product.price}"/>
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger glyphicon glyphicon-trash"></button>
+                                        <!-- Delete sold product from workday -->
+                                        <form action="/deleteProductFromWorkday/${product.id}" method="post" accept-charset="utf-8">
+                                            <button type="submit" class="btn btn-danger glyphicon glyphicon-trash"></button>
+                                        </form>
                                     </td>
                                 </tr>
                             </c:forEach>
