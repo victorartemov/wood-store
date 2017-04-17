@@ -29,8 +29,6 @@ import java.util.*;
 @Controller
 public class UserAccessController {
 
-    // TODO: 4/13/2017 editing rows om product table
-
     @Autowired
     private ProfileService profileService;
 
@@ -407,7 +405,6 @@ public class UserAccessController {
                 return "redirect:/workday";
             }
 
-
             if (Integer.parseInt(quantity) > 0 && Integer.parseInt(quantity) <= storedProduct.getAmount()) {
                 soldProduct.setAmount(Integer.parseInt(quantity));
                 soldProduct.setCategory(storedProduct.getCategory());
@@ -716,5 +713,19 @@ public class UserAccessController {
         soldProductService.deleteFromWorkday(id);
 
         return "redirect:/workday";
+    }
+
+    @RequestMapping(value = "/deleteProductFromShipmentIn/{id}", method = RequestMethod.POST)
+    public String deleteProductFromShipmentIn(@PathVariable("id") Long id){
+        recievedProductService.deleteFromShipmentIn(id);
+
+        return "redirect:/shipmentin";
+    }
+
+    @RequestMapping(value = "/deleteProductFromShipmentOut/{id}", method = RequestMethod.POST)
+    public String deleteProductFromShipmentOut(@PathVariable("id") Long id){
+        sentProductService.deleteFromShipmentOut(id);
+
+        return "redirect:/shipmentout";
     }
 }

@@ -39,7 +39,7 @@
                                         </c:if>
                                     </td>
                                     <td>
-                                        <form action="/deleteProductFromWorkday/${product.id}" method="post" accept-charset="utf-8">
+                                        <form action="/${deleteItemsPath}/${product.id}" method="post" accept-charset="utf-8">
                                             <button type="submit" class="btn btn-danger glyphicon glyphicon-trash"></button>
                                         </form>
                                     </td>
@@ -85,7 +85,7 @@
                                     </td>
                                     <td>
                                         <!-- Delete sold product from workday -->
-                                        <form action="/deleteProductFromWorkday/${product.id}" method="post" accept-charset="utf-8">
+                                        <form action="/${deleteItemsPath}/${product.id}" method="post" accept-charset="utf-8">
                                             <button type="submit" class="btn btn-danger glyphicon glyphicon-trash"></button>
                                         </form>
                                     </td>

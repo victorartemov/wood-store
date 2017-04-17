@@ -82,6 +82,5 @@ public class SoldProductService implements ItemService<SoldProduct> {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-
     }
 }

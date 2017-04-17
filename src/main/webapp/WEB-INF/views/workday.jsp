@@ -6,6 +6,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="path" value="createnewproduct" scope="request"/>
+<c:set var="deleteItemsPath" value="deleteProductFromWorkday" scope="request"/>
 <c:set var="categoriesToIterate" value="${soldCategories}" scope="request"/>
 
 <!DOCTYPE html>

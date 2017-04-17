@@ -7,6 +7,7 @@
 <c:set var="createNewCategoryPath" value="createNewCategory" scope="request"/>
 <c:set var="createNewProductPath" value="createNewProductFromModal" scope="request"/>
 <c:set var="categoriesToIterate" value="${categories}" scope="request"/>
+<c:set var="deleteItemsPath" value="deleteProductFromShipmentIn" scope="request"/>
 
 
 <!DOCTYPE html>
@@ -50,7 +51,7 @@
         <br>
 
         <!-- Tables of products per each category -->
-        <jsp:include page="display_products_per_category.jsp"/>
+        <jsp:include page="display_products_per_category_with_deleting.jsp"/>
 
         <c:if test="${formInputError == null}">
             <div class="panel panel-info">
