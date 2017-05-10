@@ -2,6 +2,8 @@ package woodstore.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,32 +27,16 @@ public class ItemsCreatingController {
     @Autowired
     private PossibleProductService possibleProductService;
 
+    @RequestMapping(value = "/createNewCategory", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+    public String createNewCategory(@ModelAttribute("category") Category category, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-    @RequestMapping(value = "/createNewCategory", method = RequestMethod.POST)
-    public String createNewCategory(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        try {
-            request.setCharacterEncoding("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        String title = request.getParameter("title");
-        String type = request.getParameter("categoryType");
-
-        if (title != null && title != "") {
-            Category category = null;
-            if (categoryService.findByTitle(title) == null) {
-                category = new Category();
-                category.setCategoryTitle(title);
-                if (Integer.valueOf(type) == 0) {
-                    category.setSimple(true);
-                } else {
-                    category.setSimple(false);
-                }
+        if (!bindingResult.hasErrors()) {
+            //if we don't have such category already
+            if (categoryService.findByTitle(category.getTitle()) == null) {
                 categoryService.add(category);
             }
         } else {
-            // TODO: 4/11/2017 send a response about creation failure
+            System.out.println("Some errors with fields binding while creating the category");
         }
 
         return "redirect:/shipmentin";

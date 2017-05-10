@@ -19,8 +19,8 @@ import java.util.List;
  * Created by Viktor_Artemov on 3/23/2017.
  */
 
-@RestController()
-public class RRestController {
+@org.springframework.web.bind.annotation.RestController()
+public class AppRestController {
 
     @Autowired
     private ProductService productService;
