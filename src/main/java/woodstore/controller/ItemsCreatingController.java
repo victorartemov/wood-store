@@ -31,7 +31,7 @@ public class ItemsCreatingController {
                 categoryService.add(category);
             }
         } else {
-            System.out.println("Some errors with fields binding while creating the category");
+            System.out.println(bindingResult.toString());
         }
 
         return "redirect:/shipmentin";
@@ -41,9 +41,10 @@ public class ItemsCreatingController {
     public String createNewProductFromModal(@ModelAttribute("product") PossibleProduct product, BindingResult bindingResult) {
 
         if (!bindingResult.hasErrors()) {
-            possibleProductService.add(product);
+            if (possibleProductService.findByTitle(product.getTitle()) == null) {
+                possibleProductService.add(product);
+            }
         } else {
-            System.out.println("Some errors with fields binding while creating the category");
             System.out.println(bindingResult.toString());
         }
 

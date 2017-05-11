@@ -1,4 +1,4 @@
-package woodstore;
+package woodstore.converters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

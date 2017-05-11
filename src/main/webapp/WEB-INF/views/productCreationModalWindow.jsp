@@ -29,16 +29,16 @@
 
                     <div class="form-group">
                         <label for="productWidth">Ширина товара</label>
-                        <input type="text" placeholder="ширина, м" style="width:115px; margin-left:10px;" id="productWidth" name="width">
+                        <input type="text" placeholder="ширина, м" style="width:115px; margin-left:10px;" id="productWidth" name="width" value="0">
                     </div>
 
                     <div class="form-group">
                         <label for="productWeight">Вес товара</label>
-                        <input type="text" placeholder="вес, кг" style="width:115px; margin-left:10px;" id="productWeight" name="weight">
+                        <input type="text" placeholder="вес, кг" style="width:115px; margin-left:10px;" id="productWeight" name="weight" value="0">
                     </div>
 
                     <div class="form-group">
-                        <label for="productTitle">Цена товара*</label>
+                        <label for="productTitle">Цена товара</label>
                         <input type="text" placeholder="цена, р" style="width:115px; margin-left:10px;" id="productPrice" name="price" required>
                     </div>
 
