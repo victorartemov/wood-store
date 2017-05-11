@@ -2,11 +2,14 @@ package woodstore.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import woodstore.CategoryIdToCategoryConverter;
 
 import java.util.List;
 
@@ -29,5 +32,13 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
         converter.setObjectMapper(objectMapper);
         converters.add(converter);
         super.configureMessageConverters(converters);
+    }
+
+    @Autowired
+    CategoryIdToCategoryConverter categoryIdToCategoryConverter;
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(categoryIdToCategoryConverter);
     }
 }

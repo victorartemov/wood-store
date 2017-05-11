@@ -17,7 +17,7 @@
 
                     <div class="form-group">
                         <label for="selectCategoryForModal">Категория </label>
-                        <select class="btn btn-default" name="selectCategory" id="selectCategoryForModal" required>
+                        <select class="btn btn-default" name="category" id="selectCategoryForModal" required>
                             <option selected disabled hidden>Категория</option>
                         </select>
                     </div>
