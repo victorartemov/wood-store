@@ -13,13 +13,13 @@ import java.util.Collection;
 public class ShipmentIn extends Shipment {
 
     @OneToMany(fetch = FetchType.EAGER)
-    private Collection<RecievedProduct> products = new ArrayList<>();
+    private Collection<ReceivedProduct> products = new ArrayList<>();
 
-    public Collection<RecievedProduct> getProducts() {
+    public Collection<ReceivedProduct> getProducts() {
         return products;
     }
 
-    public void setProducts(Collection<RecievedProduct> products) {
+    public void setProducts(Collection<ReceivedProduct> products) {
         this.products = products;
     }
 

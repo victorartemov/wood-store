@@ -6,12 +6,12 @@ import javax.persistence.*;
  * Created by Viktor_Artemov on 3/27/2017.
  */
 @Entity
-@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
-public abstract class BasicProduct extends Item{
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class BasicProduct extends Item {
     public BasicProduct() {
     }
 
-    public BasicProduct(Product another){
+    public BasicProduct(Product another) {
         this.title = another.getTitle();
         this.length = another.getLength();
         this.width = another.getWidth();

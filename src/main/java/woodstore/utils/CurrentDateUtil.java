@@ -11,14 +11,14 @@ import java.util.Date;
 @Component
 public class CurrentDateUtil {
 
-    public String getCurrentDate(){
+    public String getCurrentDate() {
         Date currentDate = new Date();
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
 
         return dateFormatter.format(currentDate);
     }
 
-    public String getCurrentDate(String pattern){
+    public String getCurrentDate(String pattern) {
         Date currentDate = new Date();
         SimpleDateFormat dateFormatter = new SimpleDateFormat(pattern);
 

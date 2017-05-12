@@ -27,7 +27,6 @@ public class ItemsDeletingController {
     @Autowired
     private SentProductService sentProductService;
 
-
     @Autowired
     private RecievedProductService recievedProductService;
 
