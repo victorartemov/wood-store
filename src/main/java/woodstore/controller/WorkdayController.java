@@ -3,8 +3,8 @@ package woodstore.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import woodstore.model.Category;
 import woodstore.model.Product;
@@ -14,6 +14,7 @@ import woodstore.service.impl.CategoryService;
 import woodstore.service.impl.ProductService;
 import woodstore.service.impl.SoldProductService;
 import woodstore.service.impl.WorkdayService;
+import woodstore.utils.CurrentDateUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
@@ -39,8 +40,13 @@ public class WorkdayController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private CurrentDateUtil currentDateUtil;
+
     @RequestMapping(value = "/workday", method = RequestMethod.GET)
     public String workday(Model model) {
+
+        final double LINING_WIDTH = 0.096;
 
         Workday currentWorkDay = workdayService.today();
         model.addAttribute("currentWorkDay", currentWorkDay);
@@ -77,7 +83,7 @@ public class WorkdayController {
                 if (product.getCategory().isSimple()) {
                     totalSum += product.getPrice() * product.getAmount();
                 } else {
-                    totalSum += product.getPrice() * 0.096 * product.getLength() * product.getAmount();
+                    totalSum += product.getPrice() * LINING_WIDTH * product.getLength() * product.getAmount();
                 }
             }
             DecimalFormat df = new DecimalFormat("#.0");
@@ -89,14 +95,11 @@ public class WorkdayController {
         return "workday";
     }
 
-    @RequestMapping(value = "/createNewDay", method = RequestMethod.GET)
-    public String createNewDay(Model model) {
-
-        Date currentDate = new Date();
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+    @RequestMapping(value = "/create-new-day", method = RequestMethod.GET)
+    public String createNewDay() {
 
         Workday newWorkday = new Workday();
-        newWorkday.setDate(dateFormatter.format(currentDate));
+        newWorkday.setDate(currentDateUtil.getCurrentDate());
         newWorkday.setOpen(true);
 
         workdayService.add(newWorkday);
@@ -104,8 +107,8 @@ public class WorkdayController {
         return "redirect:/workday";
     }
 
-    @RequestMapping(value = "/openTheDay", method = RequestMethod.GET)
-    public String openTheDay(Model model) {
+    @RequestMapping(value = "/open-the-day", method = RequestMethod.GET)
+    public String openTheDay() {
         Workday currentWorkday = workdayService.today();
         if (currentWorkday != null) {
             currentWorkday.setOpen(true);
@@ -115,7 +118,7 @@ public class WorkdayController {
         return "redirect:/workday";
     }
 
-    @RequestMapping(value = "/closeTheDay", method = RequestMethod.GET)
+    @RequestMapping(value = "/close-the-day", method = RequestMethod.GET)
     public String closeTheDay(Model model) {
         Workday currentWorkday = workdayService.today();
         if (currentWorkday != null) {
@@ -126,16 +129,9 @@ public class WorkdayController {
         return "redirect:/workday";
     }
 
-    @RequestMapping(value = "/createnewproduct", method = RequestMethod.POST)
-    public String createnewproduct(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        try {
-            request.setCharacterEncoding("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        String title = request.getParameter("selectProduct");
-        String quantity = request.getParameter("quantity");
+    @RequestMapping(value = "/sell-the-product", method = RequestMethod.POST)
+    public String createNewProduct(@RequestParam("title") String title, @RequestParam("quantity") String quantity,
+                                   RedirectAttributes redirectAttributes) {
 
         if (title != "" && title != null) {
             Product storedProduct = productService.findByTitle(title);

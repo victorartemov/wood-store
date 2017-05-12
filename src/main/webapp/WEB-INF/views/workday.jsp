@@ -5,8 +5,8 @@
 
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<c:set var="path" value="createnewproduct" scope="request"/>
-<c:set var="deleteItemsPath" value="deleteProductFromWorkday" scope="request"/>
+<c:set var="path" value="sell-the-product" scope="request"/>
+<c:set var="deleteItemsPath" value="delete-product-from-workday" scope="request"/>
 <c:set var="categoriesToIterate" value="${soldCategories}" scope="request"/>
 
 <!DOCTYPE html>
@@ -36,7 +36,7 @@
         <div class="panel panel-warning">
             <div class="panel-heading">Новый день не создан</div>
             <div class="panel-body">
-                <form action="/createNewDay">
+                <form action="/create-new-day">
                     <button type="submit" class="btn btn-default">Создать новый день</button>
                 </form>
             </div>
@@ -118,7 +118,7 @@
                                 <c:out value="${totalSum}"/>
                                 рублей.
                             </h3>
-                            <form action="/closeTheDay">
+                            <form action="/close-the-day">
                                 <button type="submit" class="btn btn-success">Сохранить рабочий день</button>
                             </form>
                         </div>
@@ -130,7 +130,7 @@
                 <div class="panel panel-warning">
                     <div class="panel-heading">День закрыт</div>
                     <div class="panel-body">
-                        <form action="/openTheDay">
+                        <form action="/open-the-day">
                             <button type="submit" class="btn btn-default">Открыть день</button>
                         </form>
                     </div>

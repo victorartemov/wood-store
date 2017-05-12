@@ -31,7 +31,7 @@ public class ItemsDeletingController {
     @Autowired
     private RecievedProductService recievedProductService;
 
-    @RequestMapping(value = "/deleteProductFromWorkday/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete-product-from-workday/{id}", method = RequestMethod.POST)
     public String deleteProductFromWorkday(@PathVariable("id") Long id) {
 
         SoldProduct soldProduct = soldProductService.findById(id);

@@ -19,12 +19,7 @@ public class CategoryIdToCategoryConverter implements Converter<String, Category
     public Category convert(String id) {
         try {
             Long categoryId = Long.parseLong(id);
-            if (categoryService != null) {
-                return categoryService.findById(categoryId);
-            } else {
-                System.out.println("CategoryService have not been autowired in CategoryIdToCategoryConverter class");
-                return null;
-            }
+            return categoryService.findById(categoryId);
         } catch (NumberFormatException e) {
             return null;
         }
