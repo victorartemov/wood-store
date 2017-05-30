@@ -8,12 +8,12 @@ import javax.persistence.InheritanceType;
  * Created by Viktor_Artemov on 3/27/2017.
  */
 @Entity
-public class RecievedProduct extends BasicProduct {
+public class ReceivedProduct extends BasicProduct {
 
-    public RecievedProduct() {
+    public ReceivedProduct() {
     }
 
-    public RecievedProduct(BasicProduct another) {
+    public ReceivedProduct(BasicProduct another) {
         this.setTitle(another.getTitle());
         this.setLength(another.getLength());
         this.setWeight(another.getWidth());

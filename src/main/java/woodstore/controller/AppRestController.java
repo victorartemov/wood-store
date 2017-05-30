@@ -7,11 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import woodstore.model.*;
 import woodstore.service.impl.*;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +15,10 @@ import java.util.List;
  */
 
 @RestController()
-public class RRestController {
+public class AppRestController {
 
     @Autowired
     private ProductService productService;
-
-    @Autowired
-    private StoreService storeService;
 
     @Autowired
     private CategoryService categoryService;

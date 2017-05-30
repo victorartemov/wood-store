@@ -12,13 +12,14 @@
 
                     <div class="form-group">
                         <label for="categoryTitle">Название категории</label>
-                        <input type="text" placeholder="название" style="width:115px;" id="categoryTitle" name="title" required>
+                        <input type="text" placeholder="название" style="width:115px;" id="categoryTitle" name="title"
+                               required>
                     </div>
                     <div class="form-group">
                         <label for="categoryType">Тип категории</label>
-                        <select class="btn btn-default" name="categoryType" id="categoryType">
-                            <option value="0">Штучные товары</option>
-                            <option value="1">Квадратура</option>
+                        <select class="btn btn-default" name="simple" id="categoryType">
+                            <option value="0">Квадратура</option>
+                            <option value="1">Штучные товары</option>
                         </select>
                     </div>
 

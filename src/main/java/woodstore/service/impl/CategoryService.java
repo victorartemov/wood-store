@@ -37,11 +37,11 @@ public class CategoryService implements ItemService<Category> {
         categoryRepository.saveAndFlush(item);
     }
 
-    public Category findByTitle(String title){
+    public Category findByTitle(String title) {
         return categoryRepository.findByTitle(title);
     }
 
-    public Category findById(Long id){
+    public Category findById(Long id) {
         return categoryRepository.findById(id);
     }
 }
