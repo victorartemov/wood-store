@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="productTitle">Цена товара*</label>
+                        <label for="productTitle">Цена товара</label>
                         <input type="text" placeholder="цена, р" style="width:115px; margin-left:10px;" id="productPrice" name="price" required>
                     </div>
 

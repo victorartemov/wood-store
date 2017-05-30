@@ -9,11 +9,11 @@ import woodstore.model.Product;
 
 import java.util.List;
 
-/**
- * Created by Виктор on 07.02.2017.
- */
-
 public interface ProductRepository extends JpaRepository<Product, Long> {
+
+    //автоматически будет искать Product по полю title в БД
     Product findByTitle(String title);
+
+    //автоматически будет искать список обхектов Product по категории
     List<Product> findByCategory(Category category);
 }
