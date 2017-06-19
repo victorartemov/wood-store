@@ -3,9 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<c:set var="path" value="createNewShipmentOutProduct" scope="request"/>
+<c:set var="path" value="create-new-shipment-out-product" scope="request"/>
 <c:set var="categoriesToIterate" value="${categories}" scope="request"/>
-<c:set var="deleteItemsPath" value="deleteProductFromShipmentOut" scope="request"/>
+<c:set var="deleteItemsPath" value="delete-product-from-shipment-oOut" scope="request"/>
 
 
 <!DOCTYPE html>
@@ -37,7 +37,7 @@
         <div class="panel panel-warning">
             <div class="panel-heading">Расход не создан</div>
             <div class="panel-body">
-                <form action="/createNewShipmentOut">
+                <form action="/create-new-shipment-out">
                     <button type="submit" class="btn btn-default">Создать расход</button>
                 </form>
             </div>
@@ -49,7 +49,7 @@
         <br>
 
         <!-- Tables of products per each category -->
-        <jsp:include page="display_products_per_category_with_deleting.jsp"/>
+        <jsp:include page="display-products-per-category-with-deleting.jsp"/>
 
         <c:if test="${formInputError == null}">
             <div class="panel panel-info">
@@ -57,7 +57,7 @@
                 <div class="panel-body">
 
                     <!-- Choose a product to sell-->
-                    <jsp:include page="add_new_product.jsp"/>
+                    <jsp:include page="add-new-product.jsp"/>
 
                 </div>
             </div>
@@ -71,7 +71,7 @@
                 <div class="panel-body">
 
                     <!-- Choose a product to sell-->
-                    <jsp:include page="add_new_product.jsp"/>
+                    <jsp:include page="add-new-product.jsp"/>
 
                 </div>
             </div>
@@ -83,7 +83,7 @@
                     <c:out value="${totalSum}"/>
                     рублей.
                 </h3>
-                <form action="/closeCurrentShipmentOut">
+                <form action="/close-current-shipment-out">
                     <button type="submit" class="btn btn-success">Сохранить расход</button>
                 </form>
             </div>

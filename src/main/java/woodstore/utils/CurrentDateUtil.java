@@ -13,7 +13,7 @@ public class CurrentDateUtil {
 
     public String getCurrentDate() {
         Date currentDate = new Date();
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
         return dateFormatter.format(currentDate);
     }

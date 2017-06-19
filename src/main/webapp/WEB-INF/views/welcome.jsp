@@ -34,7 +34,7 @@
 
 
     <!-- Tables of products per each category -->
-    <jsp:include page="display_products_per_category.jsp"/>
+    <jsp:include page="display-products-per-category.jsp"/>
 
     <div class="well">
         <div align="center">

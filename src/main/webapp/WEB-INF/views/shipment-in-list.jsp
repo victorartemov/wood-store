@@ -45,7 +45,7 @@
     <h2 id="noResultsText"></h2>
 </div>
 <script type="text/javascript">
-    var path = "/getShipments?date=";
+    var path = "/get-shipments?date=";
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="http://jquery-ui.googlecode.com/svn-history/r3004/trunk/ui/i18n/ui.datepicker-ru.js"></script>

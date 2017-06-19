@@ -11,9 +11,6 @@ import woodstore.model.PossibleProduct;
 import woodstore.service.impl.CategoryService;
 import woodstore.service.impl.PossibleProductService;
 
-/**
- * Created by Viktor_Artemov on 5/10/2017.
- */
 @Controller
 public class ItemsCreatingController {
 
@@ -23,7 +20,7 @@ public class ItemsCreatingController {
     @Autowired
     private PossibleProductService possibleProductService;
 
-    @RequestMapping(value = "/createNewCategory", method = RequestMethod.POST)
+    @RequestMapping(value = "/create-new-category", method = RequestMethod.POST)
     public String createNewCategory(@ModelAttribute("category") Category category, BindingResult bindingResult) {
 
         if (!bindingResult.hasErrors()) {
@@ -34,10 +31,10 @@ public class ItemsCreatingController {
             System.out.println(bindingResult.toString());
         }
 
-        return "redirect:/shipmentin";
+        return "redirect:/shipment-in";
     }
 
-    @RequestMapping(value = "/createNewProductFromModal", method = RequestMethod.POST)
+    @RequestMapping(value = "/create-new-product-from-modal", method = RequestMethod.POST)
     public String createNewProductFromModal(@ModelAttribute("product") PossibleProduct product, BindingResult bindingResult) {
 
         if (!bindingResult.hasErrors()) {
@@ -48,6 +45,6 @@ public class ItemsCreatingController {
             System.out.println(bindingResult.toString());
         }
 
-        return "redirect:/shipmentin";
+        return "redirect:/shipment-in";
     }
 }

@@ -61,7 +61,7 @@
                             <div class="panel-body">
 
                                 <!-- Choose a product to sell-->
-                                <jsp:include page="add_new_product.jsp"/>
+                                <jsp:include page="add-new-product.jsp"/>
 
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                             <div class="panel-body">
 
                                 <!-- Choose a product to sell-->
-                                <jsp:include page="add_new_product.jsp"/>
+                                <jsp:include page="add-new-product.jsp"/>
 
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                 <c:if test="${fn:length(currentWorkDay.products) != 0}">
 
                     <!-- Tables of products per each category -->
-                    <jsp:include page="display_products_per_category_with_deleting.jsp"/>
+                    <jsp:include page="display-products-per-category-with-deleting.jsp"/>
 
                     <c:if test="${formInputError == null}">
                         <div class="panel panel-info">
@@ -92,7 +92,7 @@
                             <div class="panel-body">
 
                                 <!-- Choose a product to sell-->
-                                <jsp:include page="add_new_product.jsp"/>
+                                <jsp:include page="add-new-product.jsp"/>
 
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                             <div class="panel-body">
 
                                 <!-- Choose a product to sell-->
-                                <jsp:include page="add_new_product.jsp"/>
+                                <jsp:include page="add-new-product.jsp"/>
 
                             </div>
                         </div>

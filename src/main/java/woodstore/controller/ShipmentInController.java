@@ -92,7 +92,7 @@ public class ShipmentInController {
             } else model.addAttribute("totalSum", 0);
         }
 
-        return "shipmentin";
+        return "shipment-in";
     }
 
     @RequestMapping(value = "/create-new-shipment-in", method = RequestMethod.GET)
@@ -103,7 +103,7 @@ public class ShipmentInController {
 
         shipmentInService.add(currentShipment);
 
-        return "redirect:/shipmentin";
+        return "redirect:/shipment-in";
     }
 
     @RequestMapping(value = "/close-current-shipment-in", method = RequestMethod.GET)
@@ -133,7 +133,7 @@ public class ShipmentInController {
         } else {
             shipmentInService.delete(currentShipment.getId());
         }
-        return "redirect:/shipmentin";
+        return "redirect:/shipment-in";
     }
 
     @RequestMapping(value = "/create-new-shipment-in-product", method = RequestMethod.POST)
@@ -161,12 +161,12 @@ public class ShipmentInController {
 
             if (quantity == "") {
                 redirectAttributes.addFlashAttribute("formInputError", "Введите количество товара");
-                return "redirect:/shipmentin";
+                return "redirect:/shipment-in";
             }
 
             if (Integer.parseInt(quantity) == 0) {
                 redirectAttributes.addFlashAttribute("formInputError", "Недопустимое количество товара");
-                return "redirect:/shipmentin";
+                return "redirect:/shipment-in";
             }
 
             if (Integer.parseInt(quantity) > 0 && quantity != "") {
@@ -188,6 +188,6 @@ public class ShipmentInController {
             redirectAttributes.addFlashAttribute("formInputError", "Не выбран товар для прихода");
         }
 
-        return "redirect:/shipmentin";
+        return "redirect:/shipment-in";
     }
 }

@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Выбор расхода</title>
+    <title>Выбор рабочего дня</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
@@ -26,7 +26,7 @@
     <jsp:include page="header.jsp"/>
 
     <div class="page-header">
-        <h1>Выбор расхода</h1>
+        <h1>Выбор рабочего дня</h1>
     </div>
 
     <div class="panel panel-default">
@@ -38,14 +38,12 @@
         </div>
     </div>
 
-    <h1 id="countOfFoundRecords"></h1>
-
     <div id="dynamicTables"></div>
 
     <h2 id="noResultsText"></h2>
 </div>
 <script type="text/javascript">
-    var path = "/getShipmentOuts?date=";
+    var path = "/get-workday?date=";
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="http://jquery-ui.googlecode.com/svn-history/r3004/trunk/ui/i18n/ui.datepicker-ru.js"></script>
@@ -53,6 +51,6 @@
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <script src="${contextPath}/resources/js/datepickerWork.js"></script>
-<script src="${contextPath}/resources/js/findShipments.js"></script>
+<script src="${contextPath}/resources/js/findWorkdayInfo.js"></script>
 </body>
 </html>

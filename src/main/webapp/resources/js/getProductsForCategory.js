@@ -2,7 +2,7 @@ $(document).ready(function() {
             $('#selectCategory').on('change', function() {
                 var $result = $('#productSelect');
                 var $inputQuantity = $("#inputQuantity");
-                var $request = '/getProducts?id=' + $( "#selectCategory" ).val();
+                var $request = '/get-products?id=' + $( "#selectCategory" ).val();
                 $result.empty();
 
                 $result.prop('disabled', false);

@@ -1,7 +1,7 @@
  $(function(){
     $('#createCategoryModal').on('submit', function(e){
         $.ajax({
-            url: /createNewCategory,
+            url: /create-new-category,
             type: 'POST',
             data: $('#createCategoryModal').serialize(),
             success: function(data){

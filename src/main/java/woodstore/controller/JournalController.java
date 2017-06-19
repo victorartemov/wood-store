@@ -13,25 +13,21 @@ public class JournalController {
 
     @RequestMapping(value = "/journal", method = RequestMethod.GET)
     public String journal(Model model) {
-
         return "journal";
     }
 
-    @RequestMapping(value = "/shipmentInList", method = RequestMethod.GET)
+    @RequestMapping(value = "/shipment-in-list", method = RequestMethod.GET)
     public String shipmentInList(Model model) {
-
-        return "shipmentInList";
+        return "shipment-in-list";
     }
 
-    @RequestMapping(value = "/shipmentOutList", method = RequestMethod.GET)
+    @RequestMapping(value = "/shipment-out-list", method = RequestMethod.GET)
     public String shipmentOutList(Model model) {
-
-        return "shipmentOutList";
+        return "shipment-out-list";
     }
 
-    @RequestMapping(value = "/workdayList", method = RequestMethod.GET)
+    @RequestMapping(value = "/workday-list", method = RequestMethod.GET)
     public String workdayList(Model model) {
-
-        return "workdayList";
+        return "workday-list";
     }
 }

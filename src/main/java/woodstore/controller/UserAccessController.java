@@ -55,13 +55,10 @@ public class UserAccessController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") Profile userForm, BindingResult bindingResult, Model model) {
         profileValidator.validate(userForm, bindingResult);
-
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-
         profileService.add(userForm);
-
         securityService.autoLogin(userForm.getName(), userForm.getConfirmPassword());
 
         return "redirect:/welcome";

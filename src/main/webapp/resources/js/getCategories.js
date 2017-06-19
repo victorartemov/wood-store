@@ -5,7 +5,7 @@ $(document).ready(function() {
             $result.empty();
            $.ajax({
                 type: 'GET',
-                url: '/getCategories',
+                url: '/get-categories',
                 success: function(categories) {
                         if (categories.length === 0) {
                             $result.append($("<option></option>")

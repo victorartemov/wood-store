@@ -39,7 +39,7 @@ public class ShipmentOutController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value = "/shipmentout", method = RequestMethod.GET)
+    @RequestMapping(value = "/shipment-out", method = RequestMethod.GET)
     public String shipmentout(Model model) {
 
         ShipmentOut currentShipment = shipmentOutService.getCurrentShipment();
@@ -85,10 +85,10 @@ public class ShipmentOutController {
             } else model.addAttribute("totalSum", 0);
         }
 
-        return "shipmentout";
+        return "shipment-out";
     }
 
-    @RequestMapping(value = "/createNewShipmentOut", method = RequestMethod.GET)
+    @RequestMapping(value = "/create-new-shipment-out", method = RequestMethod.GET)
     public String createNewShipmentOut(Model model) {
 
         Date currentDate = new Date();
@@ -99,10 +99,10 @@ public class ShipmentOutController {
 
         shipmentOutService.add(currentShipment);
 
-        return "redirect:/shipmentout";
+        return "redirect:/shipment-out";
     }
 
-    @RequestMapping(value = "/closeCurrentShipmentOut", method = RequestMethod.GET)
+    @RequestMapping(value = "/close-current-shipment-out", method = RequestMethod.GET)
     public String closeCurrentShipmentOut(Model model) {
 
         //пополняем склад всеми товарами из прихода
@@ -129,10 +129,10 @@ public class ShipmentOutController {
             shipmentOutService.delete(currentShipment.getId());
         }
 
-        return "redirect:/shipmentout";
+        return "redirect:/shipment-out";
     }
 
-    @RequestMapping(value = "/createNewShipmentOutProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/create-new-shipment-out-product", method = RequestMethod.POST)
     public String createNewShipmentOutProduct(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         try {
             request.setCharacterEncoding("UTF-8");
@@ -149,13 +149,13 @@ public class ShipmentOutController {
             Product storedProduct = productService.findByTitle(title);
             if (storedProduct == null) {
                 redirectAttributes.addFlashAttribute("formInputError", "На складе нет данного товара");
-                return "redirect:/shipmentout";
+                return "redirect:/shipment-out";
             }
             SentProduct sentProduct = new SentProduct(storedProduct);
 
             if (quantity == "") {
                 redirectAttributes.addFlashAttribute("formInputError", "Введите количество товара");
-                return "redirect:/shipmentout";
+                return "redirect:/shipment-out";
             }
 
             //check if we already have this product to ship out and its quantity(multiple rows may exist)
@@ -168,7 +168,7 @@ public class ShipmentOutController {
 
             if (Integer.parseInt(quantity) == 0) {
                 redirectAttributes.addFlashAttribute("formInputError", "Введите количество товара");
-                return "redirect:/shipmentout";
+                return "redirect:/shipment-out";
             }
 
             if ((Integer.parseInt(quantity) > 0) && (storedProduct.getAmount() >= (Integer.parseInt(quantity) + summaryCountOfAlreadySentProducts))) {
@@ -193,6 +193,6 @@ public class ShipmentOutController {
             redirectAttributes.addFlashAttribute("formInputError", "Не выбран товар для отправки");
         }
 
-        return "redirect:/shipmentout";
+        return "redirect:/shipment-out";
     }
 }

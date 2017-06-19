@@ -58,7 +58,7 @@ public class SoldProductService implements ItemService<SoldProduct> {
         String JDBC_DRIVER = "org.postgresql.Driver";
         String DB_URL = "jdbc:postgresql://localhost:5432/woodstore";
         String USER = "postgres";
-        String PASSWORD = "Qq123456";
+        String PASSWORD = "Unexpirience1";
 
         Connection conn = null;
         PreparedStatement stmt = null;

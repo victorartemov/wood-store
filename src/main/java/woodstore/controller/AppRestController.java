@@ -35,15 +35,18 @@ public class AppRestController {
     @Autowired
     private WorkdayService workdayService;
 
-    @RequestMapping(value = "/getProducts", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-products", method = RequestMethod.GET)
     public List<PossibleProduct> getProducts(@RequestParam(value = "id", required = true) Long id) {
         return possibleProductService.findMatchesById(Long.valueOf(id));
     }
 
-    @RequestMapping(value = "/getShipments", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-shipments", method = RequestMethod.GET)
     public List<ShipmentIn> getShipments(@RequestParam(value = "date", required = true) String date) {
 
         List<ShipmentIn> shipmentIns = shipmentInService.findAll();
+        for(ShipmentIn shipmentIn:shipmentIns){
+            System.out.println(shipmentIn.getId() + shipmentIn.getDate());
+        }
         List<ShipmentIn> resultList = new ArrayList<>();
         for (ShipmentIn shipment : shipmentIns) {
             if (shipment.getDate().equals(date)) {
@@ -54,7 +57,7 @@ public class AppRestController {
         return resultList;
     }
 
-    @RequestMapping(value = "/getShipmentOuts", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-shipment-outs", method = RequestMethod.GET)
     public List<ShipmentOut> getShipmentOuts(@RequestParam(value = "date", required = true) String date) {
 
         List<ShipmentOut> shipmentOuts = shipmentOutService.findAll();
@@ -68,7 +71,7 @@ public class AppRestController {
         return resultList;
     }
 
-    @RequestMapping(value = "/getWorkday", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-workday", method = RequestMethod.GET)
     public Workday getWorkday(@RequestParam(value = "date", required = true) String date) {
 
         String dateAppropriateForDb = date.replaceAll("/", ".");
@@ -77,7 +80,7 @@ public class AppRestController {
         return workday;
     }
 
-    @RequestMapping(value = "/getCategories", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-categories", method = RequestMethod.GET)
     public List<Category> getCategories() {
         return categoryService.findAll();
     }

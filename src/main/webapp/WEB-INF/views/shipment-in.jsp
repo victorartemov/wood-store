@@ -4,11 +4,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<c:set var="path" value="createNewShipmentInProduct" scope="request"/>
-<c:set var="createNewCategoryPath" value="createNewCategory" scope="request"/>
-<c:set var="createNewProductPath" value="createNewProductFromModal" scope="request"/>
+<c:set var="path" value="create-new-shipment-in-product" scope="request"/>
+<c:set var="createNewCategoryPath" value="create-new-category" scope="request"/>
+<c:set var="createNewProductPath" value="create-new-product-from-modal" scope="request"/>
 <c:set var="categoriesToIterate" value="${categories}" scope="request"/>
-<c:set var="deleteItemsPath" value="deleteProductFromShipmentIn" scope="request"/>
+<c:set var="deleteItemsPath" value="delete-product-from-shipment-in" scope="request"/>
 
 
 <!DOCTYPE html>
@@ -42,7 +42,7 @@
         <div class="panel panel-warning">
             <div class="panel-heading">Приход не создан</div>
             <div class="panel-body">
-                <form action="/createnewshipmentin">
+                <form action="/create-new-shipment-in">
                     <button type="submit" class="btn btn-default">Создать приход</button>
                 </form>
             </div>
@@ -54,7 +54,7 @@
         <br>
 
         <!-- Tables of products per each category -->
-        <jsp:include page="display_products_per_category_with_deleting.jsp"/>
+        <jsp:include page="display-products-per-category-with-deleting.jsp"/>
 
         <c:if test="${formInputError == null}">
             <div class="panel panel-info">
@@ -62,7 +62,7 @@
                 <div class="panel-body">
 
                     <!-- Choose a product to sell-->
-                    <jsp:include page="add_completely_new_product.jsp"/>
+                    <jsp:include page="add-completely-new-product.jsp"/>
 
                 </div>
             </div>
@@ -76,7 +76,7 @@
                 <div class="panel-body">
 
                     <!-- Choose a product to sell-->
-                    <jsp:include page="add_completely_new_product.jsp"/>
+                    <jsp:include page="add-completely-new-product.jsp"/>
 
                 </div>
             </div>
@@ -88,7 +88,7 @@
                     <c:out value="${totalSum}"/>
                     рублей.
                 </h3>
-                <form action="/closeCurrentShipmentIn">
+                <form action="/close-current-shipment-in">
                     <button type="submit" class="btn btn-success">Сохранить приход</button>
                 </form>
             </div>
@@ -96,8 +96,8 @@
 
     </c:if>
 
-    <jsp:include page="categoryCreationModalWindow.jsp"/>
-    <jsp:include page="productCreationModalWindow.jsp"/>
+    <jsp:include page="category-creation-modal-window.jsp"/>
+    <jsp:include page="product-creation-modal-window.jsp"/>
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

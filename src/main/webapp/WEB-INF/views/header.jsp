@@ -10,8 +10,8 @@
             <ul class="nav navbar-nav">
                 <li><a href="welcome">Склад</a></li>
                 <li><a href="workday">Рабочий день</a></li>
-                <li><a href="shipmentin">Приход</a></li>
-                <li><a href="shipmentout">Расход</a></li>
+                <li><a href="shipment-in">Приход</a></li>
+                <li><a href="shipment-out">Расход</a></li>
                 <li><a href="journal">Журнал</a></li>
             </ul>
         </div>

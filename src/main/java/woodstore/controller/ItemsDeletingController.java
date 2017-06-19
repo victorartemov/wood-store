@@ -50,17 +50,17 @@ public class ItemsDeletingController {
         return "redirect:/workday";
     }
 
-    @RequestMapping(value = "/deleteProductFromShipmentIn/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete-product-from-shipment-in/{id}", method = RequestMethod.POST)
     public String deleteProductFromShipmentIn(@PathVariable("id") Long id) {
         recievedProductService.deleteFromShipmentIn(id);
 
-        return "redirect:/shipmentin";
+        return "redirect:/shipment-in";
     }
 
-    @RequestMapping(value = "/deleteProductFromShipmentOut/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete-product-from-shipment-out/{id}", method = RequestMethod.POST)
     public String deleteProductFromShipmentOut(@PathVariable("id") Long id) {
         sentProductService.deleteFromShipmentOut(id);
 
-        return "redirect:/shipmentout";
+        return "redirect:/shipment-out";
     }
 }
