@@ -12,7 +12,7 @@
     </select>
 
     <label style="font-size:20px; margin-left:25px">Название: </label>
-    <select class="btn btn-default" id="productSelect" name="title">
+    <select class="btn btn-default" id="productSelect" name="selectProduct">
         <option selected disabled hidden>Название товара</option>
         <!-- Automatically generates with javascript function in getProductsForCategory.js -->
     </select>

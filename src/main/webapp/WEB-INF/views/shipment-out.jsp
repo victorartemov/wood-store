@@ -5,7 +5,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="path" value="create-new-shipment-out-product" scope="request"/>
 <c:set var="categoriesToIterate" value="${categories}" scope="request"/>
-<c:set var="deleteItemsPath" value="delete-product-from-shipment-oOut" scope="request"/>
+<c:set var="deleteItemsPath" value="delete-product-from-shipment-out" scope="request"/>
 
 
 <!DOCTYPE html>

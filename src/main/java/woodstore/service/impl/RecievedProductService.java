@@ -58,8 +58,8 @@ public class RecievedProductService implements ItemService<ReceivedProduct> {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 
-            String sql = "DELETE FROM SHIPMENTIN_RECIEVEDPRODUCT WHERE PRODUCTS_ID = ?; " +
-                    "DELETE FROM RECIEVEDPRODUCT WHERE RECIEVEDPRODUCT.ID = ?;";
+            String sql = "DELETE FROM SHIPMENTIN_RECEIVEDPRODUCT WHERE PRODUCTS_ID = ?; " +
+                    "DELETE FROM RECEIVEDPRODUCT WHERE RECEIVEDPRODUCT.ID = ?;";
             stmt = conn.prepareStatement(sql);
 
             stmt.setLong(1, id);
