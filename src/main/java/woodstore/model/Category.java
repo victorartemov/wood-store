@@ -3,10 +3,13 @@ package woodstore.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import lombok.Data;
+
 /**
  * Created by Виктор on 18.01.2017.
  */
 @Entity
+@Data
 public class Category extends Item{
 
     public Category() {
@@ -22,24 +25,5 @@ public class Category extends Item{
     @Column(name = "KIND")
     private boolean simple;
 
-    public void setCategoryTitle(String categoryTitle) {
-        this.title = categoryTitle;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public boolean isSimple() {
-        return simple;
-    }
-
-    public void setSimple(boolean simple) {
-        this.simple = simple;
-    }
 }
 

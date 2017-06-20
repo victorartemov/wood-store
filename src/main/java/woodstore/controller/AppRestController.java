@@ -37,16 +37,13 @@ public class AppRestController {
 
     @RequestMapping(value = "/get-products", method = RequestMethod.GET)
     public List<PossibleProduct> getProducts(@RequestParam(value = "id", required = true) Long id) {
-        return possibleProductService.findMatchesById(Long.valueOf(id));
+        return possibleProductService.findByCategory(categoryService.findById(Long.valueOf(id)));
     }
 
     @RequestMapping(value = "/get-shipments", method = RequestMethod.GET)
     public List<ShipmentIn> getShipments(@RequestParam(value = "date", required = true) String date) {
 
         List<ShipmentIn> shipmentIns = shipmentInService.findAll();
-        for(ShipmentIn shipmentIn:shipmentIns){
-            System.out.println(shipmentIn.getId() + shipmentIn.getDate());
-        }
         List<ShipmentIn> resultList = new ArrayList<>();
         for (ShipmentIn shipment : shipmentIns) {
             if (shipment.getDate().equals(date)) {

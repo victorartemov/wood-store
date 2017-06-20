@@ -1,14 +1,18 @@
 package woodstore.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.Set;
+
+import lombok.Data;
 
 /**
  * Created by Viktor_Artemov on 3/2/2017.
  */
 @Entity
+@Data
 @Table(name = "roles")
 public class Role extends Item {
 
@@ -19,20 +23,4 @@ public class Role extends Item {
 
     @ManyToMany(mappedBy = "roles")
     private Set<Profile> users;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Profile> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<Profile> users) {
-        this.users = users;
-    }
 }

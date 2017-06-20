@@ -8,10 +8,13 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import lombok.Data;
+
 /**
  * Created by Виктор on 18.01.2017.
  */
 @Entity
+@Data
 public class Workday extends Item {
 
     public Workday() {
@@ -25,30 +28,6 @@ public class Workday extends Item {
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<SoldProduct> products = new ArrayList<>();
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public Long getWorkerId() {
-        return workerId;
-    }
-
-    public void setWorkerId(Long workerId) {
-        this.workerId = workerId;
-    }
-
-    public List<SoldProduct> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<SoldProduct> products) {
-        this.products = products;
-    }
 
     public boolean isOpen() {
         return open;

@@ -1,6 +1,6 @@
 package woodstore.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 
 /**
  * Created by Виктор on 18.01.2017.
@@ -9,7 +9,6 @@ import javax.persistence.*;
 public class Product extends BasicProduct {
 
     public Product() {
-
     }
 
     public Product(PossibleProduct another) {

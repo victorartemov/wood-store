@@ -9,10 +9,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import lombok.Data;
+
 /**
  * Created by Виктор on 05.02.2017.
  */
 @Entity
+@Data
 public class Store extends Item {
 
     private String title;
@@ -24,31 +27,7 @@ public class Store extends Item {
     @LazyCollection(LazyCollectionOption.FALSE)
     List<PossibleProduct> possibleProducts = new ArrayList<>();
 
-    public Collection<Product> getStoredProducts() {
-        return storedProducts;
-    }
-
-    public void setStoredProducts(Collection<Product> storedProducts) {
-        this.storedProducts = storedProducts;
-    }
-
     public void addProduct(Product product) {
         storedProducts.add(product);
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public List<PossibleProduct> getPossibleProducts() {
-        return possibleProducts;
-    }
-
-    public void setPossibleProducts(List<PossibleProduct> possibleProducts) {
-        this.possibleProducts = possibleProducts;
     }
 }

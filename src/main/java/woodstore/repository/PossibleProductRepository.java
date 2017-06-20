@@ -1,6 +1,8 @@
 package woodstore.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import woodstore.model.Category;
 import woodstore.model.PossibleProduct;
 
 import java.util.List;
@@ -10,4 +12,5 @@ import java.util.List;
  */
 public interface PossibleProductRepository extends JpaRepository<PossibleProduct, Long> {
     PossibleProduct findByTitle(String title);
+    List<PossibleProduct> findByCategory(Category category);
 }

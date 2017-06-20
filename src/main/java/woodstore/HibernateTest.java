@@ -31,19 +31,19 @@ public class HibernateTest {
         tester.setName("Masha");
 
         Category category1 = new Category();
-        category1.setCategoryTitle("Вагонка сосна");
+        category1.setTitle("Вагонка сосна");
         category1.setSimple(false);
 
         Category category2 = new Category();
-        category2.setCategoryTitle("Вагонка липа");
+        category2.setTitle("Вагонка липа");
         category2.setSimple(false);
 
         Category category3 = new Category();
-        category3.setCategoryTitle("Печи дровяные");
+        category3.setTitle("Печи дровяные");
         category3.setSimple(true);
 
         Category category4 = new Category();
-        category4.setCategoryTitle("Штучные товары");
+        category4.setTitle("Штучные товары");
         category4.setSimple(true);
 
         Product product1 = new Product();
