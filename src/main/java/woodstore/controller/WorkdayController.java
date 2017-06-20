@@ -99,7 +99,7 @@ public class WorkdayController {
     public String createNewDay() {
 
         Workday newWorkday = new Workday();
-        newWorkday.setDate(currentDateUtil.getCurrentDate());
+        newWorkday.setDate(currentDateUtil.getCurrentDate("dd.MM.yyyy"));
         newWorkday.setOpen(true);
 
         workdayService.add(newWorkday);
@@ -130,7 +130,7 @@ public class WorkdayController {
     }
 
     @RequestMapping(value = "/sell-the-product", method = RequestMethod.POST)
-    public String createNewProduct(@RequestParam("title") String title, @RequestParam("quantity") String quantity,
+    public String createNewProduct(@RequestParam("selectProduct") String title, @RequestParam("quantity") String quantity,
                                    RedirectAttributes redirectAttributes) {
 
         if (title != "" && title != null) {

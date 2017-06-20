@@ -49,7 +49,7 @@ public class SentProductService implements ItemService<SentProduct> {
         String JDBC_DRIVER = "org.postgresql.Driver";
         String DB_URL = "jdbc:postgresql://localhost:5432/woodstore";
         String USER = "postgres";
-        String PASSWORD = "Unexpirience1";
+        String PASSWORD = "Qq123456";
 
         Connection conn = null;
         PreparedStatement stmt = null;
