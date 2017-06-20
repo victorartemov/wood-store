@@ -1,10 +1,12 @@
 package woodstore.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.Collection;
 
 import lombok.Data;
 
@@ -15,10 +17,10 @@ import lombok.Data;
 @Data
 public class ShipmentIn extends Shipment {
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<ReceivedProduct> products = new ArrayList<>();
 
-    public void close(){
+    public void close() {
         super.setClosed(true);
     }
 }

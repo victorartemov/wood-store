@@ -85,5 +85,8 @@ public class ProductService implements ItemService<Product> {
             e.printStackTrace();
         }
 
+//        System.out.println("NEW SHIT WORKS!");
+//        productRepository.delete(product);
+
     }
 }

@@ -1,13 +1,17 @@
 package woodstore.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 
 import lombok.Data;
 
@@ -20,8 +24,12 @@ public class Store extends Item {
 
     private String title;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    Collection<Product> storedProducts = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinTable(name = "store_product",
+            joinColumns = @JoinColumn(name = "store_id"),
+            inverseJoinColumns = @JoinColumn(name = "storedproducts_id")
+    )
+    List<Product> storedProducts = new ArrayList<>();
 
     @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)

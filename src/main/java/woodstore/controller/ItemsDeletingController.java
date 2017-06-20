@@ -5,7 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import woodstore.model.Product;
+import woodstore.model.ReceivedProduct;
+import woodstore.model.SentProduct;
 import woodstore.model.SoldProduct;
 import woodstore.service.impl.ProductService;
 import woodstore.service.impl.RecievedProductService;
@@ -52,14 +55,20 @@ public class ItemsDeletingController {
 
     @RequestMapping(value = "/delete-product-from-shipment-in/{id}", method = RequestMethod.POST)
     public String deleteProductFromShipmentIn(@PathVariable("id") Long id) {
-        recievedProductService.deleteFromShipmentIn(id);
+        ReceivedProduct existingRecievedProduct = recievedProductService.findById(id);
+        if (existingRecievedProduct != null) {
+            recievedProductService.deleteFromShipmentIn(id);
+        }
 
         return "redirect:/shipment-in";
     }
 
     @RequestMapping(value = "/delete-product-from-shipment-out/{id}", method = RequestMethod.POST)
     public String deleteProductFromShipmentOut(@PathVariable("id") Long id) {
-        sentProductService.deleteFromShipmentOut(id);
+        SentProduct existingSentProduct = sentProductService.findById(id);
+        if (existingSentProduct != null) {
+            sentProductService.deleteFromShipmentOut(id);
+        }
 
         return "redirect:/shipment-out";
     }

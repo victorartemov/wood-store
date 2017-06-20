@@ -1,16 +1,17 @@
 package woodstore.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import woodstore.model.ReceivedProduct;
-import woodstore.repository.RecievedProductRepository;
-import woodstore.service.ItemService;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import woodstore.model.ReceivedProduct;
+import woodstore.repository.RecievedProductRepository;
+import woodstore.service.ItemService;
 
 /**
  * Created by Viktor_Artemov on 3/28/2017.
@@ -41,7 +42,7 @@ public class RecievedProductService implements ItemService<ReceivedProduct> {
         return recievedProductRepository.findAll();
     }
 
-    public ReceivedProduct findById(Long id){
+    public ReceivedProduct findById(Long id) {
         return recievedProductRepository.findById(id);
     }
 
@@ -73,5 +74,7 @@ public class RecievedProductService implements ItemService<ReceivedProduct> {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
+//        System.out.println("New shit works!");
+//        recievedProductRepository.delete(id);
     }
 }

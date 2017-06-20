@@ -74,4 +74,8 @@ public class SentProductService implements ItemService<SentProduct> {
             e.printStackTrace();
         }
     }
+
+    public SentProduct findById(final Long id) {
+        return sentProductRepository.findById(id);
+    }
 }

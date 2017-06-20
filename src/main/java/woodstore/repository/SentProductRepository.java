@@ -8,4 +8,7 @@ import woodstore.model.SentProduct;
  */
 public interface SentProductRepository extends JpaRepository<SentProduct, Long> {
     SentProduct findByTitle(String title);
+
+    SentProduct findById(Long id);
 }
+

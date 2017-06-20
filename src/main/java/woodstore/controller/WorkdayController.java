@@ -1,11 +1,19 @@
 package woodstore.controller;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import woodstore.model.Category;
 import woodstore.model.Product;
 import woodstore.model.SoldProduct;
@@ -15,12 +23,6 @@ import woodstore.service.impl.ProductService;
 import woodstore.service.impl.SoldProductService;
 import woodstore.service.impl.WorkdayService;
 import woodstore.utils.CurrentDateUtil;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 /**
  * Created by Viktor_Artemov on 5/10/2017.
@@ -98,11 +100,14 @@ public class WorkdayController {
     @RequestMapping(value = "/create-new-day", method = RequestMethod.GET)
     public String createNewDay() {
 
-        Workday newWorkday = new Workday();
-        newWorkday.setDate(currentDateUtil.getCurrentDate("dd.MM.yyyy"));
-        newWorkday.setOpen(true);
+        if (workdayService.findByDate(CurrentDateUtil.getCurrentDate("dd.MM.yyyy")) == null) {
 
-        workdayService.add(newWorkday);
+            Workday newWorkday = new Workday();
+            newWorkday.setDate(currentDateUtil.getCurrentDate("dd.MM.yyyy"));
+            newWorkday.setOpen(true);
+
+            workdayService.add(newWorkday);
+        }
 
         return "redirect:/workday";
     }
@@ -111,8 +116,10 @@ public class WorkdayController {
     public String openTheDay() {
         Workday currentWorkday = workdayService.today();
         if (currentWorkday != null) {
-            currentWorkday.setOpen(true);
-            workdayService.edit(currentWorkday);
+            if (!currentWorkday.isOpen()) {
+                currentWorkday.setOpen(true);
+                workdayService.edit(currentWorkday);
+            }
         }
 
         return "redirect:/workday";
@@ -122,16 +129,19 @@ public class WorkdayController {
     public String closeTheDay(Model model) {
         Workday currentWorkday = workdayService.today();
         if (currentWorkday != null) {
-            currentWorkday.setOpen(false);
-            workdayService.edit(currentWorkday);
+            if (currentWorkday.isOpen()) {
+                currentWorkday.setOpen(false);
+                workdayService.edit(currentWorkday);
+            }
         }
 
         return "redirect:/workday";
     }
 
     @RequestMapping(value = "/sell-the-product", method = RequestMethod.POST)
-    public String createNewProduct(@RequestParam("selectProduct") String title, @RequestParam("quantity") String quantity,
-                                   RedirectAttributes redirectAttributes) {
+    public String createNewProduct(
+            @RequestParam("selectProduct") String title, @RequestParam("quantity") String quantity,
+            RedirectAttributes redirectAttributes) {
 
         if (title != "" && title != null) {
             Product storedProduct = productService.findByTitle(title);
